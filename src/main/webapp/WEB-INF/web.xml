@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>portal</display-name>
+
+	<!-- 使用应用上下文参数来指定spring的配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring.xml,classpath:applicationContext-scheduler.xml</param-value>
+	</context-param>
+
+	<!-- 使用应用上下文参数来指定logback的配置文件 -->
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>classpath:logback.xml</param-value>
+	</context-param>
+
+	<!-- 过滤器的配置 -->
+	<filter>
+		<filter-name>setCharacterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+<!-- 	<filter>
+		<filter-name>protectAdminSourceFilter</filter-name>
+		<filter-class>com.magtech.rlib.user.filter.UserRightFilter</filter-class>
+		<init-param>
+			<param-name>denyPage</param-name>
+			<param-value>/login</param-value>
+		</init-param>
+	</filter>
+ -->
+	<filter-mapping>
+		<filter-name>setCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+<!-- 	<filter-mapping>
+		<filter-name>protectAdminSourceFilter</filter-name>
+		<url-pattern>/system/*</url-pattern>
+	</filter-mapping> -->
+	<!-- 添加监听器 -->
+	<!-- 配置初始化Spring应用上下文的监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 配置Spring对log4j的支持 -->
+	<!-- <listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+ -->
+<!-- 	<listener>
+		<listener-class>com.magtech.rlib.user.listener.WebHttpSessionListener</listener-class>
+	</listener>
+ -->
+	<servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+
+	<!--<servlet-mapping>-->
+		<!--<servlet-name>jsp</servlet-name>-->
+		<!--<url-pattern>*.html</url-pattern>-->
+	<!--</servlet-mapping>-->
+
+	<!-- session超时定义,单位为分钟 -->
+	<session-config>
+		<session-timeout>10080</session-timeout>
+	</session-config>
+	
+	<welcome-file-list>
+        <welcome-file>/index.html</welcome-file>
+    </welcome-file-list>
+
+<!-- 	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/jsp/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/jsp/error/500.jsp</location>
+	</error-page> -->
+
+	<!--<jsp-config>-->
+		<!--<taglib>-->
+			<!--<taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>-->
+			<!--<taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>-->
+		<!--</taglib>-->
+		<!--<taglib>-->
+			<!--<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>-->
+			<!--<taglib-location>/WEB-INF/tld/c.tld</taglib-location>-->
+		<!--</taglib>-->
+		<!--<taglib>-->
+			<!--<taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>-->
+			<!--<taglib-location>/WEB-INF/tld/fn.tld</taglib-location>-->
+		<!--</taglib>-->
+		<!--<jsp-property-group>-->
+			<!--<url-pattern>*.jsp</url-pattern>-->
+			<!--<trim-directive-whitespaces>true</trim-directive-whitespaces>-->
+		<!--</jsp-property-group>-->
+	<!--</jsp-config>-->
+</web-app>

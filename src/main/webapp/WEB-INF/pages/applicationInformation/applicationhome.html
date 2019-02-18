@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申请指南</title>
+    <link rel="stylesheet" href="../../../static/css/applicationInformation/applicationGuide.css">
+    <link rel="stylesheet" href="../../../static/css/applicationInformation/translateGradeGuide.css">
+    <link rel="shortcut icon" href="../../inc/icon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="../../static/css/jquery.idcode.css">
+    <script src="../../static/js/lib/animate.js"></script>
+    <script src="../../static/js/lib/jquery.min.js"></script>
+    <script src="../../static/js/lib/angular.min.js"></script>
+    <script src="../../static/js/lib/angular-ui-router.js"></script>
+    <script src="../../static/js/lib/angular-animate.min.js"></script>
+    <script src="../../static/js/lib/uibootstraptpls.js"></script>
+    <script src="../../static/js/lib/app.js"></script>
+    <script src="../../static/js/lib/config.js"></script>
+    <script src="../../../static/js/controller/application/applicationController.js"></script>
+    <script src="../../../static/js/controller/application/applicationGuideController.js"></script>
+    <script src="../../../static/js/controller/application/academicStandardsController.js"></script>
+    <script src="../../../static/js/controller/application/gradeStandardsController.js"></script>
+    <script src="../../../static/js/controller/application/paymentInformationController.js"></script>
+    <script src="../../../static/js/controller/application/refundPolicyController.js"></script>
+    <script src="../../../static/js/controller/application/teachingQualityEvaluationController.js"></script>
+    <script src="../../../static/js/controller/application/transcriptCertificationController.js"></script>
+    <script src="../../../static/js/controller/application/translateGradeGuideController.js"></script>
+    <script src="../../../static/js/controller/application/tuitionInformationController.js"></script>
+
+    <style>
+        .m1-borderBottom {
+            display: none;
+            position: absolute;
+            top: 3px;
+            left: 45px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 40px;
+            height: 3px;
+        }
+
+        .m1-borderBottom1 {
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 45px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 40px;
+            height: 3px;
+        }
+
+        .m2-borderBottom {
+            display: none;
+            position: absolute;
+            top: 3px;
+            left: 135px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m2-borderBottom2 {
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 135px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m3-borderBottom {
+            display: none;
+            position: absolute;
+            top: 3px;
+            left: 270px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m3-borderBottom3 {
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 270px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m4-borderBottom {
+            display: none;
+            position: absolute;
+            top: 3px;
+            left: 405px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m4-borderBottom4 {
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 405px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m5-borderBottom {
+            display: none;
+            position: absolute;
+            top: 3px;
+            left: 540px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m5-borderBottom5 {
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 540px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m6-borderBottom {
+            display: none;
+            position: absolute;
+            top: 3px;
+            left: 676px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+
+        .m6-borderBottom6 {
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 676px;
+            background-image: -moz-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -webkit-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            background-image: -ms-linear-gradient(0deg, rgb(89, 184, 232) 0%, rgb(223, 161, 241) 100%);
+            width: 83px;
+            height: 3px;
+        }
+        .f-modelFoot0 {
+            width: 36px;
+            height: 30px;
+            float: left;
+            font-size: 18px;
+            line-height: 30px;
+            color: white;
+            margin-right: 0px;
+            border-bottom: 1px solid white;
+            margin-right: 30px;
+        }
+        .f-modelFoot1 {
+            width: 74px;
+            height: 30px;
+            float: left;
+            font-size: 18px;
+            line-height: 30px;
+            color: white;
+            margin-right: 0px;
+            border-bottom: 1px solid white;
+            margin-right: 30px;
+        }
+
+        .f-modelFoot2 {
+            width: 74px;
+            height: 30px;
+            float: left;
+            font-size: 18px;
+            line-height: 30px;
+            color: white;
+            margin-right: 30px;
+        }
+        .f-modelFoot3 {
+            width: 74px;
+            height: 30px;
+            float: left;
+            font-size: 18px;
+            line-height: 30px;
+            color: white;
+            margin-right: 30px;
+        }
+
+        .ai-l-1Sel {
+                width: 121px;
+                height: 65px;
+                margin-left: 18px;
+                text-align: center;
+                font-size: 18px;
+                line-height: 65px;
+                color: #535d64;
+                font-weight: 600;
+            }
+        .ai-l-1UnSel {
+            width: 121px;
+            height: 65px;
+            margin-left: 18px;
+            text-align: center;
+            font-size: 20px;
+            line-height: 65px;
+            color: #535d64;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="applicationGuideController">
+<!--头部信息开始-->
+<header class="header">
+    <div class="conBox">
+        <a href="javascript:void(0)" ui-sref="indexhome" class="logo"></a>
+        <div class="h-modelB0x">
+            <a href="javascript:void(0)">
+                <div class="model1" ng-click="indexhomeCenter()">首页</div>
+            </a>
+            <a href="">
+                <div class="model2" ng-click="campusCenter()">校区介绍</div>
+            </a>
+            <a href="">
+                <div class="model3" ng-click="teacherCenter()">师资团队</div>
+            </a>
+            <a href="">
+                <div class="model4" ng-click="ApplicationCenter()">申请信息</div>
+            </a>
+            <a href="">
+                <div class="model5" ng-click="ActivityCenter()">校园生活</div>
+            </a>
+            <a href="">
+                <div class="model6" ng-click="aboutUsCenter()">关于我们</div>
+            </a>
+            <div class="h-modelBorder">
+                <div class="m1-borderBottom"></div>
+                <div class="m2-borderBottom"></div>
+                <div class="m3-borderBottom"></div>
+                <div class="m4-borderBottom"></div>
+                <div class="m5-borderBottom"></div>
+                <div class="m6-borderBottom"></div>
+            </div>
+        </div>
+        <div class="logOrReg" ng-show="visible">
+            <a href="javascript:void(0);" ui-sref="login">
+                <!--{{baseurl}}/login.html  ng-click="Login()" ng-click="Register()"-->
+                <div class="log">登录</div>
+            </a>
+            <a href="javascript:void(0);" ui-sref="register">
+                <div class="reg">注册</div>
+            </a>
+        </div>
+        <div class="logOrReg" ng-show="visiblePerson">
+            <a href="javascript:void(0);" ng-click="PersonalCenter()">
+                <div class="log2" style="width: 100px;color: #242424;">个人中心</div>
+            </a>
+        </div>
+    </div>
+</header>
+<!--导航图-->
+<!--<div class="ai-bgBox">-->
+<!--<div class="ai-bgWord">-->
+<!--<span>报名指南</span><br/>-->
+<!--<span style="font-size: 48px">Registration Guide</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;中间主体信息部分开始&ndash;&gt;-->
+<!--导航图-->
+<div class="ai-bgBox">
+    <div class="ai-bgWord" id="daohangtuwenzi">
+
+    </div>
+</div>
+<!--中间主体信息部分开始-->
+<div class="ai">
+    <div class="ai-left">
+        <a href="javascript:void(0)">
+            <div class="ai-l-1" ui-sref="applicationGuide">报名指南
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-2" ui-sref="translateGradeGuide">转学分指南
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-3" ui-sref="academicStandards">学术准则
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-4" ui-sref="gradeStandards">评分标准
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-5" ui-sref="teachingQualityEvaluation">教学质量评估
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-6" ui-sref="transcriptCertification">成绩单认证
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-7" ui-sref="tuitionInformation">学费信息
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-8" ui-sref="paymentInformation">支付信息
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+        <a href="javascript:void(0)">
+            <div class="ai-l-9" ui-sref="refundPolicy">退还政策
+                <div class="ai-l-line"></div>
+            </div>
+        </a>
+    </div>
+    <!--右侧主体内容部分-->
+    <div ui-view></div>
+</div>
+<!--底部导航栏-->
+<footer>
+    <div class="f-conBox">
+        <div class="f-model">
+            <a href="">
+                <div class="f-model1" ng-click="indexhomeCenter()">首页</div>
+            </a>
+            <a href="">
+                <div class="f-model2" ng-click="campusCenter()">校区介绍</div>
+            </a>
+            <a href="">
+                <div class="f-model3" ng-click="teacherCenter()">师资团队</div>
+            </a>
+            <a href="">
+                <div class="f-model4" ng-click="ApplicationCenter()">申请信息</div>
+            </a>
+            <a href="">
+                <div class="f-model5" ng-click="ActivityCenter()">校园生活</div>
+            </a>
+            <a href="">
+                <div class="f-model6" ng-click="aboutUsCenter()">关于我们</div>
+            </a>
+            <div class="f-logOrReg">
+                <a href="../login.html">
+                    <div class="f-log">登录</div>
+                </a>
+                <a href="../register.html">
+                    <div class="f-reg">注册</div>
+                </a>
+            </div>
+        </div>
+        <div class="f-contactBox">
+            <div class="f-contactLeft">
+                <span>NAIS</span>
+                <span>INTERNATIONAL</span>
+                <span>SUMMER</span>
+            </div>
+            <div class="f-contactRight">
+                <div class="fcr-top">
+                    <div class="fcrt-log"></div>
+                    <div class="fcrt-number">021-80394666</div>
+                </div>
+                <div class="fcr-bottom">
+                    <div class="fcrb-log"></div>
+                    <div class="fcrb-number">info@naiseducation.com</div>
+                </div>
+            </div>
+        </div>
+        <div class="companyInfo">版权所有 2015 上海千结教育科技有限公司　NAIS国际暑期学校平台 沪ICP备15041968号-1</div>
+    </div>
+</footer>
+
+<div class="slidebar">
+    <div class="slidebar-top">
+        <div class="st-pic"></div>
+    </div>
+    <div class="slidebar-bottom">
+        <div class="sb-pic"></div>
+    </div>
+</div>
+<div class="big-ewm"></div>
+<script>
+
+    window.onscroll = function () {
+        if ($(document).scrollTop() > 410)//这个410是距离顶部高度
+        {
+            $(".ai-left").addClass('ai-leftFixed');//
+        } else {
+            $(".ai-left").removeClass('ai-leftFixed');
+        }
+    }
+
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+        function () {
+            $(".big-ewm").css("right", "65px")
+        }
+    );
+    $(".slidebar-top").mouseout(
+        function () {
+            $(".big-ewm").css("right", "-165px")
+        }
+    )
+    //一键返回顶部
+    var toTop = document.querySelector(".slidebar-bottom");
+    toTop.onclick = function () {
+        obj = document.body.scrollTop == 0 ? document.documentElement : document.body;
+        animate(obj, {scrollTop: 0}, 100)
+    };
+</script>
+</body>
+</html>

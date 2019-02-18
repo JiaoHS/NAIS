@@ -1,0 +1,146 @@
+<!--右侧内容-->
+<link rel="stylesheet" href="../../../static/css/personalCenter/orderCenter.css">
+<style type="text/css">
+    .mcb-cuponsBox {
+        width: 675px;
+        height: auto;
+        /*background: salmon;*/
+        float: left;
+        margin-top: 5px;
+        margin-left: 150px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .mcb-cupons {
+        width: 875px;
+        height: auto;
+        /*background: seagreen;*/
+        margin-top: 5px;
+        margin-left: -159px;
+        /*float: left;*/
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .mcb-couponsDetail {
+        width: 148px;
+        height: 98px;
+        float: left;
+        margin-top: 15px;
+        margin-left: 11px;
+        background: url("../../../static/images/personal/coupon2.png") no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+    }
+
+    .mcb-couponsDetail > .mcb-cSymbol {
+        display: block;
+        float: left;
+        width: 100%;
+        height: 20px;
+        margin-top: 19px;
+        text-align: center;
+        line-height: 20px;
+        font-size: 19px;
+        color: #a2cbff;
+    }
+
+    .mcb-cGet {
+        width: 79px;
+        height: 24px;
+        border-radius: 20px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        text-align: center;
+        line-height: 24px;
+        font-size: 18px;
+        color: #a2cbff;
+        position: absolute;
+        top: 56px;
+        left: 35px;
+        cursor: pointer;
+        margin-top: 7px;
+    }
+</style>
+<div class="m-right">
+    <div class="hp-contentBox">
+        <div class="hp-header">
+            <!--<div class="hp-header1">选择</div>-->
+            <div class="hp-header2">订单号</div>
+            <div class="hp-header3">订单属性</div>
+            <div class="hp-header4">数量</div>
+            <div class="hp-header5">价格</div>
+        </div>
+        <div class="hp-headerBorder"></div>
+        <!--订单详情-->
+        <div class="hp-orderDetail">
+            <!--<div class="hp-orderDtail1">-->
+            <!--<input type="checkbox" class="hpod1-checkbox" id="1"/>-->
+            <!--</div>-->
+            <div class="hp-orderDtail2">{{OrderInfo.paymentSeq}}</div>
+            <div class="hp-orderDtail3">{{OrderInfo.orderSource==100?"课程费用":"住宿押金"}}</div>
+            <div class="hp-orderDtail4">1</div>
+            <div class="hp-orderDtail5">￥{{OrderInfo.totalAmount/1000}}</div>
+        </div>
+
+        <div class="hp-chooseCouponWord">请选择优惠券</div>
+        <div class="hp-headerBorder"></div>
+
+        <div class="hp-chooseCoupon" ng-click="MyCouponList()">选择优惠券
+            <div class="hpcc-icion">
+                <div class="hpcc-icoin1"></div>
+                <div class="hpcc-icoin2"></div>
+            </div>
+        </div>
+        <div class="mcb-cuponsBox">
+            <div class="mcb-cupons">
+                <div style="cursor: pointer" class="mcb-couponsDetail"
+                     ng-click="GetCouponMoney(mycoupon.discountAmount/1000,mycoupon.stockId)"
+                     ng-repeat="mycoupon in MyCouponList" ng-show="{{CouponlistShow}}">
+                    <span class="mcb-cSymbol">￥{{mycoupon.discountAmount/1000}}</span>
+                    <div class="mcb-cGet">优惠券</div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="hp-chooseCoupon" ng-show="{{cuponsBox}}">-->
+        <!--<div class="hpcs-inside" ng-repeat="mycoupon in MyCouponList">-->
+        <!--<span>实付款：</span>-->
+        <!--<span>￥505500.00</span>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div ng-repeat="mycoupon in MyCouponList">&ndash;&gt;-->
+        <!--&lt;!&ndash;<span>￥{{mycoupon.discountAmount*1000}}</span>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div>优惠券</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+
+
+        <div class="hp-result">
+            <div class="hp-favourable">
+                <span class="hp- favourableTitle">优惠价格：</span>
+                <span class="hp- favourableNum">￥{{DiscountMoney}}</span>
+            </div>
+            <div class="hp-fgx"></div>
+            <div class="hp-actualPay">
+                <span class="hp-actualTitle">应付金额：</span>
+                <span class="hp-actualNum">￥{{ShouldMoney}}</span>
+            </div>
+            <div class="hp-headerBorder" style="margin-top: 100px"></div>
+            <div class="hp-countShow">
+                <div class="hpcs-inside">
+                    <span>实付款：</span>
+                    <span>￥{{ShouldMoney}}</span>
+                </div>
+            </div>
+            <div class="hp-submitOrder" ui-sref="payWay">提交订单</div>
+            <span class="countDown">订单关闭倒计时：{{text}}</span>
+            <span class="timePromopt">* 订单有效时间为24小时，超过时间系统自动关闭此订单</span>
+        </div>
+    </div>
+</div>

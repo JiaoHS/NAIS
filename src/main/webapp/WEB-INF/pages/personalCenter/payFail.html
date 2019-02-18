@@ -1,0 +1,26 @@
+<!--右侧内容-->
+<link rel="stylesheet" href="../../../static/css/personalCenter/payFail.css">
+<div class="m-right">
+    <div class="pf-containerOutside">
+        <div class="pf-containerInside">
+            <div class="pfc-success"></div>
+            <div class="pfc-word">支付失败</div>
+            <div class="pfc-line"></div>
+            <div class="pfc-detailBox">
+                <div class="pfcd-money">实付款：</div>
+                <span id="pfcd-money">￥{{(OrderInfo.cashAmount/1000).toFixed(2)}}</span>
+                <div class="pfcd-project">付款项目：</div>
+                <span id="pfcd-project">{{OrderInfo.orderSource==100?"住宿费用定金":"暑校课程学费"}}</span>
+                <div class="pfcd-time">下单时间：</div>
+                <span id="pfcd-date" style="width: 220px">{{OrderInfo.createTime}}</span>
+                <!--<span id="pfcd-time">12:12:12</span>-->
+                <a href="" >
+                    <div class="pfcd-cancel" ui-sref="orderCenter">取消本次交易</div>
+                </a>
+                <a href="">
+                    <div class="pfcd-again" ui-sref="orderCenter">重新支付>></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

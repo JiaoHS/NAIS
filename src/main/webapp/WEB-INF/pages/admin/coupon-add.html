@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="../../../static/caohao/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<div style="padding:10px 10px 10px 10px">
+    <form id="contentAddForm_yy_1" class="itemForm" method="post">
+        <input type="hidden" name="categoryId"/>
+        <table cellpadding="5">
+
+            <tr>
+                <td>优惠码:</td>
+                <td><input class="easyui-textbox" type="text" name="couponCode" id="couponCode" data-options="required:true" style="width: 280px;"></input></td>
+                <td><button id="button" type="button" onclick="getCode()">生成</button ></td>
+            </tr>
+
+            <tr>
+                <td>优惠码类型:</td>
+                <!--<td><input class="easyui-textbox" type="text" name="couponType" data-options="required:true" style="width: 280px;"></input></td>-->
+                <td><select name="couponType" id="couponType" data-options="required:true" style="line-height:26px;border:1px solid #ccc">
+                    <option value='1'>活动推广</option>
+                    <option value='2'>推广优惠</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td>优惠金额:</td>
+                <td><input class="easyui-textbox" type="text" name="discountAmount" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>库存:</td>
+                <td><input class="easyui-textbox" type="text" name="stock" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>优惠券生效时间：</td>
+                <td><input id="couponStartTime" name="couponStartTime" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/></td>
+
+                <!--<label for="seasonStart"> 开学时间：</label><input id="seasonStart" name="seasonStart" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/>-->
+                <!--<td>开学时间:</td>
+                <td><input class="easyui-textbox" type="text" name="campusName" data-options="required:true" style="width: 280px;"></input></td>-->
+            </tr>
+            <tr>
+                <td>优惠券作废时间：</td>
+                <td><input id="couponEndTime" name="couponEndTime" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/></td>
+
+                <!-- <label for="seasonEnd"> 结束时间：</label><input id="seasonEnd" name="seasonEnd" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/>-->
+                <!--<td>结束时间:</td>
+                <td><input class="easyui-textbox" type="text" name="campusName" data-options="required:true" style="width: 280px;"></input></td>-->
+            </tr>
+
+            <!--<tr>
+                <td>校区首页小图:</td>
+                <td>
+                    <input type="hidden" name="campusPhoto" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>校区主页Banner：</td>
+                <td>
+                    <input type="hidden" name="campusBannerPhoto" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>-->
+
+            <!--<tr>
+                <td>校区介绍:</td>
+                <td><input class="easyui-textbox" name="campusDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td>路线介绍:</td>
+                <td><input class="easyui-textbox" name="adreesDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
+                </td>
+            </tr>-->
+
+
+            <!--<tr>
+                <td>校区介绍:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="campusDesc"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>路线介绍:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="adreesDesc"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>住宿推荐图:</td>
+                <td>
+                    <input type="hidden" name="hotelPhoto" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>-->
+
+            <!--<tr>
+                <td>住宿介绍:</td>
+                <td><input class="easyui-textbox" name="hotelDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
+                </td>
+            </tr>-->
+
+
+           <!-- <tr>
+                <td>住宿介绍:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="hotelDesc"></textarea>
+                </td>
+            </tr>-->
+            <!--<tr>
+                <td>资讯标题:</td>
+                <td><input class="easyui-textbox" type="text" name="title" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+            <tr>
+                <td>资讯描述:</td>
+                <td><input class="easyui-textbox" type="text" name="desc" style="width: 280px;"></input></td>
+            </tr>-->
+            <!--<tr>-->
+                <!--<td>URL:</td>-->
+                <!--<td><input class="easyui-textbox" type="text" name="url" style="width: 280px;"></input></td>-->
+            <!--</tr>-->
+            <!--<tr>
+                <td>资讯轮播图:</td>
+                <td>
+                    <input type="hidden" name="titleImg" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>-->
+            <!--<tr>-->
+                <!--<td>图片2:</td>-->
+                <!--<td>-->
+                    <!--<input type="hidden" name="pic2" />-->
+                    <!--<a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>
+                <td>资讯内容:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="content"></textarea>
+                </td>
+            </tr>-->
+        </table>
+    </form>
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentAddPage.submitForm()">提交</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentAddPage.clearForm()">重置</a>
+    </div>
+</div>
+<script>
+
+    function getCode(){
+        $.ajax({
+            url:'/coupon/admin/getCoupon',
+            type:"POST",
+            data:{},
+            dataType: "json",
+            headers: {"Content-Type": "application/json;charset=utf-8"},
+            success:function(data){
+                var resdata = JSON.stringify(data);
+                //alert(resdata);
+                var res=resdata.toString();
+                var r=res.split(":");
+                res=r[2];
+                //var end=res.indexOf('"');
+                res=res.substring(1,res.length);
+                var end=res.indexOf('"');
+                res=res.substring(0,end);
+                //document.getElementById('couponCode').value="somethind";
+                $('#couponCode').textbox('setValue',res);
+            },
+            error:function (data) {
+                alert('服务器产生code异常，请重试');
+            }
+        })
+    }
+    /*$(function(){
+        $.ajax({
+            url:'/coupon/admin/types',
+            type:"POST",
+            data:{},
+            dataType: "json",
+            headers: {"Content-Type": "application/json;charset=utf-8"},
+            success:function(data){
+                var selDom = $("#couponType");
+
+                var resdata = JSON.stringify(data);
+                var res=resdata.toString();
+                var r=res.split(":");
+                res=r[2];
+                var end=res.indexOf(']');
+                res=res.substring(1,end);
+                res=res.split(",");
+                alert('test');
+                for(var i=0;i<res.length;i++){
+                    if(res[i]=="1"){
+                        selDom.append("<option value='1'>活动优惠</option>");
+                    }else if(res[i]=="2"){
+                        selDom.append("<option value='2'>推广优惠</option>");
+                    }
+                }
+            },
+            error:function (data) {
+                alert('types获取失败');
+            }
+        })
+    });*/
+
+    /*var contentAddEditorForCampus ;
+    var contentAddEditorForAddress ;
+    var contentAddEditorForHotel ;
+    $(function(){
+        contentAddEditorForCampus = TT.createEditor("#contentAddForm_yy_1 [name=campusDesc]");
+        contentAddEditorForAddress = TT.createEditor("#contentAddForm_yy_1 [name=adreesDesc]");
+        contentAddEditorForHotel = TT.createEditor("#contentAddForm_yy_1 [name=hotelDesc]");
+        TT.initOnePicUpload();
+        // $("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
+    });*/
+
+    var contentAddPage  = {
+        submitForm : function (){
+            if(!$('#contentAddForm_yy_1').form('validate')){
+                $.messager.alert('提示','表单还未填写完成!');
+                return ;
+            }
+            /*contentAddEditorForCampus.sync();
+            contentAddEditorForAddress.sync();
+            contentAddEditorForHotel.sync();*/
+
+            $.post("/coupon/admin/insert",$("#contentAddForm_yy_1").serialize(), function(data){
+                if(data.code == 0){
+                    $.messager.alert('提示','新增内容成功!');
+                    $("#contentList_yy_1").datagrid("reload");
+                    TT.closeCurrentWindow();
+                }
+            });
+        },
+        clearForm : function(){
+            $('#contentAddForm_yy_1').form('reset');
+            contentAddEditor.html('');
+        }
+    };
+
+
+</script>
+
+</html>

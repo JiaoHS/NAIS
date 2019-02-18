@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="easyui-panel" title="Nested Panel" data-options="width:'100%',minHeight:1000,noheader:true,border:false" style="padding:10px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <!--<div data-options="region:'west',split:false" style="width:250px;padding:5px">-->
+            <!--<ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/content/category/list',animate: true,method : 'GET'">-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div data-options="region:'center'" style="padding:5px">
+            <div>
+                <!--label for="startDate"> 开始时间：</label><input id="startDate" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/>-->
+                <label for="query_yy_1"> 优惠码： </label><input id="query_yy_1" type="text" style="line-height:26px;border:1px solid #ccc"/>
+                <label for="query_yy_2"> 类型： </label><select id="query_yy_2" style="line-height:26px;border:1px solid #ccc"></select>
+                <!--<input id="query_yy_2" type="text" style="line-height:26px;border:1px solid #ccc"/>-->
+            </div>
+            <table class="easyui-datagrid" id="contentList_yy_1" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/coupon/admin/find',queryParams:{page:1,rows:20}">
+                <thead>
+                <tr>
+                    <th data-options="field:'id',width:30">ID</th>
+                    <th data-options="field:'couponCode',width:100">优惠码</th>
+                    <th data-options="field:'couponStartTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">优惠券生效时间</th>
+                    <th data-options="field:'couponEndTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">优惠券作废时间</th>
+                    <th data-options="field:'couponType',width:100">优惠码类型</th>
+                    <th data-options="field:'discountAmount',width:100">优惠金额</th>
+                    <th data-options="field:'stock',width:100">库存</th>
+                    <th data-options="field:'createTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">创建时间</th>
+                    <th data-options="field:'updateTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">更新时间</th>
+                    <th data-options="field:'createUser',width:100">创建人ID</th>
+
+                    <!--<th data-options="field:'campusName',width:100">校区名称</th>
+                    <th data-options="field:'campusNameEn',width:100">校区英文名称</th>
+                    <th data-options="field:'seasonStart',width:100,align:'center',formatter:TAOTAO.formatDateTime">开学时间</th>
+                    <th data-options="field:'seasonEnd',width:100,align:'center',formatter:TAOTAO.formatDateTime">结束时间</th>
+                    <th data-options="field:'campusPhoto',width:100">校区首页小图URL</th>
+                    <th data-options="field:'campusBannerPhoto',width:100">校区主页Banner图URL</th>
+                    <th data-options="field:'hotelPhoto',width:100">住宿推荐图URL</th>
+                    <th data-options="field:'createTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">创建时间</th>
+                    <th data-options="field:'updateTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">更新时间</th>-->
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    $(function(){
+        $.ajax({
+            url:'/coupon/admin/types',
+            type:"POST",
+            data:{},
+            dataType: "json",
+            headers: {"Content-Type": "application/json;charset=utf-8"},
+            success:function(data){
+                var selDom = $("#query_yy_2");
+
+                var resdata = JSON.stringify(data);
+                var res=resdata.toString();
+                var r=res.split(":");
+                res=r[2];
+                var end=res.indexOf(']');
+                res=res.substring(1,end);
+                res=res.split(",");
+                for(var i=0;i<res.length;i++){
+                    if(res[i]=="1"){
+                        selDom.append("<option value='1'>活动优惠</option>");
+                    }else if(res[i]=="2"){
+                        selDom.append("<option value='2'>推广优惠</option>");
+                    }
+                }
+                selDom.append("<option value=''>不选择</option>");
+            },
+            error:function (data) {
+                alert('types获取失败');
+            }
+        })
+        var tree = $("#contentCategoryTree");
+        var datagrid = $("#contentList_yy_1");
+        tree.tree({
+            onClick : function(node){
+                if(tree.tree("isLeaf",node.target)){
+                    datagrid.datagrid('reload', {
+                        categoryId :node.id
+                    });
+                }
+            }
+        });
+    });
+
+    var contentListToolbar = [{
+        text:'新增',
+        iconCls:'icon-add',
+        handler:function(){
+            // var node = $("#contentCategoryTree").tree("getSelected");
+            // if(!node || !$("#contentCategoryTree").tree("isLeaf",node.target)){
+            //     $.messager.alert('提示','新增内容必须选择一个内容分类!');
+            //     return ;
+            // }
+            TT.createWindow({
+                url : "/admin/coupon-add.html"
+            });
+        }
+    },/*{
+        text:'编辑',
+        iconCls:'icon-edit',
+        handler:function(){
+            var ids = TT.getSelectionsIds("#contentList_yy_1");
+            if(ids.length == 0){
+                $.messager.alert('提示','必须选择一个内容才能编辑!');
+                return ;
+            }
+            if(ids.indexOf(',') > 0){
+                $.messager.alert('提示','只能选择一个内容!');
+                return ;
+            }
+            TT.createWindow({
+                url : "/admin/coupon-edit.html",
+                onLoad : function(){
+                    var data = $("#contentList_yy_1").datagrid("getSelections")[0];
+                    $("#contentEditForm_yy").form("load",data);
+                    // 实现图片
+                    /!*if(data.campusPhoto){
+                        $("#contentEditForm_yy [name=campusPhoto]").after("<a href='"+data.campusPhoto+"' target='_blank'><img src='"+data.campusPhoto+"' width='80' height='50'/></a>");
+                    }
+                    if(data.campusBannerPhoto){
+                        $("#contentEditForm_yy [name=campusBannerPhoto]").after("<a href='"+data.campusBannerPhoto+"' target='_blank'><img src='"+data.campusBannerPhoto+"' width='80' height='50'/></a>");
+                    }
+                    if(data.hotelPhoto){
+                        $("#contentEditForm_yy [name=hotelPhoto]").after("<a href='"+data.hotelPhoto+"' target='_blank'><img src='"+data.hotelPhoto+"' width='80' height='50'/></a>");
+                    }
+
+                    contentEditEditorForCampus.html(data.campusDesc);
+                    contentEditEditorForAddress.html(data.adreesDesc);
+                    contentEditEditorForHotel.html(data.hotelDesc);*!/
+                    /!*if(data.campusDesc){
+                        $("#contentEditForm [name=campusDesc]").html(data.campusDesc);
+                    }
+                    if(data.adreesDesc){
+                        $("#contentEditForm [name=adreesDesc]").html(data.adreesDesc);
+                    }
+                    if(data.hotelDesc){
+                        $("#contentEditForm [name=hotelDesc]").html(data.hotelDesc);
+                    }*!/
+                    // if(data.pic2){
+                    //     $("#contentEditForm [name=pic2]").after("<a href='"+data.pic2+"' target='_blank'><img src='"+data.pic2+"' width='80' height='50'/></a>");
+                    // }
+
+                    //contentEditEditor.html(data.content);
+                }
+            });
+        }
+    },*/{
+        text:'删除',
+        iconCls:'icon-cancel',
+        handler:function(){
+            var ids = TT.getSelectionsIds("#contentList_yy_1");
+            if(ids.length == 0){
+                $.messager.alert('提示','未选中商品!');
+                return ;
+            }
+            $.messager.confirm('确认','确定删除ID为 '+ids+' 的内容吗？',function(r){
+                if (r){
+                    var params = {"ids":ids};
+                    $.post("/coupon/admin/batchDelete",params, function(data){
+                        if(data.code == 0){
+                            $.messager.alert('提示','删除内容成功!',undefined,function(){
+                                $("#contentList_yy_1").datagrid("reload");
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    },{
+        text:'查询',
+        iconCls:'icon-search',
+        handler:function () {
+            $('#contentList_yy_1').datagrid('reload',{
+                /*date:$("#startDate").datetimebox('getValue'),*/
+                code:$("#query_yy_1").val(),
+                type:$("#query_yy_2").val()
+            });
+        }
+    }
+    ];
+
+
+</script>
+</html>

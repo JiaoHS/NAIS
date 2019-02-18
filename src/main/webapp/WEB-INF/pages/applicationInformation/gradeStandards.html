@@ -1,0 +1,132 @@
+<!--导航图-->
+<link rel="stylesheet" href="../../../static/css/applicationInformation/gradeStandards.css">
+<!--<div class="ai-bgBox">-->
+    <!--<div class="ai-bgWord">-->
+        <!--<span>学术准则</span><br/>-->
+        <!--<span style="font-size: 48px">Academic standards</span>-->
+    <!--</div>-->
+<!--</div>-->
+<!--右侧主体内容部分-->
+<div class="ai-right">
+    <div class="ai-rightIn">
+        <div class="gsDeriction">申请信息>评分标准</div>
+        <div class="gsShape1"></div>
+        <div class="gsShape2"></div>
+        <div class="gsShape3"></div>
+        <div class="gsTableBg">
+            <table>
+                <tr>
+                    <th width="33.33%">Grade</th>
+                    <th width="33.33%">Percent</th>
+                    <th width="33.33%">Quality Points Per Semester Hour</th>
+                </tr>
+                <tr>
+                    <td>A+</td>
+                    <td>97-100</td>
+                    <td>4.00</td>
+                </tr>
+                <tr>
+                    <td>A</td>
+                    <td>94-96</td>
+                    <td>3.80</td>
+                </tr>
+                <tr>
+                    <td>A-</td>
+                    <td>90-93</td>
+                    <td>3.60</td>
+                </tr>
+                <tr>
+                    <td>B+</td>
+                    <td>87-89</td>
+                    <td>3.47</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>84-86</td>
+                    <td>3.33</td>
+                </tr>
+                <tr>
+                    <td>B-</td>
+                    <td>80-83</td>
+                    <td>3.20</td>
+                </tr>
+                <tr>
+                    <td>C+</td>
+                    <td>77-79</td>
+                    <td>3.07</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>74-76</td>
+                    <td>2.93</td>
+                </tr>
+                <tr>
+                    <td>C-</td>
+                    <td>70-73</td>
+                    <td>2.80</td>
+                </tr>
+                <tr>
+                    <td>D+</td>
+                    <td>67-69</td>
+                    <td>2.67</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>64-66</td>
+                    <td>2.53</td>
+                </tr>
+                <tr>
+                    <td>D-</td>
+                    <td>60-63</td>
+                    <td>2.40</td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td><60</td>
+                    <td>0</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!--固定的侧边栏-->
+<div class="slidebar">
+    <div class="slidebar-top">
+        <div class="st-pic"></div>
+    </div>
+    <div class="slidebar-bottom">
+        <div class="sb-pic"></div>
+    </div>
+</div>
+<div class="big-ewm"></div>
+<script>
+
+    window.onscroll=function(){
+        if ($(document).scrollTop() >410)//这个410是距离顶部高度
+        {
+            $(".ai-left").addClass('ai-leftFixed');//
+        }else{
+            $(".ai-left").removeClass('ai-leftFixed');
+        }
+    }
+
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+            function () {
+                $(".big-ewm").css("right","65px")
+            }
+    );
+    $(".slidebar-top").mouseout(
+            function () {
+                $(".big-ewm").css("right","-165px")
+            }
+    )
+
+    //一键返回顶部
+    var toTop=document.querySelector(".slidebar-bottom");
+    toTop.onclick=function(){
+        obj=document.body.scrollTop==0?document.documentElement:document.body;
+        animate(obj,{scrollTop:0},100)
+    };
+
+</script>

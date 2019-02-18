@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="../../static/css/userCenter/ucPublic.css">
+<link rel="stylesheet" href="../../static/css/userCenter/index.css">
+<style type="text/css">
+    .btnBuy {
+        background: #75D7F3;
+        border-radius: 6px;
+        display: block;
+        width: 104px;
+        height: 32px;
+        line-height: 32px;
+        top: 20px;
+        color: #fff;
+        margin-top: 20px;
+    }
+</style>
+<div class="ucRight fr">
+    <div class="process">
+        <div class="title rel f22">我的申请进程</div>
+        <div class="processDetail">
+            <!-- 通过step2 3 4 来控制显示 -->
+            <div id="process" style="padding-top: 7px;" class="processNow fl step1">
+                <img src="../../static/images/userCenter/中心2亮.png" height="126" width="869" alt="">
+            </div>
+        </div>
+    </div>
+    <div id="beforeChange" class="lessons rel">
+        <div class="title rel f22">我的课程</div>
+        <a href="javascript:;" id="changeCourse" class="fr tc changeLessonBtn abs fff"
+           ng-click="ChangeLesson()">{{btnName}}</a>
+        <div class="myLessons">
+            <div id="noCourseList" class="noLessons f30 hide">这里还没有任何课程，请先前往缴费处</div>
+            <input class="btnBuy" type="button" ui-sref="apply" value="购买课程">
+            <ul id="courseList" class="lessonsList clearfix">
+                <li class="fl bj" ng-repeat="couse in CourseListTotal| limitTo: 4">
+                    <img src="{{couse.campusId==1?'../../static/images/sh.png':'../../static/images/bj.png'}}" alt="">
+                    <div class="lessonMsg clearfix">
+                        <div class="fl msgDetail">
+                            <div class="s_name toe f14">{{couse.courseName}}</div>
+                            <div class="date f12">{{FormatDateTime(couse.startTime)}} -
+                                {{FormatDateTime(couse.endTime)}}
+                            </div>
+                            <div class="time f12">{{couse.startTime.substr(10,9)}} - {{couse.endTime.substr(10,9)}}
+                            </div>
+                        </div>
+                        <div class="fr tr rel hzgb baseColor f16 _addr">
+                            {{couse.schoolNameCn.indexOf('南京')>-1?'南京':'北京'}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="lessonDetail">
+                <ol class="thead clearfix f20" id="lessonDetailList">
+                    <li class="fl tc num">序号</li>
+                    <li class="fl tc code">课程代码</li>
+                    <li class="fl tc name">课程名称</li>
+                    <li class="fl tc teacher">授课老师</li>
+                    <li class="fl tc time">上课时间</li>
+                </ol>
+                <ul class="tbody clearfix f14" ng-repeat="couse in CourseListTotal| limitTo: 4">
+                    <li class="fl tc num">{{$index+1}}</li>
+                    <li class="fl tc code">{{couse.courseCode}}</li>
+                    <li class="fl tc name">{{couse.courseName}}</li>
+                    <li class="fl tc teacher">{{couse.professorNameCn}}</li>
+                    <li class="fl tc time">{{couse.startTime.substr(10,9)}} - {{couse.endTime.substr(10,9)}}</li>
+                    <li class="fl tc del"
+                        style="{{(couse.status==3||couse.status==4)?'opacity:0.5;cursor:no-drop;':''}}"><i
+                            ng-click="DelOrder(couse.professorId,couse.status)"></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="afterChange" class="lessons rel hide">
+        <div class="title rel f22">我的课程</div>
+        <a href="javascript:;" id="changeCourse2" class="fr tc changeLessonBtn abs fff"
+           ng-click="ChangeLesson()">{{btnName}}</a>
+        <div class="tip tip3 c98 f16">(每个时间段只能选择一门课程，最多可选4门课程！)</div>
+        <div class="lessonList" id="lessonList">
+        </div>
+        <a href="javascript:;" class="fr syllabus c65 f20" ng-click="DownLoadSy()">Syllabus下载</a>
+        <span style="cursor: pointer" class="saveBtn baseBg fff fl tc" ng-click="submitApply()">提交更改</span>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".lessonList").on("click", ".arr", function () {
+        var list = $(this).parent();
+        if ($(list).hasClass('open')) {
+            $(list).removeClass('open');
+            $(list).find(".lessonListInfo").slideUp(300);
+            $(list).siblings().find(".lessonListInfo").slideUp(300);
+        } else {
+            $(list).addClass('open').siblings().removeClass('open').find(".lessonListInfo").slideUp(300);
+            $(list).find(".lessonListInfo").slideDown(300);
+        }
+    })
+</script>

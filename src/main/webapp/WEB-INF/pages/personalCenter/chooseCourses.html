@@ -1,0 +1,92 @@
+<!--右侧内容-->
+<link rel="stylesheet" href="../../../static/css/personalCenter/chooseCourses.css">
+<style type="text/css">
+    .SelectedDiv {
+        width: 100%;
+        height: 50px;
+        margin-top: 80px;
+        text-align: left;
+        line-height: 50px;
+        border-left: 1px dashed #959595;
+        border-top: 1px dashed #959595;
+        border-bottom: 1px dashed #959595;
+        border-radius: 10px 0px 0px 10px;
+        font-size: 20px;
+        padding-left: 20px;
+        color: #4e4e4e;
+        background: #00aeef;
+        color: white;
+        cursor: pointer;
+    }
+
+    .unSelectedDiv {
+        width: 100%;
+        height: 50px;
+        margin-top: 80px;
+        text-align: left;
+        line-height: 50px;
+        border-left: 1px dashed #959595;
+        border-top: 1px dashed #959595;
+        border-bottom: 1px dashed #959595;
+        border-radius: 10px 0px 0px 10px;
+        font-size: 20px;
+        padding-left: 20px;
+        color: #4e4e4e;
+        cursor: pointer;
+    }
+</style>
+<!--右侧内容-->
+<div class="m-right">
+    <div class="mr-inside">
+        <div class="mr-ChooseTitle">
+            <div class="mrct-line1"></div>
+            <div class="mrct-campus">校区选择</div>
+            <div class="mrct-line1"></div>
+            <div class="mrct-courses">选择课程</div>
+            <div class="mrct-line1"></div>
+            <div class="mrct-confirm">课程确认</div>
+            <div class="mrct-line1"></div>
+        </div>
+        <div class="mri-campusBox">
+            <sapn>校区：</sapn>
+            <span id="mri-campus">{{SchoolName}}</span>
+        </div>
+        <div class="mri-course" ng-show="{{mriCourseShow}}">
+            <div class="mric-1" id="course1">课程一</div>
+            <div class="mric-1" id="course2">课程二</div>
+            <div class="mric-1" id="course3">课程三</div>
+            <div class="mric-1" id="course4">课程四</div>
+        </div>
+        <table id="courselist2">
+            <tr>
+                <th>时间安排</th>
+                <th>课程名称</th>
+                <th>课号</th>
+                <th>授课教师</th>
+                <th>操作</th>
+            </tr>
+        </table>
+        <div class="undeterminedBox" ng-click="DaiDing()">
+            <div class="ub-word">待定</div>
+            <input type="checkbox" id="ckBtn" class="ub-check"/>
+        </div>
+
+        <div class="chooseButton">
+            <div class="mro-nextButton">
+                <a href="">
+                    <div class="mronb-inside" ui-sref="courseHome">上一步</div>
+                </a>
+            </div>
+            <div class="mro-submitButton">
+                <a href="">
+                    <!--ui-sref="coursesOrderPreview"-->
+                    <div class="mroscb-inside" ui-sref="coursesOrderPreview">提交课程
+                    </div>
+                </a>
+            </div>
+        </div>
+        <span class="cc-prompt">注：若还未确定课程选项，可选择待定选项。</span>
+    </div>
+</div>
+
+

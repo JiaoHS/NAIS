@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="../../../static/caohao/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<div style="padding:10px 10px 10px 10px">
+    <form id="contentAddForm_yy" class="itemForm" method="post">
+        <input type="hidden" name="categoryId"/>
+        <table cellpadding="5">
+
+            <tr>
+                <td>校区名称:</td>
+                <td><input class="easyui-textbox" type="text" name="campusName" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>校区英文名称:</td>
+                <td><input class="easyui-textbox" type="text" name="campusNameEn" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>开学时间：</td>
+                <td><input id="seasonStart" name="seasonStart" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/></td>
+
+                <!--<label for="seasonStart"> 开学时间：</label><input id="seasonStart" name="seasonStart" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/>-->
+                <!--<td>开学时间:</td>
+                <td><input class="easyui-textbox" type="text" name="campusName" data-options="required:true" style="width: 280px;"></input></td>-->
+            </tr>
+            <tr>
+                <td>结束时间：</td>
+                <td><input id="seasonEnd" name="seasonEnd" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/></td>
+
+                <!-- <label for="seasonEnd"> 结束时间：</label><input id="seasonEnd" name="seasonEnd" type="text" class="easyui-datebox" style="line-height:26px;border:1px solid #ccc"/>-->
+                <!--<td>结束时间:</td>
+                <td><input class="easyui-textbox" type="text" name="campusName" data-options="required:true" style="width: 280px;"></input></td>-->
+            </tr>
+
+            <tr>
+                <td>校区首页小图:</td>
+                <td>
+                    <input type="hidden" name="campusPhoto" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>校区主页Banner：</td>
+                <td>
+                    <input type="hidden" name="campusBannerPhoto" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>
+
+            <!--<tr>
+                <td>校区介绍:</td>
+                <td><input class="easyui-textbox" name="campusDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td>路线介绍:</td>
+                <td><input class="easyui-textbox" name="adreesDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
+                </td>
+            </tr>-->
+
+
+            <tr>
+                <td>校区介绍:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="campusDesc"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>路线介绍:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="adreesDesc"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>住宿推荐图:</td>
+                <td>
+                    <input type="hidden" name="hotelPhoto" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>
+
+            <!--<tr>
+                <td>住宿介绍:</td>
+                <td><input class="easyui-textbox" name="hotelDesc" data-options="multiline:true,validType:'length[0,150]'" style="height:60px;width: 280px;"></input>
+                </td>
+            </tr>-->
+
+
+            <tr>
+                <td>住宿介绍:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="hotelDesc"></textarea>
+                </td>
+            </tr>
+            <!--<tr>
+                <td>资讯标题:</td>
+                <td><input class="easyui-textbox" type="text" name="title" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+            <tr>
+                <td>资讯描述:</td>
+                <td><input class="easyui-textbox" type="text" name="desc" style="width: 280px;"></input></td>
+            </tr>-->
+            <!--<tr>-->
+            <!--<td>URL:</td>-->
+            <!--<td><input class="easyui-textbox" type="text" name="url" style="width: 280px;"></input></td>-->
+            <!--</tr>-->
+            <!--<tr>
+                <td>资讯轮播图:</td>
+                <td>
+                    <input type="hidden" name="titleImg" />
+                    <a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>
+                </td>
+            </tr>-->
+            <!--<tr>-->
+            <!--<td>图片2:</td>-->
+            <!--<td>-->
+            <!--<input type="hidden" name="pic2" />-->
+            <!--<a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>
+                <td>资讯内容:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="content"></textarea>
+                </td>
+            </tr>-->
+        </table>
+    </form>
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentAddPage.submitForm()">提交</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentAddPage.clearForm()">重置</a>
+    </div>
+</div>
+<script>
+
+
+
+    var contentAddEditorForCampus ;
+    var contentAddEditorForAddress ;
+    var contentAddEditorForHotel ;
+    $(function(){
+        contentAddEditorForCampus = TT.createEditor("#contentAddForm_yy [name=campusDesc]");
+        contentAddEditorForAddress = TT.createEditor("#contentAddForm_yy [name=adreesDesc]");
+        contentAddEditorForHotel = TT.createEditor("#contentAddForm_yy [name=hotelDesc]");
+        TT.initOnePicUpload();
+        // $("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
+    });
+
+    var contentAddPage  = {
+        submitForm : function (){
+            if(!$('#contentAddForm_yy').form('validate')){
+                $.messager.alert('提示','表单还未填写完成!');
+                return ;
+            }
+            contentAddEditorForCampus.sync();
+            contentAddEditorForAddress.sync();
+            contentAddEditorForHotel.sync();
+
+            $.post("/campus/updateSave",$("#contentAddForm_yy").serialize(), function(data){
+                if(data.code == 0){
+                    $.messager.alert('提示','新增内容成功!');
+                    $("#contentList_yy").datagrid("reload");
+                    TT.closeCurrentWindow();
+                }
+            });
+        },
+        clearForm : function(){
+            $('#contentAddForm_yy').form('reset');
+            contentAddEditor.html('');
+        }
+    };
+
+
+</script>
+
+</html>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nasi.portal.data.mapper.SchoolMapper" >
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.School" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="school_name_cn" property="schoolNameCn" jdbcType="VARCHAR" />
+    <result column="school_name_en" property="schoolNameEn" jdbcType="VARCHAR" />
+    <result column="school_desc_cn" property="schoolDescCn" jdbcType="VARCHAR" />
+    <result column="school_desc_en" property="schoolDescEn" jdbcType="VARCHAR" />
+    <result column="school_provice" property="schoolProvice" jdbcType="VARCHAR" />
+    <result column="school_city" property="schoolCity" jdbcType="VARCHAR" />
+    <result column="season_start" property="seasonStart" jdbcType="TIMESTAMP" />
+    <result column="season_end" property="seasonEnd" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="show_order" property="showOrder" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, school_name_cn, school_name_en, school_desc_cn, school_desc_en, school_provice, 
+    school_city, season_start, season_end, create_time, create_user, update_time, update_user, 
+    show_order
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nasi.portal.data.model.SchoolCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `school`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and start >= 0 " >
+      limit #{start}
+    </if>
+    <if test="start != null and start >= 0 and end != null and end >= 0" >
+      , #{end}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `school`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `school`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.SchoolCriteria" >
+    delete from `school`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.School" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `school` (school_name_cn, school_name_en, school_desc_cn, 
+      school_desc_en, school_provice, school_city, 
+      season_start, season_end, create_time, 
+      create_user, update_time, update_user, 
+      show_order)
+    values (#{schoolNameCn,jdbcType=VARCHAR}, #{schoolNameEn,jdbcType=VARCHAR}, #{schoolDescCn,jdbcType=VARCHAR}, 
+      #{schoolDescEn,jdbcType=VARCHAR}, #{schoolProvice,jdbcType=VARCHAR}, #{schoolCity,jdbcType=VARCHAR}, 
+      #{seasonStart,jdbcType=TIMESTAMP}, #{seasonEnd,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, 
+      #{showOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.School" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `school`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="schoolNameCn != null" >
+        school_name_cn,
+      </if>
+      <if test="schoolNameEn != null" >
+        school_name_en,
+      </if>
+      <if test="schoolDescCn != null" >
+        school_desc_cn,
+      </if>
+      <if test="schoolDescEn != null" >
+        school_desc_en,
+      </if>
+      <if test="schoolProvice != null" >
+        school_provice,
+      </if>
+      <if test="schoolCity != null" >
+        school_city,
+      </if>
+      <if test="seasonStart != null" >
+        season_start,
+      </if>
+      <if test="seasonEnd != null" >
+        season_end,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="showOrder != null" >
+        show_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="schoolNameCn != null" >
+        #{schoolNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNameEn != null" >
+        #{schoolNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolDescCn != null" >
+        #{schoolDescCn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolDescEn != null" >
+        #{schoolDescEn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolProvice != null" >
+        #{schoolProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCity != null" >
+        #{schoolCity,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonStart != null" >
+        #{seasonStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seasonEnd != null" >
+        #{seasonEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="showOrder != null" >
+        #{showOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.SchoolCriteria" resultType="java.lang.Integer" >
+    select count(*) from `school`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update `school`
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolNameCn != null" >
+        school_name_cn = #{record.schoolNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolNameEn != null" >
+        school_name_en = #{record.schoolNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolDescCn != null" >
+        school_desc_cn = #{record.schoolDescCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolDescEn != null" >
+        school_desc_en = #{record.schoolDescEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolProvice != null" >
+        school_provice = #{record.schoolProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolCity != null" >
+        school_city = #{record.schoolCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seasonStart != null" >
+        season_start = #{record.seasonStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.seasonEnd != null" >
+        season_end = #{record.seasonEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.showOrder != null" >
+        show_order = #{record.showOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update `school`
+    set id = #{record.id,jdbcType=INTEGER},
+      school_name_cn = #{record.schoolNameCn,jdbcType=VARCHAR},
+      school_name_en = #{record.schoolNameEn,jdbcType=VARCHAR},
+      school_desc_cn = #{record.schoolDescCn,jdbcType=VARCHAR},
+      school_desc_en = #{record.schoolDescEn,jdbcType=VARCHAR},
+      school_provice = #{record.schoolProvice,jdbcType=VARCHAR},
+      school_city = #{record.schoolCity,jdbcType=VARCHAR},
+      season_start = #{record.seasonStart,jdbcType=TIMESTAMP},
+      season_end = #{record.seasonEnd,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      show_order = #{record.showOrder,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.School" >
+    update `school`
+    <set >
+      <if test="schoolNameCn != null" >
+        school_name_cn = #{schoolNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNameEn != null" >
+        school_name_en = #{schoolNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolDescCn != null" >
+        school_desc_cn = #{schoolDescCn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolDescEn != null" >
+        school_desc_en = #{schoolDescEn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolProvice != null" >
+        school_provice = #{schoolProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCity != null" >
+        school_city = #{schoolCity,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonStart != null" >
+        season_start = #{seasonStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seasonEnd != null" >
+        season_end = #{seasonEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="showOrder != null" >
+        show_order = #{showOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.School" >
+    update `school`
+    set school_name_cn = #{schoolNameCn,jdbcType=VARCHAR},
+      school_name_en = #{schoolNameEn,jdbcType=VARCHAR},
+      school_desc_cn = #{schoolDescCn,jdbcType=VARCHAR},
+      school_desc_en = #{schoolDescEn,jdbcType=VARCHAR},
+      school_provice = #{schoolProvice,jdbcType=VARCHAR},
+      school_city = #{schoolCity,jdbcType=VARCHAR},
+      season_start = #{seasonStart,jdbcType=TIMESTAMP},
+      season_end = #{seasonEnd,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      show_order = #{showOrder,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

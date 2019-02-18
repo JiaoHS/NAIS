@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nasi.portal.data.mapper.MainOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.MainOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="payment_seq" property="paymentSeq" jdbcType="VARCHAR" />
+    <result column="order_version" property="orderVersion" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="order_source" property="orderSource" jdbcType="INTEGER" />
+    <result column="campus_id" property="campusId" jdbcType="BIGINT" />
+    <result column="total_amount" property="totalAmount" jdbcType="BIGINT" />
+    <result column="cash_amount" property="cashAmount" jdbcType="BIGINT" />
+    <result column="discount_amount" property="discountAmount" jdbcType="BIGINT" />
+    <result column="payment_channel" property="paymentChannel" jdbcType="INTEGER" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="payment_success_time" property="paymentSuccessTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="paymen_remark" property="paymenRemark" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="manual_paid_rep" property="manualPaidRep" jdbcType="VARCHAR" />
+    <result column="receipt" property="receipt" jdbcType="VARCHAR" />
+    <result column="created_user" property="createdUser" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, payment_seq, order_version, order_status, order_source, campus_id, total_amount, 
+    cash_amount, discount_amount, payment_channel, payment_time, payment_success_time, 
+    create_time, update_time, paymen_remark, remark, manual_paid_rep, receipt, created_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nasi.portal.data.model.MainOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from main_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from main_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from main_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.MainOrderExample" >
+    delete from main_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.MainOrder" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into main_order (payment_seq, order_version, order_status, 
+      order_source, campus_id, total_amount, 
+      cash_amount, discount_amount, payment_channel, 
+      payment_time, payment_success_time, create_time, 
+      update_time, paymen_remark, remark, 
+      manual_paid_rep, receipt, created_user
+      )
+    values (#{paymentSeq,jdbcType=VARCHAR}, #{orderVersion,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, 
+      #{orderSource,jdbcType=INTEGER}, #{campusId,jdbcType=BIGINT}, #{totalAmount,jdbcType=BIGINT}, 
+      #{cashAmount,jdbcType=BIGINT}, #{discountAmount,jdbcType=BIGINT}, #{paymentChannel,jdbcType=INTEGER}, 
+      #{paymentTime,jdbcType=TIMESTAMP}, #{paymentSuccessTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{paymenRemark,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{manualPaidRep,jdbcType=VARCHAR}, #{receipt,jdbcType=VARCHAR}, #{createdUser,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.MainOrder" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into main_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paymentSeq != null" >
+        payment_seq,
+      </if>
+      <if test="orderVersion != null" >
+        order_version,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="orderSource != null" >
+        order_source,
+      </if>
+      <if test="campusId != null" >
+        campus_id,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="cashAmount != null" >
+        cash_amount,
+      </if>
+      <if test="discountAmount != null" >
+        discount_amount,
+      </if>
+      <if test="paymentChannel != null" >
+        payment_channel,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="paymentSuccessTime != null" >
+        payment_success_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="paymenRemark != null" >
+        paymen_remark,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="manualPaidRep != null" >
+        manual_paid_rep,
+      </if>
+      <if test="receipt != null" >
+        receipt,
+      </if>
+      <if test="createdUser != null" >
+        created_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paymentSeq != null" >
+        #{paymentSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="orderVersion != null" >
+        #{orderVersion,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderSource != null" >
+        #{orderSource,jdbcType=INTEGER},
+      </if>
+      <if test="campusId != null" >
+        #{campusId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="cashAmount != null" >
+        #{cashAmount,jdbcType=BIGINT},
+      </if>
+      <if test="discountAmount != null" >
+        #{discountAmount,jdbcType=BIGINT},
+      </if>
+      <if test="paymentChannel != null" >
+        #{paymentChannel,jdbcType=INTEGER},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentSuccessTime != null" >
+        #{paymentSuccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymenRemark != null" >
+        #{paymenRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="manualPaidRep != null" >
+        #{manualPaidRep,jdbcType=VARCHAR},
+      </if>
+      <if test="receipt != null" >
+        #{receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="createdUser != null" >
+        #{createdUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.MainOrderExample" resultType="java.lang.Integer" >
+    select count(*) from main_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update main_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.paymentSeq != null" >
+        payment_seq = #{record.paymentSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderVersion != null" >
+        order_version = #{record.orderVersion,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderStatus != null" >
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderSource != null" >
+        order_source = #{record.orderSource,jdbcType=INTEGER},
+      </if>
+      <if test="record.campusId != null" >
+        campus_id = #{record.campusId,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.cashAmount != null" >
+        cash_amount = #{record.cashAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.discountAmount != null" >
+        discount_amount = #{record.discountAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.paymentChannel != null" >
+        payment_channel = #{record.paymentChannel,jdbcType=INTEGER},
+      </if>
+      <if test="record.paymentTime != null" >
+        payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paymentSuccessTime != null" >
+        payment_success_time = #{record.paymentSuccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paymenRemark != null" >
+        paymen_remark = #{record.paymenRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manualPaidRep != null" >
+        manual_paid_rep = #{record.manualPaidRep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receipt != null" >
+        receipt = #{record.receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdUser != null" >
+        created_user = #{record.createdUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update main_order
+    set id = #{record.id,jdbcType=BIGINT},
+      payment_seq = #{record.paymentSeq,jdbcType=VARCHAR},
+      order_version = #{record.orderVersion,jdbcType=INTEGER},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      order_source = #{record.orderSource,jdbcType=INTEGER},
+      campus_id = #{record.campusId,jdbcType=BIGINT},
+      total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      cash_amount = #{record.cashAmount,jdbcType=BIGINT},
+      discount_amount = #{record.discountAmount,jdbcType=BIGINT},
+      payment_channel = #{record.paymentChannel,jdbcType=INTEGER},
+      payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
+      payment_success_time = #{record.paymentSuccessTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      paymen_remark = #{record.paymenRemark,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      manual_paid_rep = #{record.manualPaidRep,jdbcType=VARCHAR},
+      receipt = #{record.receipt,jdbcType=VARCHAR},
+      created_user = #{record.createdUser,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.MainOrder" >
+    update main_order
+    <set >
+      <if test="paymentSeq != null" >
+        payment_seq = #{paymentSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="orderVersion != null" >
+        order_version = #{orderVersion,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderSource != null" >
+        order_source = #{orderSource,jdbcType=INTEGER},
+      </if>
+      <if test="campusId != null" >
+        campus_id = #{campusId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="cashAmount != null" >
+        cash_amount = #{cashAmount,jdbcType=BIGINT},
+      </if>
+      <if test="discountAmount != null" >
+        discount_amount = #{discountAmount,jdbcType=BIGINT},
+      </if>
+      <if test="paymentChannel != null" >
+        payment_channel = #{paymentChannel,jdbcType=INTEGER},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentSuccessTime != null" >
+        payment_success_time = #{paymentSuccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymenRemark != null" >
+        paymen_remark = #{paymenRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="manualPaidRep != null" >
+        manual_paid_rep = #{manualPaidRep,jdbcType=VARCHAR},
+      </if>
+      <if test="receipt != null" >
+        receipt = #{receipt,jdbcType=VARCHAR},
+      </if>
+      <if test="createdUser != null" >
+        created_user = #{createdUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.MainOrder" >
+    update main_order
+    set payment_seq = #{paymentSeq,jdbcType=VARCHAR},
+      order_version = #{orderVersion,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_source = #{orderSource,jdbcType=INTEGER},
+      campus_id = #{campusId,jdbcType=BIGINT},
+      total_amount = #{totalAmount,jdbcType=BIGINT},
+      cash_amount = #{cashAmount,jdbcType=BIGINT},
+      discount_amount = #{discountAmount,jdbcType=BIGINT},
+      payment_channel = #{paymentChannel,jdbcType=INTEGER},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      payment_success_time = #{paymentSuccessTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      paymen_remark = #{paymenRemark,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      manual_paid_rep = #{manualPaidRep,jdbcType=VARCHAR},
+      receipt = #{receipt,jdbcType=VARCHAR},
+      created_user = #{createdUser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="paymentOrderScan" parameterType="Date">
+    UPDATE main_order SET
+    order_status=-1,
+    update_time=NOW()
+    WHERE order_status =1 AND create_time &lt;=#{date}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+
+<!--导航图-->
+<link rel="stylesheet" href="../../../static/css/applicationInformation/refundPolicy.css">
+<!--<div class="ai-bgBox">-->
+    <!--<div class="ai-bgWord">-->
+        <!--<span>退款政策</span><br/>-->
+        <!--<span style="font-size: 48px">Refundable policy</span>-->
+    <!--</div>-->
+<!--</div>-->
+<!--右侧主体内容部分-->
+<div class="ai-right">
+    <div class="ai-rightIn">
+        <div class="gsDeriction">申请信息>退款政策</div>
+        <div class="gsShape1"></div>
+        <div class="gsShape2"></div>
+        <div class="gsShape3"></div>
+        <span class="rf-sentence1">
+                退款政策(此政策适应美国，加拿大及中国付款的用户）<br/>
+                2019年3月15日之前申请退款的学生都会得到学费全额退款<br/>
+                <br/>
+                <h5>具体信息如下：</h5>
+                1.  申请退款的条件为退掉所有科目<br/>
+                2.  如用paypal缴费，缴费超过60天后申请退款，paypal将自动扣去3.3%手续费。<br/>
+                3.  所有交易中的手续费不予退还。（如：转账费用）<br/>
+                4.  退款到账需要15个工作日<br/>
+                5.  退款货币与交款货币一致
+            </span>
+        <table>
+            <tr>
+                <th width="100%" colspan="8">所有学生在2019年3月15日前都有权申请全额退款(仅指课程费)，在此日期以后只能依照以下方案进行退款：</th>
+            </tr>
+            <tr>
+                <td width="12.5%">退款比例</td>
+                <td width="12.5%">西安校区</td>
+                <td width="12.5%">北京校区</td>
+                <td width="12.5%">日本校区</td>
+                <td width="12.5%">杭州校区</td>
+                <td width="12.5%">成都校区</td>
+                <td width="12.5%">大连校区</td>
+                <td width="12.5%">上海校区</td>
+            </tr>
+            <tr>
+                <td>60%</td>
+                <td colspan="7">2019年4月15日之前</td>
+            </tr>
+            <tr>
+                <td>20%</td>
+                <td colspan="7">各校区开学的前两周之前</td>
+            </tr>
+            <tr>
+                <td>0%</td>
+                <td colspan="7">各校区开学的前两周之后</td>
+            </tr>
+        </table>
+        <span class="rf-sentence2">
+                在暑校开学之前如需退课，您需要联系我们的客服021-80394666；<br/>
+开学后的第一周周三之前需退课的学生，需要下载课程调整申请表。完成全部必要信息的填写后在开学第一周周三中午12点之前交予学校办公室，经相关负责老师审核后，办理相关手续。学校办公室的办公时间为早9点至晚5点
+            </span>
+        <div class="rf-title1">
+            <span style="color: red">*</span>
+            <sapn style="font-weight: bold">2018-2019 寒课退费明细</sapn>
+        </div>
+        <table>
+            <tr>
+                <th width="100%" colspan="8">所有学生在2018年11月15日前都有权申请全额退款(仅指课程费)，在此日期以后只能依照以下方案进行退款：</th>
+            </tr>
+            <tr>
+                <td width="12.5%">退款比例</td>
+                <td width="87.5%">成都校区</td>
+            </tr>
+            <tr>
+                <td width="12.5%">50%</td>
+                <td width="87.5%">各校区开学的前三周之前</td>
+            </tr>
+            <tr>
+                <td width="12.5%">20%</td>
+                <td width="87.5%">各校区开学的前两周之前</td>
+            </tr>
+            <tr>
+                <td width="12.5%">0%</td>
+                <td width="87.5%">各校区开学的前两周之后</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!--固定的侧边栏-->
+<div class="slidebar">
+    <div class="slidebar-top">
+        <div class="st-pic"></div>
+    </div>
+    <div class="slidebar-bottom">
+        <div class="sb-pic"></div>
+    </div>
+</div>
+<div class="big-ewm"></div>
+<!--------------------------------------------------------------------------------------------------------------------------->
+<script>
+
+    window.onscroll=function(){
+        if ($(document).scrollTop() >410)//这个410是距离顶部高度
+        {
+            $(".ai-left").addClass('ai-leftFixed');//
+        }else{
+            $(".ai-left").removeClass('ai-leftFixed');
+        }
+    }
+
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+            function () {
+                $(".big-ewm").css("right","65px")
+            }
+    );
+    $(".slidebar-top").mouseout(
+            function () {
+                $(".big-ewm").css("right","-165px")
+            }
+    )
+    //一键返回顶部
+    var toTop=document.querySelector(".slidebar-bottom");
+    toTop.onclick=function(){
+        obj=document.body.scrollTop==0?document.documentElement:document.body;
+        animate(obj,{scrollTop:0},100)
+    };
+</script>

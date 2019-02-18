@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="../../static/css/userCenter/ucPublic.css">
+<link rel="stylesheet" href="../../static/css/userCenter/payment.css">
+<div class="paymentWrap paymentHandleWrap">
+    <div class="title rel f22">学费缴纳</div>
+    <div class="coupon">
+        <div class="text fl fff tc f30">输入优惠码</div>
+        <input type="text" style="width: 203px" class="fl f22" ng-model="CouponId">
+        <!--<input class="fl f22 fff" style="width:103px;height:42px;margin-top: 35px;margin-left: 20px;cursor: pointer;text-align: center;font-size: 14px" type="button" value="立刻使用">-->
+        <div class="fl fff"
+             style="font-size: 25px;width:103px;height:32px;border-bottom: 2px solid #f6f6f6;padding-bottom: 3px;margin-top: 35px;margin-left: 20px;cursor: pointer;"
+             ng-click="UseConpon()">立刻使用
+        </div>
+    </div>
+    <div style="height: 110px" class="agreement c65 f16">
+        <div class="title f22">ISSN暑期特别提示</div>
+        <p style="font-size: 25px;color: red">请在缴费时注意看清各项操作提示，以免发生缴错学费的现象！</p>
+    </div>
+    <label class="agree f22" for="agree"><input id="agree" type="checkbox">同意</label>
+</div>
+<div class="choicePayMethod">
+    <div class="title rel f22">选择支付方式</div>
+</div>
+<div class="payMethodList">
+    <ul class="methodTitle clearfix f22 c56">
+        <li class="fl rel tc cur">银行汇款（国内）</li>
+        <li class="fl rel tc">银行汇款（美国）</li>
+        <li class="fl rel tc c">支付宝</li>
+        <li class="fl rel tc d">支付宝扫码支付</li>
+    </ul>
+    <div class="payDetailWrap">
+        <div id="pay0" class="payDetail clearfix">
+            <div class="fl info clearfix c65">
+                <div class="infoLine clearfix">
+                    <span class="fl infoTitle">公司名称</span>
+                    <div class="fl infoMsg">公司名称公司名称公司名称公司名称</div>
+                </div>
+                <div class="infoLine clearfix">
+                    <span class="fl infoTitle">地址</span>
+                    <div class="fl infoMsg">地址地址地址地址地址地址地址地址</div>
+                </div>
+                <div class="infoLine clearfix">
+                    <span class="fl infoTitle">银行名称</span>
+                    <div class="fl infoMsg">中国建设银行</div>
+                </div>
+                <div class="infoLine clearfix">
+                    <span class="fl infoTitle">账号</span>
+                    <div class="fl infoMsg">6214 6601 4013 9585</div>
+                </div>
+            </div>
+            <div class="fr payTip f14">
+                <div class="tipHead f20">汇款说明</div>
+                <p>友情建议您使用银行转账的方式结算学费和住宿费，使用银行转账可以避免高额手续费，并且方便我们尽快确认您的付款信息。</p>
+            </div>
+        </div>
+        <div id="pay1" class="payDetail two clearfix hide">
+            <div class="fl info clearfix c65">
+                <div class="infoLine clearfix">
+                    <span class="fl infoTitle">账号</span>
+                    <div class="fl infoMsg">4744751233759951</div>
+                </div>
+            </div>
+            <div class="fr payTip f14">
+                <div class="tipHead f20">汇款说明</div>
+                <p>友情建议您使用银行转账的方式结算学费和住宿费，使用银行转账可以避免高额手续费，并且方便我们尽快确认您的付款信息。</p>
+            </div>
+        </div>
+        <div id="pay2" class="payDetail three clearfix hide">
+            <div class="fl info clearfix rel c65">
+                <img class="aliPay abs" src="../../../static/images/userCenter/alipayda.png" style="width:155px;height: 111px;top: -45px;left: -20px" alt="">
+                <div class="alipayInfo">
+                    <div class="payNum f30 tc">支付金额：￥ {{TotalMoney/1000}}</div>
+                    <img class="aliPay2" src="" alt="">
+                    <div class="payNowBtn" ng-click="Pay(2)">立刻付款</div>
+                </div>
+            </div>
+            <div class="fr payTip f14">
+                <div class="tipHead f20">支付宝支付说明</div>
+                <p>
+                    通过支付宝在线支付申请费、学费十分的方便。您可以选择国内百家银行快捷支付或者支付宝账户进行支付。在线支付平台会收取您支付金额0.6%的手续费，并且会直接计入总支付费用中。手续费会在您提交付款之前显示，并且会计入到总支付费用里面显示在您的消费记录中。 </p>
+            </div>
+        </div>
+        <div id="pay3" class="payDetail four clearfix hide">
+            <div class="fl info clearfix rel c65">
+                <img class="aliPay abs" src="../../../static/images/userCenter/alipayda.png" style="width:155px;height: 111px;top: -45px;left: -20px" alt="">
+                <div class="alipayInfo fl f14">
+                    <div class="payNum f30 tc">支付金额：￥ {{TotalMoney/1000}}</div>
+                    <img class="qrCode" src="../../../static/images/zhifubaocode.png" alt="">
+                    <p class="payTips">使用支付宝手机客户端扫码转账支付：</p>
+                    <p class="payTips">支付完成后，填写右侧转账信息，点击“付款”。</p>
+                    <p class="payTips">以便于我们快速查询账单。</p>
+                </div>
+                <div class="alipayMsg fl">
+                    <div class="f20 alipayMsgTitle c65" ng-model="RemittanceName">汇款人姓名</div>
+                    <input type="text">
+                    <div class="f20 alipayMsgTitle c65" ng-model="RemittancePhohe">汇款人电话</div>
+                    <input type="text">
+                    <div class="f20 alipayMsgTitle c65" ng-model="StudentName">学生姓名</div>
+                    <input type="text">
+                    <div class="payNowBtn" ng-click="SubmitRemark()">立刻付款</div>
+                </div>
+            </div>
+            <div class="fr payTip f14">
+                <div class="tipHead f20">支付宝支付说明</div>
+                <p class="red">注意：此处支付宝仅支持储蓄卡支付，不支持信用卡支付。 </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pay4" class="paymentInfo">
+    <div class="needPay top f22 c65">需支付金额：￥ {{TotalMoney/1000}}</div>
+    <p class="tip f16 top">请您通过银行柜台或者网银进行汇款，汇款完成后，请填写以下信息，方便我们财务核对。您的付款状态会在3个工作日之内更新。</p>
+    <div class="infoBox">
+        <div class="iptLine clearfix">
+            <span class="fl iptTitle f20 c65">汇款人姓名</span>
+            <input class="fl iptMsg" ng-model="RemittanceName" type="text"/>
+        </div>
+        <div class="iptLine clearfix">
+            <span class="fl iptTitle f20 c65">汇款人电话</span>
+            <input class="fl iptMsg" ng-model="RemittancePhohe" type="text"/>
+        </div>
+        <div class="iptLine clearfix">
+            <span class="fl iptTitle f20 c65">学生姓名</span>
+            <input class="fl iptMsg" ng-model="StudentName" type="text"/>
+        </div>
+        <div class="iptLine clearfix">
+            <span class="fl iptTitle f20 c65">汇款银行</span>
+            <input class="fl iptMsg" ng-model="RemittanceBank" type="text"/>
+        </div>
+    </div>
+    <div class="submitBtn" ng-click="SubmitRemark()">提交</div>
+</div>

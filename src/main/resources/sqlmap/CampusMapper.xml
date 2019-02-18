@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nasi.portal.data.mapper.CampusMapper">
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.Campus">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="campus_name" jdbcType="VARCHAR" property="campusName" />
+    <result column="campus_name_en" jdbcType="VARCHAR" property="campusNameEn" />
+    <result column="season_start" jdbcType="TIMESTAMP" property="seasonStart" />
+    <result column="season_end" jdbcType="TIMESTAMP" property="seasonEnd" />
+    <result column="campus_photo" jdbcType="VARCHAR" property="campusPhoto" />
+    <result column="campus_banner_photo" jdbcType="VARCHAR" property="campusBannerPhoto" />
+    <result column="hotel_photo" jdbcType="VARCHAR" property="hotelPhoto" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="hoteladdress" jdbcType="VARCHAR" property="hoteladdress" />
+    <result column="hotelimage1" jdbcType="VARCHAR" property="hotelimage1" />
+    <result column="hotelimage2" jdbcType="VARCHAR" property="hotelimage2" />
+    <result column="hotalstar" jdbcType="VARCHAR" property="hotalstar" />
+    <result column="hoteltype" jdbcType="VARCHAR" property="hoteltype" />
+    <result column="hotelname" jdbcType="VARCHAR" property="hotelname" />
+    <result column="hoteldistance" jdbcType="VARCHAR" property="hoteldistance" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nasi.portal.data.model.CampusWithBLOBs">
+    <result column="campus_desc" jdbcType="LONGVARCHAR" property="campusDesc" />
+    <result column="adrees_desc" jdbcType="LONGVARCHAR" property="adreesDesc" />
+    <result column="hotel_desc" jdbcType="LONGVARCHAR" property="hotelDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, campus_name, campus_name_en, season_start, season_end, campus_photo, campus_banner_photo, 
+    hotel_photo, create_time, update_time, hoteladdress, hotelimage1, hotelimage2, hotalstar, 
+    hoteltype, hotelname, hoteldistance
+  </sql>
+  <sql id="Blob_Column_List">
+    campus_desc, adrees_desc, hotel_desc
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.nasi.portal.data.model.CampusExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from campus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.nasi.portal.data.model.CampusExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from campus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from campus
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from campus
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.CampusExample">
+    delete from campus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.CampusWithBLOBs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into campus (campus_name, campus_name_en, season_start, 
+      season_end, campus_photo, campus_banner_photo, 
+      hotel_photo, create_time, update_time, 
+      hoteladdress, hotelimage1, hotelimage2, 
+      hotalstar, hoteltype, hotelname, 
+      hoteldistance, campus_desc, adrees_desc, 
+      hotel_desc)
+    values (#{campusName,jdbcType=VARCHAR}, #{campusNameEn,jdbcType=VARCHAR}, #{seasonStart,jdbcType=TIMESTAMP}, 
+      #{seasonEnd,jdbcType=TIMESTAMP}, #{campusPhoto,jdbcType=VARCHAR}, #{campusBannerPhoto,jdbcType=VARCHAR}, 
+      #{hotelPhoto,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{hoteladdress,jdbcType=VARCHAR}, #{hotelimage1,jdbcType=VARCHAR}, #{hotelimage2,jdbcType=VARCHAR}, 
+      #{hotalstar,jdbcType=VARCHAR}, #{hoteltype,jdbcType=VARCHAR}, #{hotelname,jdbcType=VARCHAR}, 
+      #{hoteldistance,jdbcType=VARCHAR}, #{campusDesc,jdbcType=LONGVARCHAR}, #{adreesDesc,jdbcType=LONGVARCHAR}, 
+      #{hotelDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.CampusWithBLOBs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into campus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="campusName != null">
+        campus_name,
+      </if>
+      <if test="campusNameEn != null">
+        campus_name_en,
+      </if>
+      <if test="seasonStart != null">
+        season_start,
+      </if>
+      <if test="seasonEnd != null">
+        season_end,
+      </if>
+      <if test="campusPhoto != null">
+        campus_photo,
+      </if>
+      <if test="campusBannerPhoto != null">
+        campus_banner_photo,
+      </if>
+      <if test="hotelPhoto != null">
+        hotel_photo,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="hoteladdress != null">
+        hoteladdress,
+      </if>
+      <if test="hotelimage1 != null">
+        hotelimage1,
+      </if>
+      <if test="hotelimage2 != null">
+        hotelimage2,
+      </if>
+      <if test="hotalstar != null">
+        hotalstar,
+      </if>
+      <if test="hoteltype != null">
+        hoteltype,
+      </if>
+      <if test="hotelname != null">
+        hotelname,
+      </if>
+      <if test="hoteldistance != null">
+        hoteldistance,
+      </if>
+      <if test="campusDesc != null">
+        campus_desc,
+      </if>
+      <if test="adreesDesc != null">
+        adrees_desc,
+      </if>
+      <if test="hotelDesc != null">
+        hotel_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="campusName != null">
+        #{campusName,jdbcType=VARCHAR},
+      </if>
+      <if test="campusNameEn != null">
+        #{campusNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonStart != null">
+        #{seasonStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seasonEnd != null">
+        #{seasonEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="campusPhoto != null">
+        #{campusPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="campusBannerPhoto != null">
+        #{campusBannerPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelPhoto != null">
+        #{hotelPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hoteladdress != null">
+        #{hoteladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelimage1 != null">
+        #{hotelimage1,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelimage2 != null">
+        #{hotelimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalstar != null">
+        #{hotalstar,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltype != null">
+        #{hoteltype,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelname != null">
+        #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteldistance != null">
+        #{hoteldistance,jdbcType=VARCHAR},
+      </if>
+      <if test="campusDesc != null">
+        #{campusDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="adreesDesc != null">
+        #{adreesDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="hotelDesc != null">
+        #{hotelDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.CampusExample" resultType="java.lang.Integer">
+    select count(*) from campus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update campus
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.campusName != null">
+        campus_name = #{record.campusName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.campusNameEn != null">
+        campus_name_en = #{record.campusNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seasonStart != null">
+        season_start = #{record.seasonStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.seasonEnd != null">
+        season_end = #{record.seasonEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.campusPhoto != null">
+        campus_photo = #{record.campusPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.campusBannerPhoto != null">
+        campus_banner_photo = #{record.campusBannerPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelPhoto != null">
+        hotel_photo = #{record.hotelPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.hoteladdress != null">
+        hoteladdress = #{record.hoteladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelimage1 != null">
+        hotelimage1 = #{record.hotelimage1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelimage2 != null">
+        hotelimage2 = #{record.hotelimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotalstar != null">
+        hotalstar = #{record.hotalstar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoteltype != null">
+        hoteltype = #{record.hoteltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelname != null">
+        hotelname = #{record.hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoteldistance != null">
+        hoteldistance = #{record.hoteldistance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.campusDesc != null">
+        campus_desc = #{record.campusDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.adreesDesc != null">
+        adrees_desc = #{record.adreesDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.hotelDesc != null">
+        hotel_desc = #{record.hotelDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update campus
+    set id = #{record.id,jdbcType=BIGINT},
+      campus_name = #{record.campusName,jdbcType=VARCHAR},
+      campus_name_en = #{record.campusNameEn,jdbcType=VARCHAR},
+      season_start = #{record.seasonStart,jdbcType=TIMESTAMP},
+      season_end = #{record.seasonEnd,jdbcType=TIMESTAMP},
+      campus_photo = #{record.campusPhoto,jdbcType=VARCHAR},
+      campus_banner_photo = #{record.campusBannerPhoto,jdbcType=VARCHAR},
+      hotel_photo = #{record.hotelPhoto,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      hoteladdress = #{record.hoteladdress,jdbcType=VARCHAR},
+      hotelimage1 = #{record.hotelimage1,jdbcType=VARCHAR},
+      hotelimage2 = #{record.hotelimage2,jdbcType=VARCHAR},
+      hotalstar = #{record.hotalstar,jdbcType=VARCHAR},
+      hoteltype = #{record.hoteltype,jdbcType=VARCHAR},
+      hotelname = #{record.hotelname,jdbcType=VARCHAR},
+      hoteldistance = #{record.hoteldistance,jdbcType=VARCHAR},
+      campus_desc = #{record.campusDesc,jdbcType=LONGVARCHAR},
+      adrees_desc = #{record.adreesDesc,jdbcType=LONGVARCHAR},
+      hotel_desc = #{record.hotelDesc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update campus
+    set id = #{record.id,jdbcType=BIGINT},
+      campus_name = #{record.campusName,jdbcType=VARCHAR},
+      campus_name_en = #{record.campusNameEn,jdbcType=VARCHAR},
+      season_start = #{record.seasonStart,jdbcType=TIMESTAMP},
+      season_end = #{record.seasonEnd,jdbcType=TIMESTAMP},
+      campus_photo = #{record.campusPhoto,jdbcType=VARCHAR},
+      campus_banner_photo = #{record.campusBannerPhoto,jdbcType=VARCHAR},
+      hotel_photo = #{record.hotelPhoto,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      hoteladdress = #{record.hoteladdress,jdbcType=VARCHAR},
+      hotelimage1 = #{record.hotelimage1,jdbcType=VARCHAR},
+      hotelimage2 = #{record.hotelimage2,jdbcType=VARCHAR},
+      hotalstar = #{record.hotalstar,jdbcType=VARCHAR},
+      hoteltype = #{record.hoteltype,jdbcType=VARCHAR},
+      hotelname = #{record.hotelname,jdbcType=VARCHAR},
+      hoteldistance = #{record.hoteldistance,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.CampusWithBLOBs">
+    update campus
+    <set>
+      <if test="campusName != null">
+        campus_name = #{campusName,jdbcType=VARCHAR},
+      </if>
+      <if test="campusNameEn != null">
+        campus_name_en = #{campusNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="seasonStart != null">
+        season_start = #{seasonStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seasonEnd != null">
+        season_end = #{seasonEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="campusPhoto != null">
+        campus_photo = #{campusPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="campusBannerPhoto != null">
+        campus_banner_photo = #{campusBannerPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelPhoto != null">
+        hotel_photo = #{hotelPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hoteladdress != null">
+        hoteladdress = #{hoteladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelimage1 != null">
+        hotelimage1 = #{hotelimage1,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelimage2 != null">
+        hotelimage2 = #{hotelimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalstar != null">
+        hotalstar = #{hotalstar,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltype != null">
+        hoteltype = #{hoteltype,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelname != null">
+        hotelname = #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteldistance != null">
+        hoteldistance = #{hoteldistance,jdbcType=VARCHAR},
+      </if>
+      <if test="campusDesc != null">
+        campus_desc = #{campusDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="adreesDesc != null">
+        adrees_desc = #{adreesDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="hotelDesc != null">
+        hotel_desc = #{hotelDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nasi.portal.data.model.CampusWithBLOBs">
+    update campus
+    set campus_name = #{campusName,jdbcType=VARCHAR},
+      campus_name_en = #{campusNameEn,jdbcType=VARCHAR},
+      season_start = #{seasonStart,jdbcType=TIMESTAMP},
+      season_end = #{seasonEnd,jdbcType=TIMESTAMP},
+      campus_photo = #{campusPhoto,jdbcType=VARCHAR},
+      campus_banner_photo = #{campusBannerPhoto,jdbcType=VARCHAR},
+      hotel_photo = #{hotelPhoto,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      hoteladdress = #{hoteladdress,jdbcType=VARCHAR},
+      hotelimage1 = #{hotelimage1,jdbcType=VARCHAR},
+      hotelimage2 = #{hotelimage2,jdbcType=VARCHAR},
+      hotalstar = #{hotalstar,jdbcType=VARCHAR},
+      hoteltype = #{hoteltype,jdbcType=VARCHAR},
+      hotelname = #{hotelname,jdbcType=VARCHAR},
+      hoteldistance = #{hoteldistance,jdbcType=VARCHAR},
+      campus_desc = #{campusDesc,jdbcType=LONGVARCHAR},
+      adrees_desc = #{adreesDesc,jdbcType=LONGVARCHAR},
+      hotel_desc = #{hotelDesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.Campus">
+    update campus
+    set campus_name = #{campusName,jdbcType=VARCHAR},
+      campus_name_en = #{campusNameEn,jdbcType=VARCHAR},
+      season_start = #{seasonStart,jdbcType=TIMESTAMP},
+      season_end = #{seasonEnd,jdbcType=TIMESTAMP},
+      campus_photo = #{campusPhoto,jdbcType=VARCHAR},
+      campus_banner_photo = #{campusBannerPhoto,jdbcType=VARCHAR},
+      hotel_photo = #{hotelPhoto,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      hoteladdress = #{hoteladdress,jdbcType=VARCHAR},
+      hotelimage1 = #{hotelimage1,jdbcType=VARCHAR},
+      hotelimage2 = #{hotelimage2,jdbcType=VARCHAR},
+      hotalstar = #{hotalstar,jdbcType=VARCHAR},
+      hoteltype = #{hoteltype,jdbcType=VARCHAR},
+      hotelname = #{hotelname,jdbcType=VARCHAR},
+      hoteldistance = #{hoteldistance,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

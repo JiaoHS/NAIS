@@ -1,0 +1,93 @@
+<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/schoolIntro.css"/>
+<div class="banner"></div>
+<div class="content">
+    <ol class="tab clearfix w1280" id="tabSchool">
+        <li id="bj" class="fl rel f36 hzgb" ng-click="SelectCampus(beijingInfo.id)">北京校区</li>
+        <li id="sh" class="fr rel f36 hzgb" ng-click="SelectCampus(shanghaiInfo.id)">南京校区</li>
+    </ol>
+    <div class="infoCon">
+        <!-- 给需要隐藏的添加class:hide -->
+        <div class="infoItem w1280">
+            <div class="smallBanner fff f20">
+                <div style="margin-top: 50px;height: 23px" class="fr infoMsg hzgb">地址：北京市朝阳区定福庄南里1号</div>
+                <div style="height: 23px" class="fr infoMsg hzgb">项目时间：{{FormatDateTime(beijingInfo.seasonStart)}} - {{FormatDateTime(beijingInfo.seasonEnd)}}</div>
+            </div>
+        </div>
+        <div class="infoItem w1280">
+            <div class="smallBanner sh fff f20">
+                <div style="margin-top: 50px;height: 23px" class="fr infoMsg hzgb">地址：徐汇区中山西路2230号</div>
+                <div style="height: 23px" class="fr infoMsg hzgb">项目时间：{{FormatDateTime(shanghaiInfo.seasonStart)}} - {{FormatDateTime(shanghaiInfo.seasonEnd)}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="infoDetail">
+        <div class="w1280">
+            <ol class="detailTab">
+                <!-- 当前被选中的添加 select -->
+                <li class="fl hzgb f24 select">校区简介</li>
+                <li class="fl hzgb f24">课程安排</li>
+                <li class="fl hzgb f24">师资力量</li>
+                <li class="fl hzgb f24">住宿信息</li>
+            </ol>
+            <div class="detailCon">
+                <!-- 当前显示的添加 cur -->
+                <div class="detailItem intro f20 tein2">
+                    <p ng-bind-html="campusInfoList.campusDesc | parseHTML"></p>
+                </div>
+                <div class="detailItem lessons">
+                    <div class="f20 durning">开课时间：{{FormatDateTime(campusInfoList.seasonStart)}} - {{FormatDateTime(campusInfoList.seasonEnd)}}</div>
+                    <ol class="lessonInfo clearfix">
+                        <li class="fl fwb f30">上课时间</li>
+                        <li class="fl fwb f30">课程名称</li>
+                        <li class="fl fwb f30">授课教师</li>
+                        <li class="fl fwb f30">教学大纲</li>
+                    </ol>
+                    <div class="lessonList rel" >
+                        <div class="listItem clearfix rel" ng-repeat="info in CourseList">
+                            <div class="list time fl abs">
+                                <div class="timeCon abs">{{info.timeSpan}}</div>
+                            </div>
+                            <div class="list name fl f24">
+                                <div class="listSon" ng-repeat="course in info.list">
+                                    <div class="nameMsg toe" title="{{course.courseCode}}">{{course.courseCode}}</div>
+                                    <div class="nameMsg toe" title="{{course.courseName}}">{{course.courseName}}</div>
+                                </div>
+                            </div>
+                            <div class="list teacher fl f24">
+                                <div class="listSon"  ng-repeat="doctor in info.list">
+                                    <div class="nameMsg toe" title="{{doctor.professorNameCn}}">{{doctor.professorNameCn}}</div>
+                                    <div class="nameMsg toe" title="{{doctor.professorFromSchoolCn}}">{{doctor.professorFromSchoolCn}}</div>
+                                </div>
+                            </div>
+                            <div class="list outline fl" >
+                                <div class="listSon tc" ng-repeat="down in info.list">
+                                    <a href="javascript:;" class="download" ng-click="uploadFile2(down.id)"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detailItem clearfix teachers cur">
+                    <div class="teacherInfo fl tc" ng-repeat="teacher in teacherList">
+                        <div class="teacherHeader">
+                            <img ng-src="{{getApiUrl()+teacher.photo}}">
+                        </div>
+                        <p class="name broadway baseColor f16">{{teacher.professorName}}</p>
+                        <p class="schoolName f14">{{teacher.schoolNameList[0]}}</p>
+                        <div class="hasLesson clearfix">
+                            <span class="fl f18 title">课程</span>
+                            <ul class="fl tl f14">
+                                <li class="toe" title="{{cou}}" ng-repeat="cou in teacher.courseNameList">{{cou}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="detailItem dormitory f20 tein2">
+                    <p ng-bind-html="campusInfoList.hotelDesc | parseHTML"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../static/js/lib/schoolIntro.js"></script>

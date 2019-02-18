@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nasi.portal.data.mapper.CourseArrangeMapper" >
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.CourseArrange" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="school_id" property="schoolId" jdbcType="INTEGER" />
+    <result column="school_name_cn" property="schoolNameCn" jdbcType="VARCHAR" />
+    <result column="school_name_en" property="schoolNameEn" jdbcType="VARCHAR" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="course_name_cn" property="courseNameCn" jdbcType="VARCHAR" />
+    <result column="course_name_en" property="courseNameEn" jdbcType="VARCHAR" />
+    <result column="course_code" property="courseCode" jdbcType="VARCHAR" />
+    <result column="professor_id" property="professorId" jdbcType="INTEGER" />
+    <result column="professor_name_cn" property="professorNameCn" jdbcType="VARCHAR" />
+    <result column="professor_name_en" property="professorNameEn" jdbcType="VARCHAR" />
+    <result column="professor_from_school_cn" property="professorFromSchoolCn" jdbcType="VARCHAR" />
+    <result column="professor_from_school_en" property="professorFromSchoolEn" jdbcType="VARCHAR" />
+    <result column="course_start_time" property="courseStartTime" jdbcType="TIME" />
+    <result column="course_end_time" property="courseEndTime" jdbcType="TIME" />
+    <result column="attach_path" property="attachPath" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_user" property="updateUser" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, school_id, school_name_cn, school_name_en, course_id, course_name_cn, course_name_en, 
+    course_code, professor_id, professor_name_cn, professor_name_en, professor_from_school_cn, 
+    professor_from_school_en, course_start_time, course_end_time, attach_path, create_time, 
+    create_user, update_time, update_user, `status`, price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nasi.portal.data.model.CourseArrangeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `course_arrange`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and start >= 0 " >
+      limit #{start}
+    </if>
+    <if test="start != null and start >= 0 and end != null and end >= 0" >
+      , #{end}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `course_arrange`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `course_arrange`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.CourseArrangeCriteria" >
+    delete from `course_arrange`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.CourseArrange" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `course_arrange` (school_id, school_name_cn, school_name_en, 
+      course_id, course_name_cn, course_name_en, 
+      course_code, professor_id, professor_name_cn, 
+      professor_name_en, professor_from_school_cn, 
+      professor_from_school_en, course_start_time, course_end_time, 
+      attach_path, create_time, create_user, 
+      update_time, update_user, `status`, 
+      price)
+    values (#{schoolId,jdbcType=INTEGER}, #{schoolNameCn,jdbcType=VARCHAR}, #{schoolNameEn,jdbcType=VARCHAR}, 
+      #{courseId,jdbcType=INTEGER}, #{courseNameCn,jdbcType=VARCHAR}, #{courseNameEn,jdbcType=VARCHAR}, 
+      #{courseCode,jdbcType=VARCHAR}, #{professorId,jdbcType=INTEGER}, #{professorNameCn,jdbcType=VARCHAR}, 
+      #{professorNameEn,jdbcType=VARCHAR}, #{professorFromSchoolCn,jdbcType=VARCHAR}, 
+      #{professorFromSchoolEn,jdbcType=VARCHAR}, #{courseStartTime,jdbcType=TIME}, #{courseEndTime,jdbcType=TIME}, 
+      #{attachPath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{price,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.CourseArrange" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `course_arrange`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="schoolId != null" >
+        school_id,
+      </if>
+      <if test="schoolNameCn != null" >
+        school_name_cn,
+      </if>
+      <if test="schoolNameEn != null" >
+        school_name_en,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="courseNameCn != null" >
+        course_name_cn,
+      </if>
+      <if test="courseNameEn != null" >
+        course_name_en,
+      </if>
+      <if test="courseCode != null" >
+        course_code,
+      </if>
+      <if test="professorId != null" >
+        professor_id,
+      </if>
+      <if test="professorNameCn != null" >
+        professor_name_cn,
+      </if>
+      <if test="professorNameEn != null" >
+        professor_name_en,
+      </if>
+      <if test="professorFromSchoolCn != null" >
+        professor_from_school_cn,
+      </if>
+      <if test="professorFromSchoolEn != null" >
+        professor_from_school_en,
+      </if>
+      <if test="courseStartTime != null" >
+        course_start_time,
+      </if>
+      <if test="courseEndTime != null" >
+        course_end_time,
+      </if>
+      <if test="attachPath != null" >
+        attach_path,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="schoolId != null" >
+        #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolNameCn != null" >
+        #{schoolNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNameEn != null" >
+        #{schoolNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseNameCn != null" >
+        #{courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameEn != null" >
+        #{courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCode != null" >
+        #{courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="professorId != null" >
+        #{professorId,jdbcType=INTEGER},
+      </if>
+      <if test="professorNameCn != null" >
+        #{professorNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="professorNameEn != null" >
+        #{professorNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="professorFromSchoolCn != null" >
+        #{professorFromSchoolCn,jdbcType=VARCHAR},
+      </if>
+      <if test="professorFromSchoolEn != null" >
+        #{professorFromSchoolEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseStartTime != null" >
+        #{courseStartTime,jdbcType=TIME},
+      </if>
+      <if test="courseEndTime != null" >
+        #{courseEndTime,jdbcType=TIME},
+      </if>
+      <if test="attachPath != null" >
+        #{attachPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.CourseArrangeCriteria" resultType="java.lang.Integer" >
+    select count(*) from `course_arrange`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update `course_arrange`
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolId != null" >
+        school_id = #{record.schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolNameCn != null" >
+        school_name_cn = #{record.schoolNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolNameEn != null" >
+        school_name_en = #{record.schoolNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseId != null" >
+        course_id = #{record.courseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseNameCn != null" >
+        course_name_cn = #{record.courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseNameEn != null" >
+        course_name_en = #{record.courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseCode != null" >
+        course_code = #{record.courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professorId != null" >
+        professor_id = #{record.professorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.professorNameCn != null" >
+        professor_name_cn = #{record.professorNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professorNameEn != null" >
+        professor_name_en = #{record.professorNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professorFromSchoolCn != null" >
+        professor_from_school_cn = #{record.professorFromSchoolCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professorFromSchoolEn != null" >
+        professor_from_school_en = #{record.professorFromSchoolEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseStartTime != null" >
+        course_start_time = #{record.courseStartTime,jdbcType=TIME},
+      </if>
+      <if test="record.courseEndTime != null" >
+        course_end_time = #{record.courseEndTime,jdbcType=TIME},
+      </if>
+      <if test="record.attachPath != null" >
+        attach_path = #{record.attachPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update `course_arrange`
+    set id = #{record.id,jdbcType=INTEGER},
+      school_id = #{record.schoolId,jdbcType=INTEGER},
+      school_name_cn = #{record.schoolNameCn,jdbcType=VARCHAR},
+      school_name_en = #{record.schoolNameEn,jdbcType=VARCHAR},
+      course_id = #{record.courseId,jdbcType=INTEGER},
+      course_name_cn = #{record.courseNameCn,jdbcType=VARCHAR},
+      course_name_en = #{record.courseNameEn,jdbcType=VARCHAR},
+      course_code = #{record.courseCode,jdbcType=VARCHAR},
+      professor_id = #{record.professorId,jdbcType=INTEGER},
+      professor_name_cn = #{record.professorNameCn,jdbcType=VARCHAR},
+      professor_name_en = #{record.professorNameEn,jdbcType=VARCHAR},
+      professor_from_school_cn = #{record.professorFromSchoolCn,jdbcType=VARCHAR},
+      professor_from_school_en = #{record.professorFromSchoolEn,jdbcType=VARCHAR},
+      course_start_time = #{record.courseStartTime,jdbcType=TIME},
+      course_end_time = #{record.courseEndTime,jdbcType=TIME},
+      attach_path = #{record.attachPath,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.CourseArrange" >
+    update `course_arrange`
+    <set >
+      <if test="schoolId != null" >
+        school_id = #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolNameCn != null" >
+        school_name_cn = #{schoolNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolNameEn != null" >
+        school_name_en = #{schoolNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseNameCn != null" >
+        course_name_cn = #{courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameEn != null" >
+        course_name_en = #{courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCode != null" >
+        course_code = #{courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="professorId != null" >
+        professor_id = #{professorId,jdbcType=INTEGER},
+      </if>
+      <if test="professorNameCn != null" >
+        professor_name_cn = #{professorNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="professorNameEn != null" >
+        professor_name_en = #{professorNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="professorFromSchoolCn != null" >
+        professor_from_school_cn = #{professorFromSchoolCn,jdbcType=VARCHAR},
+      </if>
+      <if test="professorFromSchoolEn != null" >
+        professor_from_school_en = #{professorFromSchoolEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseStartTime != null" >
+        course_start_time = #{courseStartTime,jdbcType=TIME},
+      </if>
+      <if test="courseEndTime != null" >
+        course_end_time = #{courseEndTime,jdbcType=TIME},
+      </if>
+      <if test="attachPath != null" >
+        attach_path = #{attachPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.CourseArrange" >
+    update `course_arrange`
+    set school_id = #{schoolId,jdbcType=INTEGER},
+      school_name_cn = #{schoolNameCn,jdbcType=VARCHAR},
+      school_name_en = #{schoolNameEn,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=INTEGER},
+      course_name_cn = #{courseNameCn,jdbcType=VARCHAR},
+      course_name_en = #{courseNameEn,jdbcType=VARCHAR},
+      course_code = #{courseCode,jdbcType=VARCHAR},
+      professor_id = #{professorId,jdbcType=INTEGER},
+      professor_name_cn = #{professorNameCn,jdbcType=VARCHAR},
+      professor_name_en = #{professorNameEn,jdbcType=VARCHAR},
+      professor_from_school_cn = #{professorFromSchoolCn,jdbcType=VARCHAR},
+      professor_from_school_en = #{professorFromSchoolEn,jdbcType=VARCHAR},
+      course_start_time = #{courseStartTime,jdbcType=TIME},
+      course_end_time = #{courseEndTime,jdbcType=TIME},
+      attach_path = #{attachPath,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
+      price = #{price,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

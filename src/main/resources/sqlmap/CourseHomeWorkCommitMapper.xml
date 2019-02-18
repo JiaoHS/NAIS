@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nasi.portal.data.mapper.CourseHomeWorkCommitMapper" >
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.CourseHomeWorkCommit" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="assign_id" property="assignId" jdbcType="BIGINT" />
+    <result column="assign_name" property="assignName" jdbcType="VARCHAR" />
+    <result column="arrange_id" property="arrangeId" jdbcType="BIGINT" />
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="student_name_cn" property="studentNameCn" jdbcType="VARCHAR" />
+    <result column="student_name_en" property="studentNameEn" jdbcType="VARCHAR" />
+    <result column="commit_status" property="commitStatus" jdbcType="INTEGER" />
+    <result column="commit_type" property="commitType" jdbcType="INTEGER" />
+    <result column="course_code" property="courseCode" jdbcType="VARCHAR" />
+    <result column="course_name_cn" property="courseNameCn" jdbcType="VARCHAR" />
+    <result column="course_name_en" property="courseNameEn" jdbcType="VARCHAR" />
+    <result column="work_path" property="workPath" jdbcType="VARCHAR" />
+    <result column="commit_path" property="commitPath" jdbcType="VARCHAR" />
+    <result column="commit_total_score" property="commitTotalScore" jdbcType="INTEGER" />
+    <result column="commit_this_score" property="commitThisScore" jdbcType="INTEGER" />
+    <result column="commit_desc" property="commitDesc" jdbcType="VARCHAR" />
+    <result column="commit_time" property="commitTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, assign_id, assign_name, arrange_id, student_id, student_name_cn, student_name_en, 
+    commit_status, commit_type, course_code, course_name_cn, course_name_en, work_path, 
+    commit_path, commit_total_score, commit_this_score, commit_desc, commit_time, create_time, 
+    update_time, create_user, update_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nasi.portal.data.model.CourseHomeWorkCommitCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course_home_work_commit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and start >= 0 " >
+      limit #{start}
+    </if>
+    <if test="start != null and start >= 0 and end != null and end >= 0" >
+      , #{end}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course_home_work_commit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course_home_work_commit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.CourseHomeWorkCommitCriteria" >
+    delete from course_home_work_commit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.CourseHomeWorkCommit" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into course_home_work_commit (assign_id, assign_name, arrange_id, 
+      student_id, student_name_cn, student_name_en, 
+      commit_status, commit_type, course_code, 
+      course_name_cn, course_name_en, work_path, 
+      commit_path, commit_total_score, commit_this_score, 
+      commit_desc, commit_time, create_time, 
+      update_time, create_user, update_user
+      )
+    values (#{assignId,jdbcType=BIGINT}, #{assignName,jdbcType=VARCHAR}, #{arrangeId,jdbcType=BIGINT}, 
+      #{studentId,jdbcType=INTEGER}, #{studentNameCn,jdbcType=VARCHAR}, #{studentNameEn,jdbcType=VARCHAR}, 
+      #{commitStatus,jdbcType=INTEGER}, #{commitType,jdbcType=INTEGER}, #{courseCode,jdbcType=VARCHAR}, 
+      #{courseNameCn,jdbcType=VARCHAR}, #{courseNameEn,jdbcType=VARCHAR}, #{workPath,jdbcType=VARCHAR}, 
+      #{commitPath,jdbcType=VARCHAR}, #{commitTotalScore,jdbcType=INTEGER}, #{commitThisScore,jdbcType=INTEGER}, 
+      #{commitDesc,jdbcType=VARCHAR}, #{commitTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.CourseHomeWorkCommit" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into course_home_work_commit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="assignId != null" >
+        assign_id,
+      </if>
+      <if test="assignName != null" >
+        assign_name,
+      </if>
+      <if test="arrangeId != null" >
+        arrange_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="studentNameCn != null" >
+        student_name_cn,
+      </if>
+      <if test="studentNameEn != null" >
+        student_name_en,
+      </if>
+      <if test="commitStatus != null" >
+        commit_status,
+      </if>
+      <if test="commitType != null" >
+        commit_type,
+      </if>
+      <if test="courseCode != null" >
+        course_code,
+      </if>
+      <if test="courseNameCn != null" >
+        course_name_cn,
+      </if>
+      <if test="courseNameEn != null" >
+        course_name_en,
+      </if>
+      <if test="workPath != null" >
+        work_path,
+      </if>
+      <if test="commitPath != null" >
+        commit_path,
+      </if>
+      <if test="commitTotalScore != null" >
+        commit_total_score,
+      </if>
+      <if test="commitThisScore != null" >
+        commit_this_score,
+      </if>
+      <if test="commitDesc != null" >
+        commit_desc,
+      </if>
+      <if test="commitTime != null" >
+        commit_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="assignId != null" >
+        #{assignId,jdbcType=BIGINT},
+      </if>
+      <if test="assignName != null" >
+        #{assignName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangeId != null" >
+        #{arrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentNameCn != null" >
+        #{studentNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNameEn != null" >
+        #{studentNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="commitStatus != null" >
+        #{commitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="commitType != null" >
+        #{commitType,jdbcType=INTEGER},
+      </if>
+      <if test="courseCode != null" >
+        #{courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameCn != null" >
+        #{courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameEn != null" >
+        #{courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="workPath != null" >
+        #{workPath,jdbcType=VARCHAR},
+      </if>
+      <if test="commitPath != null" >
+        #{commitPath,jdbcType=VARCHAR},
+      </if>
+      <if test="commitTotalScore != null" >
+        #{commitTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="commitThisScore != null" >
+        #{commitThisScore,jdbcType=INTEGER},
+      </if>
+      <if test="commitDesc != null" >
+        #{commitDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="commitTime != null" >
+        #{commitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.CourseHomeWorkCommitCriteria" resultType="java.lang.Integer" >
+    select count(*) from course_home_work_commit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course_home_work_commit
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.assignId != null" >
+        assign_id = #{record.assignId,jdbcType=BIGINT},
+      </if>
+      <if test="record.assignName != null" >
+        assign_name = #{record.assignName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrangeId != null" >
+        arrange_id = #{record.arrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentNameCn != null" >
+        student_name_cn = #{record.studentNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentNameEn != null" >
+        student_name_en = #{record.studentNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commitStatus != null" >
+        commit_status = #{record.commitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.commitType != null" >
+        commit_type = #{record.commitType,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseCode != null" >
+        course_code = #{record.courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseNameCn != null" >
+        course_name_cn = #{record.courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseNameEn != null" >
+        course_name_en = #{record.courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPath != null" >
+        work_path = #{record.workPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commitPath != null" >
+        commit_path = #{record.commitPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commitTotalScore != null" >
+        commit_total_score = #{record.commitTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.commitThisScore != null" >
+        commit_this_score = #{record.commitThisScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.commitDesc != null" >
+        commit_desc = #{record.commitDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commitTime != null" >
+        commit_time = #{record.commitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course_home_work_commit
+    set id = #{record.id,jdbcType=INTEGER},
+      assign_id = #{record.assignId,jdbcType=BIGINT},
+      assign_name = #{record.assignName,jdbcType=VARCHAR},
+      arrange_id = #{record.arrangeId,jdbcType=BIGINT},
+      student_id = #{record.studentId,jdbcType=INTEGER},
+      student_name_cn = #{record.studentNameCn,jdbcType=VARCHAR},
+      student_name_en = #{record.studentNameEn,jdbcType=VARCHAR},
+      commit_status = #{record.commitStatus,jdbcType=INTEGER},
+      commit_type = #{record.commitType,jdbcType=INTEGER},
+      course_code = #{record.courseCode,jdbcType=VARCHAR},
+      course_name_cn = #{record.courseNameCn,jdbcType=VARCHAR},
+      course_name_en = #{record.courseNameEn,jdbcType=VARCHAR},
+      work_path = #{record.workPath,jdbcType=VARCHAR},
+      commit_path = #{record.commitPath,jdbcType=VARCHAR},
+      commit_total_score = #{record.commitTotalScore,jdbcType=INTEGER},
+      commit_this_score = #{record.commitThisScore,jdbcType=INTEGER},
+      commit_desc = #{record.commitDesc,jdbcType=VARCHAR},
+      commit_time = #{record.commitTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=BIGINT},
+      update_user = #{record.updateUser,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.CourseHomeWorkCommit" >
+    update course_home_work_commit
+    <set >
+      <if test="assignId != null" >
+        assign_id = #{assignId,jdbcType=BIGINT},
+      </if>
+      <if test="assignName != null" >
+        assign_name = #{assignName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangeId != null" >
+        arrange_id = #{arrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentNameCn != null" >
+        student_name_cn = #{studentNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNameEn != null" >
+        student_name_en = #{studentNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="commitStatus != null" >
+        commit_status = #{commitStatus,jdbcType=INTEGER},
+      </if>
+      <if test="commitType != null" >
+        commit_type = #{commitType,jdbcType=INTEGER},
+      </if>
+      <if test="courseCode != null" >
+        course_code = #{courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameCn != null" >
+        course_name_cn = #{courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameEn != null" >
+        course_name_en = #{courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="workPath != null" >
+        work_path = #{workPath,jdbcType=VARCHAR},
+      </if>
+      <if test="commitPath != null" >
+        commit_path = #{commitPath,jdbcType=VARCHAR},
+      </if>
+      <if test="commitTotalScore != null" >
+        commit_total_score = #{commitTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="commitThisScore != null" >
+        commit_this_score = #{commitThisScore,jdbcType=INTEGER},
+      </if>
+      <if test="commitDesc != null" >
+        commit_desc = #{commitDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="commitTime != null" >
+        commit_time = #{commitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.CourseHomeWorkCommit" >
+    update course_home_work_commit
+    set assign_id = #{assignId,jdbcType=BIGINT},
+      assign_name = #{assignName,jdbcType=VARCHAR},
+      arrange_id = #{arrangeId,jdbcType=BIGINT},
+      student_id = #{studentId,jdbcType=INTEGER},
+      student_name_cn = #{studentNameCn,jdbcType=VARCHAR},
+      student_name_en = #{studentNameEn,jdbcType=VARCHAR},
+      commit_status = #{commitStatus,jdbcType=INTEGER},
+      commit_type = #{commitType,jdbcType=INTEGER},
+      course_code = #{courseCode,jdbcType=VARCHAR},
+      course_name_cn = #{courseNameCn,jdbcType=VARCHAR},
+      course_name_en = #{courseNameEn,jdbcType=VARCHAR},
+      work_path = #{workPath,jdbcType=VARCHAR},
+      commit_path = #{commitPath,jdbcType=VARCHAR},
+      commit_total_score = #{commitTotalScore,jdbcType=INTEGER},
+      commit_this_score = #{commitThisScore,jdbcType=INTEGER},
+      commit_desc = #{commitDesc,jdbcType=VARCHAR},
+      commit_time = #{commitTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT},
+      update_user = #{updateUser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

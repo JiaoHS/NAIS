@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nasi.portal.data.mapper.CourseWareMapper" >
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.CourseWare" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ware_name_cn" property="wareNameCn" jdbcType="VARCHAR" />
+    <result column="ware_name_en" property="wareNameEn" jdbcType="VARCHAR" />
+    <result column="ware_name_count" property="wareNameCount" jdbcType="INTEGER" />
+    <result column="ware_status" property="wareStatus" jdbcType="INTEGER" />
+    <result column="ware_name_desc" property="wareNameDesc" jdbcType="VARCHAR" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="course_name_cn" property="courseNameCn" jdbcType="VARCHAR" />
+    <result column="course_name_en" property="courseNameEn" jdbcType="VARCHAR" />
+    <result column="course_code" property="courseCode" jdbcType="VARCHAR" />
+    <result column="arrange_id" property="arrangeId" jdbcType="BIGINT" />
+    <result column="ware_path" property="warePath" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ware_name_cn, ware_name_en, ware_name_count, ware_status, ware_name_desc, course_id, 
+    course_name_cn, course_name_en, course_code, arrange_id, ware_path, create_time, 
+    update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nasi.portal.data.model.CourseWareCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `course_ware`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and start >= 0 " >
+      limit #{start}
+    </if>
+    <if test="start != null and start >= 0 and end != null and end >= 0" >
+      , #{end}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from `course_ware`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `course_ware`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.CourseWareCriteria" >
+    delete from `course_ware`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.CourseWare" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `course_ware` (ware_name_cn, ware_name_en, ware_name_count, 
+      ware_status, ware_name_desc, course_id, 
+      course_name_cn, course_name_en, course_code, 
+      arrange_id, ware_path, create_time, 
+      update_time)
+    values (#{wareNameCn,jdbcType=VARCHAR}, #{wareNameEn,jdbcType=VARCHAR}, #{wareNameCount,jdbcType=INTEGER}, 
+      #{wareStatus,jdbcType=INTEGER}, #{wareNameDesc,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT}, 
+      #{courseNameCn,jdbcType=VARCHAR}, #{courseNameEn,jdbcType=VARCHAR}, #{courseCode,jdbcType=VARCHAR}, 
+      #{arrangeId,jdbcType=BIGINT}, #{warePath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.CourseWare" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `course_ware`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wareNameCn != null" >
+        ware_name_cn,
+      </if>
+      <if test="wareNameEn != null" >
+        ware_name_en,
+      </if>
+      <if test="wareNameCount != null" >
+        ware_name_count,
+      </if>
+      <if test="wareStatus != null" >
+        ware_status,
+      </if>
+      <if test="wareNameDesc != null" >
+        ware_name_desc,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="courseNameCn != null" >
+        course_name_cn,
+      </if>
+      <if test="courseNameEn != null" >
+        course_name_en,
+      </if>
+      <if test="courseCode != null" >
+        course_code,
+      </if>
+      <if test="arrangeId != null" >
+        arrange_id,
+      </if>
+      <if test="warePath != null" >
+        ware_path,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wareNameCn != null" >
+        #{wareNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="wareNameEn != null" >
+        #{wareNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="wareNameCount != null" >
+        #{wareNameCount,jdbcType=INTEGER},
+      </if>
+      <if test="wareStatus != null" >
+        #{wareStatus,jdbcType=INTEGER},
+      </if>
+      <if test="wareNameDesc != null" >
+        #{wareNameDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="courseNameCn != null" >
+        #{courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameEn != null" >
+        #{courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCode != null" >
+        #{courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangeId != null" >
+        #{arrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="warePath != null" >
+        #{warePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.CourseWareCriteria" resultType="java.lang.Integer" >
+    select count(*) from `course_ware`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update `course_ware`
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wareNameCn != null" >
+        ware_name_cn = #{record.wareNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wareNameEn != null" >
+        ware_name_en = #{record.wareNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wareNameCount != null" >
+        ware_name_count = #{record.wareNameCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.wareStatus != null" >
+        ware_status = #{record.wareStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.wareNameDesc != null" >
+        ware_name_desc = #{record.wareNameDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseId != null" >
+        course_id = #{record.courseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.courseNameCn != null" >
+        course_name_cn = #{record.courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseNameEn != null" >
+        course_name_en = #{record.courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseCode != null" >
+        course_code = #{record.courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrangeId != null" >
+        arrange_id = #{record.arrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.warePath != null" >
+        ware_path = #{record.warePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update `course_ware`
+    set id = #{record.id,jdbcType=BIGINT},
+      ware_name_cn = #{record.wareNameCn,jdbcType=VARCHAR},
+      ware_name_en = #{record.wareNameEn,jdbcType=VARCHAR},
+      ware_name_count = #{record.wareNameCount,jdbcType=INTEGER},
+      ware_status = #{record.wareStatus,jdbcType=INTEGER},
+      ware_name_desc = #{record.wareNameDesc,jdbcType=VARCHAR},
+      course_id = #{record.courseId,jdbcType=BIGINT},
+      course_name_cn = #{record.courseNameCn,jdbcType=VARCHAR},
+      course_name_en = #{record.courseNameEn,jdbcType=VARCHAR},
+      course_code = #{record.courseCode,jdbcType=VARCHAR},
+      arrange_id = #{record.arrangeId,jdbcType=BIGINT},
+      ware_path = #{record.warePath,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.CourseWare" >
+    update `course_ware`
+    <set >
+      <if test="wareNameCn != null" >
+        ware_name_cn = #{wareNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="wareNameEn != null" >
+        ware_name_en = #{wareNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="wareNameCount != null" >
+        ware_name_count = #{wareNameCount,jdbcType=INTEGER},
+      </if>
+      <if test="wareStatus != null" >
+        ware_status = #{wareStatus,jdbcType=INTEGER},
+      </if>
+      <if test="wareNameDesc != null" >
+        ware_name_desc = #{wareNameDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="courseNameCn != null" >
+        course_name_cn = #{courseNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseNameEn != null" >
+        course_name_en = #{courseNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="courseCode != null" >
+        course_code = #{courseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="arrangeId != null" >
+        arrange_id = #{arrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="warePath != null" >
+        ware_path = #{warePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.CourseWare" >
+    update `course_ware`
+    set ware_name_cn = #{wareNameCn,jdbcType=VARCHAR},
+      ware_name_en = #{wareNameEn,jdbcType=VARCHAR},
+      ware_name_count = #{wareNameCount,jdbcType=INTEGER},
+      ware_status = #{wareStatus,jdbcType=INTEGER},
+      ware_name_desc = #{wareNameDesc,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=BIGINT},
+      course_name_cn = #{courseNameCn,jdbcType=VARCHAR},
+      course_name_en = #{courseNameEn,jdbcType=VARCHAR},
+      course_code = #{courseCode,jdbcType=VARCHAR},
+      arrange_id = #{arrangeId,jdbcType=BIGINT},
+      ware_path = #{warePath,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

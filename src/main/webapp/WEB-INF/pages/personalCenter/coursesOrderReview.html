@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="../../static/css/userCenter/ucPublic.css">
+<link rel="stylesheet" href="../../static/css/userCenter/payment.css">
+<div class="ucRight fr">
+    <div class="paymentWrap">
+        <div class="title rel f22">学费缴纳</div>
+        <ul class="paymentList clearfix">
+            <li class="fl center {{(order.orderStatus==3||order.orderStatus==4)?'done':''}}" ng-repeat="order in OrderList">
+                <div class="top fff">
+                    <div class="name f22 toe">{{order.receipt}}</div>
+                    <div class="time tr f16">{{order.createTime.substr(0,10)}}</div>
+                </div>
+                <div class="bottom clearfix">
+                    <div class="num fl f22">￥
+                        {{((order.totalAmount-order.discountAmount)/1000)<=0?0.1:((order.totalAmount-order.discountAmount)/1000)}}
+                    </div>
+                    <div class="payBtn tc f16 fr" ng-click="ToPayOrder(order.id,order.orderStatus)">
+                        {{order.orderStatus==1?'待支付':order.orderStatus==4?'审核中':'已支付'}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div ng-show="{{isHeBing}}">
+            <div class="totalNum fr f22 baseColor tr">
+                <i>总金额</i>
+                <span class="c65">￥ {{TotalMoney/1000}}</span>
+            </div>
+            <span style="cursor: pointer;" class="payTotal baseBg tc f16 fff fr" ng-click="ToPayOrder(1,1)">合并支付</span>
+        </div>
+
+    </div>
+</div>

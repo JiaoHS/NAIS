@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nasi.portal.data.mapper.HomeWorkTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.HomeWorkTask" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="task_course_id" property="taskCourseId" jdbcType="BIGINT" />
+    <result column="task_course_code" property="taskCourseCode" jdbcType="VARCHAR" />
+    <result column="task_arrange_id" property="taskArrangeId" jdbcType="BIGINT" />
+    <result column="task_type" property="taskType" jdbcType="INTEGER" />
+    <result column="task_start_time" property="taskStartTime" jdbcType="TIMESTAMP" />
+    <result column="task_end_time" property="taskEndTime" jdbcType="TIMESTAMP" />
+    <result column="task_attach_url" property="taskAttachUrl" jdbcType="VARCHAR" />
+    <result column="task_desc" property="taskDesc" jdbcType="VARCHAR" />
+    <result column="task_total_score" property="taskTotalScore" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, task_course_id, task_course_code, task_arrange_id, task_type, task_start_time, 
+    task_end_time, task_attach_url, task_desc, task_total_score, create_time, create_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nasi.portal.data.model.HomeWorkTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from home_work_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from home_work_task
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from home_work_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.HomeWorkTaskExample" >
+    delete from home_work_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.HomeWorkTask" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into home_work_task (task_course_id, task_course_code, task_arrange_id, 
+      task_type, task_start_time, task_end_time, 
+      task_attach_url, task_desc, task_total_score, 
+      create_time, create_user)
+    values (#{taskCourseId,jdbcType=BIGINT}, #{taskCourseCode,jdbcType=VARCHAR}, #{taskArrangeId,jdbcType=BIGINT}, 
+      #{taskType,jdbcType=INTEGER}, #{taskStartTime,jdbcType=TIMESTAMP}, #{taskEndTime,jdbcType=TIMESTAMP}, 
+      #{taskAttachUrl,jdbcType=VARCHAR}, #{taskDesc,jdbcType=VARCHAR}, #{taskTotalScore,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.HomeWorkTask" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into home_work_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskCourseId != null" >
+        task_course_id,
+      </if>
+      <if test="taskCourseCode != null" >
+        task_course_code,
+      </if>
+      <if test="taskArrangeId != null" >
+        task_arrange_id,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="taskStartTime != null" >
+        task_start_time,
+      </if>
+      <if test="taskEndTime != null" >
+        task_end_time,
+      </if>
+      <if test="taskAttachUrl != null" >
+        task_attach_url,
+      </if>
+      <if test="taskDesc != null" >
+        task_desc,
+      </if>
+      <if test="taskTotalScore != null" >
+        task_total_score,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskCourseId != null" >
+        #{taskCourseId,jdbcType=BIGINT},
+      </if>
+      <if test="taskCourseCode != null" >
+        #{taskCourseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskArrangeId != null" >
+        #{taskArrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=INTEGER},
+      </if>
+      <if test="taskStartTime != null" >
+        #{taskStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskEndTime != null" >
+        #{taskEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskAttachUrl != null" >
+        #{taskAttachUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDesc != null" >
+        #{taskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTotalScore != null" >
+        #{taskTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.HomeWorkTaskExample" resultType="java.lang.Integer" >
+    select count(*) from home_work_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update home_work_task
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskCourseId != null" >
+        task_course_id = #{record.taskCourseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskCourseCode != null" >
+        task_course_code = #{record.taskCourseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskArrangeId != null" >
+        task_arrange_id = #{record.taskArrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskType != null" >
+        task_type = #{record.taskType,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskStartTime != null" >
+        task_start_time = #{record.taskStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskEndTime != null" >
+        task_end_time = #{record.taskEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskAttachUrl != null" >
+        task_attach_url = #{record.taskAttachUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskDesc != null" >
+        task_desc = #{record.taskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskTotalScore != null" >
+        task_total_score = #{record.taskTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update home_work_task
+    set id = #{record.id,jdbcType=BIGINT},
+      task_course_id = #{record.taskCourseId,jdbcType=BIGINT},
+      task_course_code = #{record.taskCourseCode,jdbcType=VARCHAR},
+      task_arrange_id = #{record.taskArrangeId,jdbcType=BIGINT},
+      task_type = #{record.taskType,jdbcType=INTEGER},
+      task_start_time = #{record.taskStartTime,jdbcType=TIMESTAMP},
+      task_end_time = #{record.taskEndTime,jdbcType=TIMESTAMP},
+      task_attach_url = #{record.taskAttachUrl,jdbcType=VARCHAR},
+      task_desc = #{record.taskDesc,jdbcType=VARCHAR},
+      task_total_score = #{record.taskTotalScore,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.HomeWorkTask" >
+    update home_work_task
+    <set >
+      <if test="taskCourseId != null" >
+        task_course_id = #{taskCourseId,jdbcType=BIGINT},
+      </if>
+      <if test="taskCourseCode != null" >
+        task_course_code = #{taskCourseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskArrangeId != null" >
+        task_arrange_id = #{taskArrangeId,jdbcType=BIGINT},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=INTEGER},
+      </if>
+      <if test="taskStartTime != null" >
+        task_start_time = #{taskStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskEndTime != null" >
+        task_end_time = #{taskEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskAttachUrl != null" >
+        task_attach_url = #{taskAttachUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDesc != null" >
+        task_desc = #{taskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTotalScore != null" >
+        task_total_score = #{taskTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.HomeWorkTask" >
+    update home_work_task
+    set task_course_id = #{taskCourseId,jdbcType=BIGINT},
+      task_course_code = #{taskCourseCode,jdbcType=VARCHAR},
+      task_arrange_id = #{taskArrangeId,jdbcType=BIGINT},
+      task_type = #{taskType,jdbcType=INTEGER},
+      task_start_time = #{taskStartTime,jdbcType=TIMESTAMP},
+      task_end_time = #{taskEndTime,jdbcType=TIMESTAMP},
+      task_attach_url = #{taskAttachUrl,jdbcType=VARCHAR},
+      task_desc = #{taskDesc,jdbcType=VARCHAR},
+      task_total_score = #{taskTotalScore,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

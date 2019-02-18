@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nasi.portal.data.mapper.ColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.Column" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="etitle" property="etitle" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="INTEGER" />
+    <result column="show_order" property="showOrder" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="column_type" property="columnType" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="econtent" property="econtent" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="eurl" property="eurl" jdbcType="VARCHAR" />
+    <result column="column_status" property="columnStatus" jdbcType="INTEGER" />
+    <result column="banner" property="banner" jdbcType="VARCHAR" />
+    <result column="ebanner" property="ebanner" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, etitle, parent_id, `location`, show_order, `level`, column_type, content, 
+    econtent, url, eurl, column_status, banner, ebanner
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nasi.portal.data.model.ColumnCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from `column`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="start != null and start >= 0 " >
+      limit #{start}
+    </if>
+    <if test="start != null and start >= 0 and end != null and end >= 0" >
+      , #{end}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `column`
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `column`
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.ColumnCriteria" >
+    delete from `column`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.Column" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `column` (title, etitle, parent_id, 
+      `location`, show_order, `level`, 
+      column_type, content, econtent, 
+      url, eurl, column_status, 
+      banner, ebanner)
+    values (#{title,jdbcType=VARCHAR}, #{etitle,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{location,jdbcType=INTEGER}, #{showOrder,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{columnType,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{econtent,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{eurl,jdbcType=VARCHAR}, #{columnStatus,jdbcType=INTEGER}, 
+      #{banner,jdbcType=VARCHAR}, #{ebanner,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.Column" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `column`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="etitle != null" >
+        etitle,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="location != null" >
+        `location`,
+      </if>
+      <if test="showOrder != null" >
+        show_order,
+      </if>
+      <if test="level != null" >
+        `level`,
+      </if>
+      <if test="columnType != null" >
+        column_type,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="econtent != null" >
+        econtent,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="eurl != null" >
+        eurl,
+      </if>
+      <if test="columnStatus != null" >
+        column_status,
+      </if>
+      <if test="banner != null" >
+        banner,
+      </if>
+      <if test="ebanner != null" >
+        ebanner,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="etitle != null" >
+        #{etitle,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=INTEGER},
+      </if>
+      <if test="showOrder != null" >
+        #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="columnType != null" >
+        #{columnType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="econtent != null" >
+        #{econtent,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="eurl != null" >
+        #{eurl,jdbcType=VARCHAR},
+      </if>
+      <if test="columnStatus != null" >
+        #{columnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="banner != null" >
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="ebanner != null" >
+        #{ebanner,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.ColumnCriteria" resultType="java.lang.Integer" >
+    select count(*) from `column`
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update `column`
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.etitle != null" >
+        etitle = #{record.etitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null" >
+        `location` = #{record.location,jdbcType=INTEGER},
+      </if>
+      <if test="record.showOrder != null" >
+        show_order = #{record.showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        `level` = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnType != null" >
+        column_type = #{record.columnType,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.econtent != null" >
+        econtent = #{record.econtent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eurl != null" >
+        eurl = #{record.eurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnStatus != null" >
+        column_status = #{record.columnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.banner != null" >
+        banner = #{record.banner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ebanner != null" >
+        ebanner = #{record.ebanner,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update `column`
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      etitle = #{record.etitle,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      `location` = #{record.location,jdbcType=INTEGER},
+      show_order = #{record.showOrder,jdbcType=INTEGER},
+      `level` = #{record.level,jdbcType=INTEGER},
+      column_type = #{record.columnType,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      econtent = #{record.econtent,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      eurl = #{record.eurl,jdbcType=VARCHAR},
+      column_status = #{record.columnStatus,jdbcType=INTEGER},
+      banner = #{record.banner,jdbcType=VARCHAR},
+      ebanner = #{record.ebanner,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.Column" >
+    update `column`
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="etitle != null" >
+        etitle = #{etitle,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        `location` = #{location,jdbcType=INTEGER},
+      </if>
+      <if test="showOrder != null" >
+        show_order = #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        `level` = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="columnType != null" >
+        column_type = #{columnType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="econtent != null" >
+        econtent = #{econtent,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="eurl != null" >
+        eurl = #{eurl,jdbcType=VARCHAR},
+      </if>
+      <if test="columnStatus != null" >
+        column_status = #{columnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="banner != null" >
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="ebanner != null" >
+        ebanner = #{ebanner,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.Column" >
+    update `column`
+    set title = #{title,jdbcType=VARCHAR},
+      etitle = #{etitle,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      `location` = #{location,jdbcType=INTEGER},
+      show_order = #{showOrder,jdbcType=INTEGER},
+      `level` = #{level,jdbcType=INTEGER},
+      column_type = #{columnType,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      econtent = #{econtent,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      eurl = #{eurl,jdbcType=VARCHAR},
+      column_status = #{columnStatus,jdbcType=INTEGER},
+      banner = #{banner,jdbcType=VARCHAR},
+      ebanner = #{ebanner,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

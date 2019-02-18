@@ -1,0 +1,98 @@
+
+<!--导航图-->
+<link rel="stylesheet" href="../../../static/css/applicationInformation/teachingQualityEvaluation.css">
+<!--<div class="ai-bgBox">-->
+    <!--<div class="ai-bgWord">-->
+        <!--<span>教学质量评估</span><br/>-->
+        <!--<span style="font-size: 48px">Teaching quality evaluation</span>-->
+    <!--</div>-->
+<!--</div>-->
+<!--右侧主体内容部分-->
+<div class="ai-right">
+    <div class="ai-rightIn">
+        <div class="tqDeriction">申请信息>教学质量评估</div>
+        <div class="tqPart1">
+            <div class="tqP1-left">教学质量评估</div>
+            <div class="tqP1-left1">委员会</div>
+            <div class="tqP1-right">
+                为提高学校教学质量，保证暑校教授按时、准确完成教学任务，保证学生学期末获得公平、公正的成绩评估，自2015年起，各主办大学特设立教学质量评估委员会，由大学相关部门老师和教授团队共同完成教学监督及成绩评定等工作。<br/>
+                国际暑期学校教学质量评估委员会是由各举办大学设立的，独立于NAIS组织方运作的学术监督与评价机构，NAIS无权干涉或参与委员会对教学情况作出的评价。2015年，主办大学邀请更多国内外知名教授学者加入到教学质量评估委员会，监督指导教学工作，以期将国际暑期学校建立成“学术更为严谨、教学更为透明、评分更为公正”的国际暑期学校。
+
+            </div>
+        </div>
+
+        <div class="tqPart1">
+            <div class="tqP1-left">组织架构</div>
+            <div class="tqP1-right">
+                各校区教学质量评估委员会设主任一名，由名校外籍教授出任；设副主任一名，由合作大学指派本校教职人员出任；设秘书长一名，由该校区国际暑期学校教务主管出任；设委员多名，由除委员会主任外的其余外籍教授出任。
+            </div>
+        </div>
+
+        <div class="tqPart1">
+            <div class="tqP1-left">课程调整</div>
+            <div class="tqP1-right">
+                暑校开学期间，每周定期召开教学质量评估委员会例会，由委员会所有成员出席，助教列席。会上，秘书长向委员会全体成员提交学生的反馈意见，由主任与副主任带领进行当周情况总结，针对不足之处提出宝贵意见并拟定相应改进措施。会后，主任会与评价较低的任课教授做出及时沟通，秘书长汇总当周课程满意度调查数据及会议记录。
+            </div>
+        </div>
+
+        <div class="tqPart1">
+            <div class="tqP1-left">关于考试 </div>
+            <div class="tqP1-right">
+                第三周为期中考时间，形式宽松灵活，由任课教授自行决定采用考试或其他方式，第三周周一由教学质量评估委员会秘书长记录各课程中期考核时间及形式，统一上报教学质量评估委员会。采用考试形式的课程，由校方指派监考老师以严肃考试纪律。在第四周的教学质量评估委员会例会上，需提交期末试卷（附教授签名的纸质版），校方根据每门课程的实际选课人数印制试卷，密封保存，于期末考试时在考场内拆封。期末考试各考场除任课教师及助教外，另指派一名学校教师共同监考。
+            </div>
+        </div>
+
+        <div class="tqPart1" style="margin-bottom: 80px">
+            <div class="tqP1-left">关于成绩评定</div>
+            <div class="tqP1-left1">及复议</div>
+            <div class="tqP1-right">
+                教学质量评估委员会第一次例会上，各外籍任课教授需提交课程成绩评定标准，包含课堂表现、作业、考试等占最终成绩的比例，统一上交秘书长留存。学生的最终课程成绩评定将严格按照已上交的标准进行评定，并由校方教务部门以1:10的比例进行抽样筛查，如发现与评定标准不一致的情况会及时提醒教授注意并作出更改。<br/>
+
+                如个别学生对成绩提出异议，可与任课教授沟通，如沟通后仍未达成一致，可依据成绩复议流程进行（详情请参见学术政策-成绩复议）教学质量评估委员会副主任将依据该课程成绩评定标准进行复核，除核查考试成绩外，还会联系外籍任课教师及助教了解该名学生课堂表现等情况，一周内作出综合评定，评定结果将以书面形式反馈予学生。
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--固定的侧边栏-->
+<div class="slidebar">
+    <div class="slidebar-top">
+        <div class="st-pic"></div>
+    </div>
+    <div class="slidebar-bottom">
+        <div class="sb-pic"></div>
+    </div>
+</div>
+<div class="big-ewm"></div>
+<!----------------------------------------------------------------------------------------------------------------------->
+<script>
+
+    window.onscroll=function(){
+        if ($(document).scrollTop() >410)//这个410是距离顶部高度
+        {
+            $(".ai-left").addClass('ai-leftFixed');//
+        }else{
+            $(".ai-left").removeClass('ai-leftFixed');
+        }
+    }
+
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+            function () {
+                $(".big-ewm").css("right","65px")
+            }
+    );
+    $(".slidebar-top").mouseout(
+            function () {
+                $(".big-ewm").css("right","-165px")
+            }
+    )
+    //一键返回顶部
+    var toTop=document.querySelector(".slidebar-bottom");
+    toTop.onclick=function(){
+        obj=document.body.scrollTop==0?document.documentElement:document.body;
+        animate(obj,{scrollTop:0},100)
+    };
+</script>

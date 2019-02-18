@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nasi.portal.data.mapper.HotelMapper">
+  <resultMap id="BaseResultMap" type="com.nasi.portal.data.model.Hotel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hotel_name_cn" jdbcType="VARCHAR" property="hotelNameCn" />
+    <result column="hotel_name_en" jdbcType="VARCHAR" property="hotelNameEn" />
+    <result column="description_cn" jdbcType="VARCHAR" property="descriptionCn" />
+    <result column="description_en" jdbcType="VARCHAR" property="descriptionEn" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="INTEGER" property="createUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="INTEGER" property="updateUser" />
+    <result column="campusid" jdbcType="INTEGER" property="campusid" />
+    <result column="hotaladdress" jdbcType="VARCHAR" property="hotaladdress" />
+    <result column="hotalimage1" jdbcType="VARCHAR" property="hotalimage1" />
+    <result column="hotalimage2" jdbcType="VARCHAR" property="hotalimage2" />
+    <result column="hotalstar" jdbcType="INTEGER" property="hotalstar" />
+    <result column="starttime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="roomtype" jdbcType="INTEGER" property="roomtype" />
+    <result column="roonumber" jdbcType="VARCHAR" property="roonumber" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, hotel_name_cn, hotel_name_en, description_cn, description_en, create_time, create_user, 
+    update_time, update_user, campusid, hotaladdress, hotalimage1, hotalimage2, hotalstar, 
+    starttime, endtime, roomtype, roonumber
+  </sql>
+  <select id="selectByExample" parameterType="com.nasi.portal.data.model.HotelCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hotel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hotel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hotel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nasi.portal.data.model.HotelCriteria">
+    delete from hotel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nasi.portal.data.model.Hotel">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hotel (hotel_name_cn, hotel_name_en, description_cn, 
+      description_en, create_time, create_user, 
+      update_time, update_user, campusid, 
+      hotaladdress, hotalimage1, hotalimage2, 
+      hotalstar, starttime, endtime, 
+      roomtype, roonumber)
+    values (#{hotelNameCn,jdbcType=VARCHAR}, #{hotelNameEn,jdbcType=VARCHAR}, #{descriptionCn,jdbcType=VARCHAR}, 
+      #{descriptionEn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{campusid,jdbcType=INTEGER}, 
+      #{hotaladdress,jdbcType=VARCHAR}, #{hotalimage1,jdbcType=VARCHAR}, #{hotalimage2,jdbcType=VARCHAR}, 
+      #{hotalstar,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{roomtype,jdbcType=INTEGER}, #{roonumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nasi.portal.data.model.Hotel">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hotel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotelNameCn != null">
+        hotel_name_cn,
+      </if>
+      <if test="hotelNameEn != null">
+        hotel_name_en,
+      </if>
+      <if test="descriptionCn != null">
+        description_cn,
+      </if>
+      <if test="descriptionEn != null">
+        description_en,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="campusid != null">
+        campusid,
+      </if>
+      <if test="hotaladdress != null">
+        hotaladdress,
+      </if>
+      <if test="hotalimage1 != null">
+        hotalimage1,
+      </if>
+      <if test="hotalimage2 != null">
+        hotalimage2,
+      </if>
+      <if test="hotalstar != null">
+        hotalstar,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="roomtype != null">
+        roomtype,
+      </if>
+      <if test="roonumber != null">
+        roonumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotelNameCn != null">
+        #{hotelNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelNameEn != null">
+        #{hotelNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionCn != null">
+        #{descriptionCn,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionEn != null">
+        #{descriptionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="campusid != null">
+        #{campusid,jdbcType=INTEGER},
+      </if>
+      <if test="hotaladdress != null">
+        #{hotaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalimage1 != null">
+        #{hotalimage1,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalimage2 != null">
+        #{hotalimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalstar != null">
+        #{hotalstar,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomtype != null">
+        #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="roonumber != null">
+        #{roonumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nasi.portal.data.model.HotelCriteria" resultType="java.lang.Integer">
+    select count(*) from hotel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hotel
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hotelNameCn != null">
+        hotel_name_cn = #{record.hotelNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelNameEn != null">
+        hotel_name_en = #{record.hotelNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descriptionCn != null">
+        description_cn = #{record.descriptionCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descriptionEn != null">
+        description_en = #{record.descriptionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.campusid != null">
+        campusid = #{record.campusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.hotaladdress != null">
+        hotaladdress = #{record.hotaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotalimage1 != null">
+        hotalimage1 = #{record.hotalimage1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotalimage2 != null">
+        hotalimage2 = #{record.hotalimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotalstar != null">
+        hotalstar = #{record.hotalstar,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null">
+        starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.roomtype != null">
+        roomtype = #{record.roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.roonumber != null">
+        roonumber = #{record.roonumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hotel
+    set id = #{record.id,jdbcType=INTEGER},
+      hotel_name_cn = #{record.hotelNameCn,jdbcType=VARCHAR},
+      hotel_name_en = #{record.hotelNameEn,jdbcType=VARCHAR},
+      description_cn = #{record.descriptionCn,jdbcType=VARCHAR},
+      description_en = #{record.descriptionEn,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=INTEGER},
+      campusid = #{record.campusid,jdbcType=INTEGER},
+      hotaladdress = #{record.hotaladdress,jdbcType=VARCHAR},
+      hotalimage1 = #{record.hotalimage1,jdbcType=VARCHAR},
+      hotalimage2 = #{record.hotalimage2,jdbcType=VARCHAR},
+      hotalstar = #{record.hotalstar,jdbcType=INTEGER},
+      starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      roomtype = #{record.roomtype,jdbcType=INTEGER},
+      roonumber = #{record.roonumber,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nasi.portal.data.model.Hotel">
+    update hotel
+    <set>
+      <if test="hotelNameCn != null">
+        hotel_name_cn = #{hotelNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelNameEn != null">
+        hotel_name_en = #{hotelNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionCn != null">
+        description_cn = #{descriptionCn,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionEn != null">
+        description_en = #{descriptionEn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=INTEGER},
+      </if>
+      <if test="campusid != null">
+        campusid = #{campusid,jdbcType=INTEGER},
+      </if>
+      <if test="hotaladdress != null">
+        hotaladdress = #{hotaladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalimage1 != null">
+        hotalimage1 = #{hotalimage1,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalimage2 != null">
+        hotalimage2 = #{hotalimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="hotalstar != null">
+        hotalstar = #{hotalstar,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roomtype != null">
+        roomtype = #{roomtype,jdbcType=INTEGER},
+      </if>
+      <if test="roonumber != null">
+        roonumber = #{roonumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nasi.portal.data.model.Hotel">
+    update hotel
+    set hotel_name_cn = #{hotelNameCn,jdbcType=VARCHAR},
+      hotel_name_en = #{hotelNameEn,jdbcType=VARCHAR},
+      description_cn = #{descriptionCn,jdbcType=VARCHAR},
+      description_en = #{descriptionEn,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=INTEGER},
+      campusid = #{campusid,jdbcType=INTEGER},
+      hotaladdress = #{hotaladdress,jdbcType=VARCHAR},
+      hotalimage1 = #{hotalimage1,jdbcType=VARCHAR},
+      hotalimage2 = #{hotalimage2,jdbcType=VARCHAR},
+      hotalstar = #{hotalstar,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      roomtype = #{roomtype,jdbcType=INTEGER},
+      roonumber = #{roonumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

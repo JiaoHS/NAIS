@@ -1,0 +1,168 @@
+/*reset*/
+body,div,ul,li,ol,h1,h2,h3,h4,h5,h6,input,textarea,select,p,dl,dt,dd,a,img,button,form,table,th,tr,td,tbody,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0;border:none;font-family:"Microsoft YaHei",Arial;}
+body{color:#323232;font-size:14px;background:#F4F4F4;}
+body,html{min-width:1280px;}
+img{display:block;}
+em,i{font-style:normal;}
+strong{font-weight:normal;}
+a{text-decoration:none;font-size:14px;color:#1e82fe;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+ul,ol,li{list-style:none;}
+input,button,a,textarea{outline:none;}
+input:-moz-placeholder{ /* Mozilla Firefox 4 to 18 */
+color:#bbb;}
+input::-moz-placeholder{ /* Mozilla Firefox 19+ */
+color:#bbb;}
+input:-ms-input-placeholder{color:#bbb;}
+input::-webkit-input-placeholder{color:#bbb;}
+
+/* 去掉IE10-11 文本框后的X按钮*/
+input::-ms-clear{display:none;}
+
+/*去掉IE10-11 密码框右边的小眼睛*/
+input::-ms-reveal{display:none;}
+
+/* 去掉chrome黄色背景 */
+input:-webkit-autofill{-webkit-box-shadow:0 0 0px 1000px white inset!important;}
+
+/*css通用样式库*/
+.fl{float:left;}
+.fr{float:right;}
+.cl{clear:both;}
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:".";clear:both;height:0;}
+.fwn{font-weight:normal;font-style:normal;}
+.fwb{font-weight:bold;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.tl{text-align:left;}
+.tdu{text-decoration:underline;}
+.f12{font-size:12px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+.f18{font-size:18px;}
+.f20{font-size:20px;}
+.f22{font-size:22px;}
+.f24{font-size:24px;}
+.f30{font-size:30px;}
+.f36{font-size:36px;}
+.f44{font-size:44px;}
+.f48{font-size:48px;}
+.f50{font-size:50px;}
+.w1280{width:1280px;margin:0 auto;}
+.toe{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.fixed{position:fixed;bottom:0;right:0;z-index:9999;}
+.rel{position:relative;}
+.abs{position:absolute;bottom:0;right:0;}
+/*@font-face{font-family:hzgb;src:url('../fonts/hzgb.TTF');font-display:auto;}*/
+.hzgb{font-family:'microsoft yahei';font-weight: bold;}
+@font-face{font-family:Broadway;src:url('../fonts/Broadway.TTF');font-display:auto;}
+.broadway{font-family:Broadway;}
+.baseBg{background:#4EC0E1;}
+.baseColor{color:#4EC0E1;}
+.color65{color:#656565;}
+.colorE6{color:#e6e6e6;}
+.tran{transition:all 0.3s;-webkit-transition:all 0.3s;}
+.fff{color:#fff;}
+.c98{color:#989898;}
+.c65{color:#656565;}
+.tein2{text-indent:2em;}
+.hide{display:none;}
+.show{display:none;}
+#header{height:133px;background:#fff;}
+.headerCon{height:100%;}
+.headerCon .logo{width:384px;height:68px;display:block;line-height:68px;margin-top:34px;}
+.headerCon .logo .logo1{margin-top:8px;}
+#nav{width:670px;height:70px;margin-top:28px;}
+#nav .navCon{height:100%;margin-top:20px;}
+#nav .navCon li{margin:0 10px;z-index:2;}
+#nav .navCon li a,#footer .navCon li a{font-size:20px;padding-right:6px;cursor:pointer;color:#4A4A4A;}
+#nav .tabSons{width:120px;background:#fff;top:0;left:-20px;z-index:-1;padding-top:30px;box-shadow:0px 8px 20px 0px #c4e4ff;height:90px;display:none;}
+#nav .tabSons .tabSon:hover a{background:#4EC0E1;color:#fff;}
+#nav .tabSons.teachers{height:130px;}
+#nav .tabSons.questions{height:210px;}
+#nav .tabSon a{display:block;padding:0!important;height:100%;height:40px;line-height:40px;font-size:16px!important;}
+#footer .navCon li{margin:0 18px;}
+#footer .navCon li a{color:#e6e6e6;}
+#nav .navCon li.cur::after,#footer .navCon li.cur::after{position:absolute;width:16px;height:5px;top:-5px;left:-3px;content:"";background:#4EC0E1;}
+#nav .navCon li::after,#footer .navCon li::after{position:absolute;width:0px;height:5px;top:-5px;left:-3px;content:"";background:#4EC0E1;transition:all 0.3s;-webkit-transition:all 0.3s;}
+#nav .navCon li:hover::after,#footer .navCon li:hover::after{width:100%;}
+#nav .navCon li:hover .tabSons{display:block;}
+#nav .login{width:70px;height:70px;}
+#nav .toLogin{display:inline-block;width:68px;height:38px;background:url(../images/login_btn.png) no-repeat;line-height:38px;color:#fff;margin-top:17px;}
+#nav .loged{display:inline-block;width:60px;height:76px;border-radius:50%;overflow:hidden;}
+#nav .loged img{width:100%;height:100%;}
+#footer{height:245px;padding-top:35px;background:url(../images/footer_bg.png) no-repeat center;}
+#footer .footerCon{height:245px;}
+#footer .footerCon .navCon{width:700px;margin:0 auto 74px;}
+#footer .QRcode{width:126px;height:126px;right:60px;bottom:44px;background:url(../images/QRcode.png) no-repeat center 100%/100%;}
+#footer .QRcode p{height:22px;top:-38px;left:0;}
+#footer .baseInfo .fl{width:630px;height:100px;margin-right:24px;}
+#footer .baseInfo .fr{width:626px;height:100px;}
+#footer .baseInfo p{height:26px;line-height:26px;margin:2px 0;}
+#footer .baseInfo .tel,#footer .baseInfo .email{padding-left:30px;background:url(../images/footer_phone.png) no-repeat 3px center;}
+#footer .baseInfo .email{background:url(../images/footer_email.png) no-repeat 0px center;}
+
+/* 个人中心公用 */
+.userCenter #header{height:94px;background:#4EC0E1;}
+.userCenter #header .issn{height:50px;line-height:50px;margin-top:17px;margin-right:36px;}
+#header .linkTab{margin-top:36px;width:170px;height:57px;border:1px solid #f4f4f4;border-bottom:none;background:#75D7F3;line-height:57px;}
+#header .ucPage{background:#f4f4f4;}
+#header .settings{margin:36px 14px 0 0;line-height:57px;border:1px solid #f4f4f4;border-bottom:none;width:146px;height:57px;padding-left:24px;cursor:pointer;background:url(../images/userCenter/settingArrB.png) no-repeat 135px center;}
+#header .settings:hover{color:#4EC0E1;background:#fff url(../images/userCenter/settingArrT.png) no-repeat 135px center;}
+#header .settings:hover .settingItem{display:block;}
+#header .settingItem{top:57px;left:-1px;border-top:2px solid #eee;z-index:2;height:114px;display:none;}
+#header .settingItem a{height:57px;width:172px;display:block;line-height:57px;text-align:center;background:#fff;color:#656565;font-size:20px;}
+#header .settingItem a:hover{background:#4EC0E1;color:#fff;}
+.userCenter #footer{background:#323232;}
+.userCenter #footer .navCon a,.userCenter #footer p{opacity:0.3;}
+
+/* 登录注册 */
+.maskBg{width:100%;height:100%;background:rgba(0,0,0,.3);}
+.lrTitle{margin-bottom:30px;}
+.loginBox{padding:20px 30px;height:310px;width:440px;background:#fff;top:50%;left:50%;margin-top:-175px;margin-left:-250px;}
+.inputWrap{height:72px;}
+.inputWrap input{width:330px;height:40px;padding-left:12px;border:1px solid #ccc;border-radius:6px;line-height:40px;font-size:16px;}
+.inputWrap input.errorTip{border-color:red;}
+.inputWrap .iptTitle{width:70px;text-align:right;}
+.loginForm .errMsgTip{width:350px;height:30px;font-size:16px;color:red;line-height:30px;padding-left:100px;}
+.loginForm .btnGroup{height:40px;padding-left:10px;margin-top:40px;}
+.loginForm .btnGroup .btn{display:block;width:80px;height:38px;background:#4EC0E1;line-height:38px;color:#fff;border-radius:6px;border:1px solid #4EC0E1;cursor:pointer;}
+.loginForm .btnGroup .btn.btnLogin{margin-left:140px;}
+.loginForm .btnGroup .btn2{cursor:pointer;color:#bbb;margin-top:20px;}
+.loginBox .close{width:44px;height:44px;cursor:pointer;top:0;background:url(../images/close.png) no-repeat center/11px;}
+.registerBox{width:540px;height:640px;margin-left:-300px;margin-top:-330px;}
+.registerBox .iptTitle{width:110px;height:40px;line-height:40px;}
+.registerBox .iptTitle i{font-style:normal;color:red;margin-right:10px;}
+.registerBox input{width:395px;}
+.registerBox .btnGroup{margin-top:30px;}
+.registerBox .errMsgTip{padding-left:130px;}
+.selectSexWrap{height:40px;line-height:40px;margin-left:20px;}
+.selectSexWrap label{cursor:pointer;margin-right:28px;}
+.selectSexWrap input{height:18px;width:18px;margin:12px 8px 0 0;}
+.loginForm .btnGroup .btnRegister{margin-left:165px;}
+.loginForm .btnGroup .btnCancel{border-color:#ccc;color:#656565;background:#fff;margin-left:30px;}
+
+/*修改滚动条样式*/ 
+::-webkit-scrollbar 
+{ 
+    width: 16px; 
+    height: 16px; 
+    background-color: rgba(0,0,0,0); 
+} 
+   
+/*定义滚动条轨道 内阴影+圆角*/ 
+::-webkit-scrollbar-track 
+{ 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0); 
+    border-radius: 10px; 
+    background:rgba(0,0,0,0); 
+} 
+   
+/*定义滑块 内阴影+圆角*/ 
+::-webkit-scrollbar-thumb 
+{ 
+    border-radius: 10px; 
+	border: 1px solid #ccc;
+	background: #f6f6f6;
+}

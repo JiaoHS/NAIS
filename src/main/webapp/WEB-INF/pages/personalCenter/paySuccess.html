@@ -1,0 +1,25 @@
+<!--右侧内容-->
+<link rel="stylesheet" href="../../../static/css/personalCenter/paySuccess.css">
+<div class="m-right">
+    <div class="ps-containerOutside">
+        <div class="ps-containerInside">
+            <div class="psc-success"></div>
+            <div class="psc-word">支付成功</div>
+            <div class="psc-line"></div>
+            <div class="psc-detailBox">
+                <div class="pscd-money">实付款：</div>
+                <span id="pscd-money">￥{{(OrderInfo.cashAmount/1000).toFixed(2)}}</span>
+                <div class="pscd-project">付款项目：</div>
+                <span id="pscd-project">{{OrderInfo.orderSource==100?"住宿费用定金":"暑校课程学费"}}</span>
+                <div class="pscd-time">付款时间：</div>
+                <span id="pscd-time">{{OrderInfo.paymentTime}}</span>
+                <a href="">
+                    <div class="pscd-prove">下载电子数据 >></div>
+                </a>
+                <a href="">
+                    <div class="pscd-back" ui-sref="personHome">回到个人中心 >></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

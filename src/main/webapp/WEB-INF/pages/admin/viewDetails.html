@@ -1,0 +1,194 @@
+<html lang="en">
+<script type="text/javascript" src="../../../static/caohao/js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../../static/caohao/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../../static/caohao/js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../../static/caohao/js/common.js"></script>
+<style type="text/css">
+    span{
+        text-align: left;
+        font-size: 18px;
+        line-height: 18px;
+        color: inherit;
+    }
+</style>
+<link rel="stylesheet" href="../../static/css/personalCenter/personalInfoShow.css">
+<html>
+<div class="ps-middle">
+<div class="ps-m-right">
+    <div class="promoCodeBox">
+        <div class="pc-words">推广码</div>
+        <div class="pc-code" id="pc-code"></div>
+    </div>
+    <!--基本信息开始-->
+    <div class="basicInfoBox">
+        <div class="bi-title">基本信息</div>
+        <div class="eNameBox">
+            <span class="eNameTitle">英文姓名：</span>
+            <span class="eName" id="eName"></span>
+        </div>
+        <div class="cNameBox">
+            <span class="cNameTitle">中文姓名：</span>
+            <span class="cname" id="cName"></span>
+        </div>
+
+        <div class="birthBox">
+            <span class="birthTitle">出生日期：</span>
+            <span class="birth" id="birthDate"></span>
+        </div>
+        <div class="sexBox">
+            <span class="sexTitle">性别：</span>
+            <span class="sex" id="sexValue"></span>
+        </div>
+
+        <div class="idNumBox">
+            <span class="idNumTitle">证件号：</span>
+            <span class="idNum" id="idCard"></span>
+        </div>
+        <div class="idTypeBox">
+            <span class="idTypeTitle">证件类型：</span>
+            <span class="idType" id="cardType"></span>
+        </div>
+
+        <div class="emailBox">
+            <span class="emailTitle">邮箱地址：</span>
+            <span class="emailNum" id="email"></span>
+        </div>
+        <div class="phoneNumBox">
+            <span class="phoneNumTitle">手机号码：</span>
+            <span class="phoneNumType" id="phoneNum"></span>
+        </div>
+    </div>
+
+    <!--学校信息开始-->
+    <div class="schoolInfoBox">
+        <div class="si-title">学校信息</div>
+        <div class="schoolBox">
+            <span class="schoolTitle">学校名称：</span>
+            <span class="school" id="schoolName"></span>
+        </div>
+
+        <div class="majorBox">
+            <span class="majorTitle">专业名称：</span>
+            <span class="major" id="majorName"></span>
+        </div>
+
+        <div class="schoolLocalBox">
+            <span class="schoolLocalTitle">学校地址(成绩单寄送地址)：</span>
+            <span class="schoolLocal" id="mailingAddress"></span>
+        </div>
+    </div>
+
+    <!--紧急联系人信息开始-->
+    <div class="emergencyContactInfoBox">
+        <div class="eci-title">紧急联系人信息</div>
+        <div class="eciSexBox">
+            <span class="eciSexTitle">性别：</span>
+            <span class="eciSex" id="emcSexValue"></span>
+        </div>
+        <div class="eciNameBox">
+            <span class="eciNameTitle">中文姓名：</span>
+            <span class="eciName" id="ecName"></span>
+        </div>
+
+        <div class="eciPhoneNumBox">
+            <span class="eciPhoneNumTitle">手机号码：</span>
+            <span class="eciPhoneNum" id="ecPhoneNum"></span>
+        </div>
+        <div class="eciRelationshapeBox">
+            <span class="eciRelationshapeTitle">称谓：</span>
+            <span class="eciRelationshape" id="ecRelationshape"></span>
+        </div>
+    </div>
+    <!--更多信息开始-->
+    <div class="moreInfoBox">
+        <div class="mi-title">更多信息</div>
+        <div class="homeLocalBox">
+            <span class="homeLocalTitle">家庭住址：</span>
+            <span class="homeLocal" id="homeLocal"></span>
+        </div>
+        <div class="wechatBox">
+            <span class="wechatTitle">微信：</span>
+            <span class="wechatNum" id="wechat"></span>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $(function(){
+        var reg = new RegExp("(^|&)"+ "id" +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        var id=unescape(r[2]);
+        var formData=new FormData();
+        formData.append("id",id);
+        $.ajax({
+            url:'/user/show',
+            type:"POST",
+            data:formData,
+            dataType: "text",
+            processData:false,
+            contentType:false,
+            //headers: {"Content-Type": "application/json;charset=utf-8"},
+            success:function(data){
+                var obj= jQuery.parseJSON(data);
+                var objSZ=JSON.stringify(obj.data);
+                //alert(objSZ);
+                //alert(obj.data.nameCn);
+
+                document.getElementById('eName').innerText=obj.data.nameEn;
+                document.getElementById('cName').innerText=obj.data.nameCn;
+                document.getElementById('birthDate').innerText=obj.data.birthDate;
+                if(obj.data.gender==0)
+                    document.getElementById('sexValue').innerText="女";
+                else
+                    document.getElementById('sexValue').innerText="男";
+                document.getElementById('idCard').innerText=obj.data.idCard;
+                document.getElementById('cardType').innerText=obj.data.cardtype;
+                document.getElementById('email').innerText=obj.data.email;
+                document.getElementById('phoneNum').innerText=obj.data.telCn;
+                document.getElementById('schoolName').innerText=obj.data.fromSchoolCn;
+                document.getElementById('majorName').innerText=obj.data.major;
+                document.getElementById('mailingAddress').innerText=obj.data.schooladdress;
+                if(obj.data.emcgender==0)
+                    document.getElementById('emcSexValue').innerText="女";
+                else
+                    document.getElementById('emcSexValue').innerText="男";
+                document.getElementById('ecName').innerText=obj.data.emcUser;
+                document.getElementById('ecPhoneNum').innerText=obj.data.emcTel;
+                document.getElementById('ecRelationshape').innerText=obj.data.emcrole;
+                document.getElementById('homeLocal').innerText=obj.data.homeaddress;
+                document.getElementById('wechat').innerText=obj.data.wechat;
+                setCouponId(obj.data.couponCode);
+            },
+            error:function (data) {
+                alert('学生信息获取失败');
+            }
+        })
+    });
+
+    function setCouponId(id){
+        var formDataQ=new FormData();
+        formDataQ.append("id",id);
+        $.ajax({
+            url:'/coupon/getCodeById',
+            type:"POST",
+            data:formDataQ,
+            dataType: "text",
+            processData:false,
+            contentType:false,
+            //headers: {"Content-Type": "application/json;charset=utf-8"},
+            success:function(data){
+                var obj= jQuery.parseJSON(data);
+                var objSZ=JSON.stringify(obj.data);
+                //alert(objSZ);
+                //alert(obj.data.nameCn);
+                //alert(obj);
+                //alert(obj.data);
+                document.getElementById('pc-code').innerText=obj.data;
+            },
+            error:function (data) {
+                alert('学生推广码获取失败');
+            }
+        })
+    }
+</script>
+</html>

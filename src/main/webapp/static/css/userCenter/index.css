@@ -1,0 +1,123 @@
+.title{
+	height: 30px;
+	padding:12px 0 0;
+	color: #656565;
+	margin-bottom: 18px;
+}
+.title::after{
+	width: 23px;
+	height: 6px;
+	background: #4EC0E1;
+	top:0;
+	left:-12px;
+	position: absolute;
+	content: "";
+}
+.process{
+	margin-bottom: 70px;
+}
+.processDetail{
+	width: 869px;
+	height: 142px;
+	margin:0 auto;
+	background:url(../../images/userCenter/中心1灰.png) no-repeat left center/100%;
+}
+.processNow{
+	width: 25%;
+	height: 126px;
+	background: #fff;
+	padding-top: 7px;
+	overflow: hidden;
+}
+.processNow.step2{
+	width: 55%;
+}
+.processNow.step3{
+	width: 75%;
+}
+.processNow.step4{
+	width: 100%;
+}
+.changeLessonBtn{
+	background: #75D7F3;
+	border-radius: 6px;
+	display: block;
+	width: 104px;
+	height: 32px;
+	line-height: 32px;
+	top: 20px;
+}
+.noLessons{
+	color: #989898;
+}
+.lessonsList{
+	padding: 15px 0 48px;
+	border-bottom: 2px dashed #F4F4F4;
+	margin-bottom: 35px;
+}
+.lessonsList li{
+	width: 198px;
+	height: 250px;
+	background: #fff;
+	box-shadow: 0 5px 80px -25px rgba(0,0,0,0.5);
+	margin:0px 9px;
+	padding:14px 8px 0;
+}
+.lessonsList li.bj{
+	background: #fff url(../../images/bj_bg.png) no-repeat 64px 216px/150px;
+}
+.lessonsList li.sh{
+	background: #fff url(../../images/sh_bg2.png) no-repeat 64px 200px/150px;
+}
+.lessonsList li img{
+	width: 100%;
+	height: 161px;
+}
+.lessonMsg{
+	margin-top: 6px;
+}
+.lessonMsg .msgDetail{
+	width: 166px;
+	color: #656565;
+}
+.lessonMsg .msgDetail .date{
+	margin:1px 0 10px;
+}
+.lessonMsg ._addr::after{
+	content: "";
+	position: absolute;
+	bottom:-6px;
+	right:0;
+	width: 12px;
+	height: 3px;
+	background: #4EC0E1;
+}
+.lessonDetail .thead,.lessonDetail .tbody{
+	border-bottom: 1px solid #f4f4f4;
+}
+.lessonDetail li{
+	height: 47px;
+	line-height: 47px;
+	width: 80px;
+}
+.lessonDetail .code,.lessonDetail .time{
+	width: 150px;
+}
+.lessonDetail .name,.lessonDetail .teacher{
+	width: 240px;
+}
+.lessonDetail .del{
+	width: 50px;
+}
+.lessonDetail .del i{
+	display: inline-block;
+	width: 47px;
+	height: 47px;
+	background: url(../../images/userCenter/delete.png) no-repeat center/16px;
+	cursor: pointer;
+}
+.tBody li{
+	height: 47px;
+	line-height: 47px;
+	color: #656565;
+}

@@ -1,0 +1,118 @@
+<link rel="stylesheet" type="text/css" href="../../static/css/global.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/index.css"/>
+<div id="banner" class="banner rel">
+    <ul class="bannerCon abs">
+        <li class="abs"><a href="javascript:;"><img src="../../static/images/banner1.png" alt=""></a></li>
+        <li class="abs"><a href="javascript:;"><img src="../../static/images/banner2.png" alt=""></a></li>
+        <li class="abs"><a href="javascript:;"><img src="../../static/images/banner3.png" alt=""></a></li>
+        <li class="abs"><a href="javascript:;"><img src="../../static/images/banner4.png" alt=""></a></li>
+    </ul>
+    <div class="handle abs">
+        <ol class="handleCon w1280">
+            <li class="tran"></li>
+            <li class="tran"></li>
+            <li class="tran"></li>
+            <li class="tran"></li>
+        </ol>
+    </div>
+    <div class="prev tran abs"></div>
+    <div class="next tran abs"></div>
+</div>
+<div class="infoCon">
+    <div class="item school w1280">
+        <div class="title clearfix">
+            <i class="fl leftLine"></i>
+            <i class="fl name hzgb">校区介绍</i>
+            <i class="issn broadway fr">ISSN</i>
+            <i class="fr bottomLine"></i>
+        </div>
+        <div class="info" id="campusInfo">
+            <!--<div class="infoItem bj fl">-->
+                <!--<img src="../../static/images/bj.png" alt="">-->
+                <!--<div class="infoMsg">-->
+                    <!--<div class="fl tl" id="bj">-->
+                        <!--&lt;!&ndash;<p class="name">{{schoolBoxList[0].campusName}}</p>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<p class="date">{{schoolBoxList[0].seasonStart.Format("yyyy.mm.dd")}}-{{schoolBoxList[0].seasonEnd.Format("yyyy.mm.dd")}}</p>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<div class="fr tr addr">-->
+                        <!--<div class="hzgb">北京</div>-->
+                        <!--<i class="line"></i>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="infoItem sh fr">-->
+                <!--<img src="../../static/images/sh.png" alt="">-->
+                <!--<div class="infoMsg">-->
+                    <!--<div class="fr tr" id="sh">-->
+                        <!--<p class="name">{{schoolBoxList[0].campusName}}</p>-->
+                        <!--<p class="date">{{schoolBoxList[0].seasonStart.sub(0,10)}}-{{schoolBoxList[0].seasonEnd.sub(0,10)}}</p>-->
+                    <!--</div>-->
+                    <!--<div class="fl tl addr">-->
+                        <!--<div class="hzgb">上海</div>-->
+                        <!--<i class="line"></i>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="item teacher">
+        <div class="w1280">
+            <div class="title clearfix">
+                <i class="fl leftLine"></i>
+                <i class="fl name hzgb">师资团队</i>
+                <p class="fl intro">百万名师教你学</p>
+                <i class="issn broadway fr">ISSN</i>
+                <i class="fr bottomLine"></i>
+            </div>
+            <div class="info clearfix">
+                <div class="infoItem tran fl f16 tc rel" ng-repeat="teacher in professorBoxList">
+                    <div class="teacherHead rel color65">
+                        <div class="con tran abs">
+                            <img ng-src="{{getApiUrl()+teacher.photo}}" class="abs" alt="">
+                        </div>
+                    </div>
+                    <div class="abs introMsg">
+                        <p class="name broadway tran">{{teacher.professorName}}</p>
+                        <p class="schoolName">{{teacher.fromSchool}}</p>
+                    </div>
+                    <!--<p class="addr hzgb">昆西</p>-->
+                    <img class="schoolImg tran abs" src="../../static/images/schoolImg.png" alt="">
+                    <i class="potin baseBg abs"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item flow w1280">
+        <div class="title clearfix">
+            <i class="fl leftLine"></i>
+            <i class="fl name hzgb">流程示意</i>
+            <i class="issn broadway fr">ISSN</i>
+            <i class="fr bottomLine"></i>
+        </div>
+        <div class="info tc">
+            <ol class="infoItem">
+                <li class="fl rel">
+                    <img src="../../static/images/学分咨询.png" alt="">
+                    <p class="f24 color65 abs">学分咨询</p>
+                </li>
+                <li class="fl"><img src="../../static/images/flowArrow.png" alt=""></li>
+                <li class="fl rel">
+                    <img src="../../static/images/在线报名.png" alt="">
+                    <p class="f24 color65 abs">在线报名</p>
+                </li>
+                <li class="fl"><img src="../../static/images/flowArrow.png" alt=""></li>
+                <li class="fl rel">
+                    <img src="../../static/images/校区上课.png" alt="">
+                    <p class="f24 color65 abs">校区上课</p>
+                </li>
+                <li class="fl"><img src="../../static/images/flowArrow.png" alt=""></li>
+                <li class="fl rel">
+                    <img src="../../static/images/学分转换.png" alt="">
+                    <p class="f24 color65 abs">学分转换</p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../static/js/lib/index.js"></script>

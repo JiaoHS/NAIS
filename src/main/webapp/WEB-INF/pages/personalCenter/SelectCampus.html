@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="../../../static/css/personalCenter/educationalCenter/teacherSystem-school.css">
+<div class="mr-title">
+    <span>Select the campus</span>
+</div>
+<div class="mr-ChooseBox">
+    <div class="mrcb-campusBox" ng-repeat="school in schoolBoxList"  ng-click="SchoolDetail(school.id)">
+        <img src="../../static/images/personal/bj.png" alt="" />
+        <div class="mrcb-inside">
+            <span class="mrcb-campus">{{school.campusName}}</span>
+        </div>
+    </div>
+</div>

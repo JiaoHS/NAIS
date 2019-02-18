@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="easyui-panel" title="score" data-options="width:'100%',minHeight:1000,noheader:true,border:false" style="padding:10px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <!--<div data-options="region:'west',split:false" style="width:250px;padding:5px">-->
+            <!--<ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/content/category/list',animate: true,method : 'GET'">-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div data-options="region:'center'" style="padding:5px">
+            <div>
+                <label for="user_En"> 英文名： </label><input id="user_En" type="text" style="line-height:26px;border:1px solid #ccc"/>
+            </div>
+            <table class="easyui-datagrid" id="contentList_user" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/user/find',queryParams:{page:1,rows:20}">
+                <thead>
+                <tr>
+                    <th data-options="field:'id',width:30">ID</th>
+                    <th data-options="field:'email',width:180">邮箱</th>
+                    <th data-options="field:'password',width:100">密码</th>
+                    <th data-options="field:'nameCn',width:160">中文名</th>
+                    <th data-options="field:'nameEn',width:160">英文名</th>
+                    <th data-options="field:'createTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">创建日期</th>
+                    <th data-options="field:'updateTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">更新日期</th>
+                    <th data-options="field:'CaoZuo1',width:150,align:'center',formatter:rowformater,onClickRow:GetInfo1">
+                        操作
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    $(function(){
+        var tree = $("#contentCategoryTree");
+        var datagrid = $("#contentList_user");
+        tree.tree({
+            onClick : function(node){
+                if(tree.tree("isLeaf",node.target)){
+                    datagrid.datagrid('reload', {
+                        categoryId :node.id
+                    });
+                }
+            }
+        });
+    });
+
+    var contentListToolbar = [{
+        text:'查询',
+        iconCls:'icon-search',
+        handler:function () {
+            $('#contentList_user').datagrid('reload',{
+                nameEn:$("#user_En").val()
+            });
+        }
+    }
+    ];
+
+    function rowformater(value, row, index) {
+        // console.log(row.paymentSeq);
+        return '<a href="javascript:void(0)" onclick="GetInfo1(' + index + ')">查看详情</a>' + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+        '<a href="javascript:void(0)" onclick="GetGrade(' + row.id + ')">查看成绩</a>';
+    }
+
+    //查看学生详情
+    function GetInfo1(index) {
+        $.messager.alert('提示','学生详情!');
+    }
+    //查看学生成绩
+    function GetGrade(index){
+        $.messager.alert('提示','学生成绩!');
+    }
+
+
+
+</script>
+</html>

@@ -1,0 +1,124 @@
+
+<!--导航图-->
+<link rel="stylesheet" href="../../../static/css/applicationInformation/tuitionInformation.css">
+<!--<div class="ai-bgBox">-->
+    <!--<div class="ai-bgWord">-->
+        <!--<span>学费信息</span><br/>-->
+        <!--<span style="font-size: 48px">Tuition information</span>-->
+    <!--</div>-->
+<!--</div>-->
+<!--右侧主体内容部分-->
+<div class="ai-right">
+    <div class="ai-rightIn">
+        <div class="tiDeriction">申请信息>学费信息</div>
+        <table>
+            <tr>
+                <th width="16.666%">缴费类别</th>
+                <th width="16.666%">提前缴费I</th>
+                <th width="16.666%">提前缴费II</th>
+                <th width="16.666%">提前缴费III</th>
+                <th width="16.666%">提前缴费Ⅳ</th>
+                <th width="16.666%">提前缴费Ⅴ</th>
+            </tr>
+            <tr>
+                <td>截止时间</td>
+                <td>18.12.01</td>
+                <td>19.01.01</td>
+                <td>19.02.01</td>
+                <td>19.03.01</td>
+                <td>19.04.01</td>
+            </tr>
+            <tr>
+                <td>优惠活动</td>
+                <td>最低学费</td>
+                <td>￥1000住宿礼包</td>
+                <td>￥100礼卡</td>
+                <td>￥50礼卡</td>
+                <td>无</td>
+            </tr>
+            <tr>
+                <td>小于等于 <br/> 两门课</td>
+                <td>$3,000 <br/> ￥20,000</td>
+                <td>$3,400 <br/> ￥23,000</td>
+                <td>$3,500 <br/> ￥23,700</td>
+                <td>$3,600 <br/> ￥24,400</td>
+                <td>$3,700 <br/> ￥25,100</td>
+            </tr>
+            <tr>
+                <td>三门课</td>
+                <td>$3,500 <br/> ￥23,500</td>
+                <td>$3,900 <br/> ￥26,500</td>
+                <td>$4,000 <br/> ￥27,200</td>
+                <td>$4,100 <br/> ￥27,900</td>
+                <td>$4,200  <br/> ￥28,600</td>
+            </tr>
+            <tr>
+                <td>四门课</td>
+                <td>$4,000 <br/> ￥27,000</td>
+                <td>$4,400 <br/> ￥30,000</td>
+                <td>$4,500 <br/> ￥30,700</td>
+                <td>$4,600 <br/> ￥31,400</td>
+                <td>$4,700 <br/> ￥32,100</td>
+            </tr>
+        </table>
+        <div class="ti-r-contentBox">
+            <span style="color:#fe4545">*</span>
+            <span>
+                    以上为上海校区，北京校区，杭州校区，成都校区的学费标准。该四个校区均为国内对应大学教务处成绩单。<br/>
+                </span>
+            <span style="color:#fe4545">*</span>
+            <span>
+                    西安校区学费在此基础上额外加（2000人民币/300美元），均在网上支付中体现。由于西安校区的合作院校是University of North Georgia, 上课地点为长安大学。成绩单是由美国大学教务处颁发邮寄。固产生额外费用。<br/>
+                </span>
+            <span style="color:#fe4545">*</span>
+            <span>
+                    日本校区学费在此基础上额外加0.5倍学费，均在网上支付中体现。由于日本校区的合作院校是立命馆大学（Ritsumeikan University）名额有限，师资用地维护管理成本远高于中国大陆地区。且成绩单是由日本立命馆大学教务处颁发邮寄。固产生额外费用。
+NAIS的学费以美金为准。以上人民币数额仅供参考，汇率将以6.8人民币兑现美元为标准。如有不明，请联系NAIS或者每个大学的团队询问。NAIS保留修改汇率的权利。<br/>
+                </span>
+            <span style="color:#fe4545;">
+                    注：NAIS官方网站的学费信息将会在2018年1月1号后在所有北美大学同步。在不同时期，各校园团队会有不同的优惠活动，请学生和学生家长联系各校负责人咨询正在进行的优惠活动。<br/>
+                </span>
+        </div>
+    </div>
+</div>
+<!--固定的侧边栏-->
+<div class="slidebar">
+    <div class="slidebar-top">
+        <div class="st-pic"></div>
+    </div>
+    <div class="slidebar-bottom">
+        <div class="sb-pic"></div>
+    </div>
+</div>
+<div class="big-ewm"></div>
+<!------------------------------------------------------------------------------------------------------------------------>
+
+<script>
+
+    window.onscroll=function(){
+        if ($(document).scrollTop() >410)//这个410是距离顶部高度
+        {
+            $(".ai-left").addClass('ai-leftFixed');//
+        }else{
+            $(".ai-left").removeClass('ai-leftFixed');
+        }
+    }
+
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+            function () {
+                $(".big-ewm").css("right","65px")
+            }
+    );
+    $(".slidebar-top").mouseout(
+            function () {
+                $(".big-ewm").css("right","-165px")
+            }
+    )
+    //一键返回顶部
+    var toTop=document.querySelector(".slidebar-bottom");
+    toTop.onclick=function(){
+        obj=document.body.scrollTop==0?document.documentElement:document.body;
+        animate(obj,{scrollTop:0},100)
+    };
+</script>

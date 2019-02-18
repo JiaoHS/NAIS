@@ -1,0 +1,201 @@
+.banner{
+	width: 100%;
+	height: 406px;
+	background: url(../images/schoolIntro/顶部banner.png) no-repeat center;
+}
+.content .tab {
+	width: 490px;
+	margin: 40px auto;
+}
+.content .tab li{
+	cursor: pointer;
+}
+.content .tab li::after{
+	content: "";
+	position: absolute;
+	bottom:-10px;
+	left:50%;
+	width: 0;
+	height: 5px;
+	background: #4EC0E1;
+	transition:all 0.3s;-webkit-transition:all 0.3s;
+}
+.content .tab li.select::after,.content .tab li:hover::after{
+	width: 140px;
+	margin-left:-70px;
+}
+.content .infoCon{
+	margin-top:40px;
+	min-height: 300px;
+	
+}
+.content .infoCon .smallBanner{
+	width: 100%;
+	height: 360px;
+	padding-top:35px;
+	background: url(../images/schoolIntro/北京banner.png) no-repeat center;
+}
+.content .infoCon .smallBanner.sh{
+	background: url(../images/schoolIntro/南京banner.png) no-repeat center;
+}
+.content .infoCon .smallBanner .infoMsg{
+	width: 430px;
+	margin-left: 500px;
+	margin-bottom:10px;
+}
+
+.infoDetail{
+	padding:40px 0;
+	background: #F4F4F4;
+}
+.detailTab{
+	width: 680px;
+	height: 60px;
+	margin:0 auto;
+	text-align: center;
+}
+.detailTab li{
+	width: 170px;
+	line-height: 60px;
+	cursor: pointer;
+}
+.detailTab li.select {
+	background: #fff;
+}
+.detailCon .detailItem{
+	background: #fff;
+	padding:50px 40px 1px;
+	display: none;
+}
+.detailCon .lessons{
+	padding:50px 0px 0px;
+}
+.durning{
+	padding-left:40px;
+}
+.detailCon .detailItem.cur{
+	display: block;
+}
+.detailCon .detailItem p{
+	line-height: 30px;
+	margin-bottom:20px;
+}
+.lessonInfo{
+	margin:40px 0;
+}
+.lessonInfo li{
+	width: 25%;
+	text-align: center;
+	color:#323232;
+}
+.lessonList::after{
+	content: "";
+	position: absolute;
+	top:0;
+	left:0px;
+	height: 2px;
+	width: 1280px;
+	background:#eee;
+}
+.listItem {
+	height: 100%;
+	padding-left: 320px;
+}
+.listItem .list{
+	width: 319px;
+	height: 100%;
+	border-right: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+.listItem .time{
+	top:0;
+	left:0;
+	height: 100%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+.listItem .outline{
+	border-right: none;
+	width: 320px;
+}
+.listItem .listSon{
+	width: 100%;
+	height: 116px;
+	border-bottom: 1px solid #eee;
+}
+.listItem .listSon:last-child{
+	height: 116px;
+	border-bottom: none;
+}
+.listItem .listSon .nameMsg{
+	width: 260px;
+	margin:0 auto;
+}
+.listItem .name .listSon,.listItem .teacher .listSon{
+	height: 90px;
+	padding-top: 26px;
+}
+.timeCon{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	top:50%;
+	font-size: 24px;
+	margin-top:-20px;
+	text-align: center;
+}
+.outline .listSon{
+	line-height: 140px;
+}
+.download{
+	display: inline-block;
+	width: 23px;
+	height: 28px;
+	background: url(../images/schoolIntro/download.png) no-repeat 0 0/100%;
+}
+
+.teacherInfo{
+	width: 220px;
+	height: 348px;
+	background: #FBFBFB;
+	box-shadow: 0 0 32px 0 rgba(108,108,108,0.50);
+	border-radius: 9px;
+	margin:0 32px 60px;
+	padding:12px 6px 0;
+}
+.teacherInfo .teacherHeader{
+	width: 100%;
+	height: 194px;
+}
+.teacherInfo .teacherHeader img{
+	width: 100%;
+	height: 100%;
+}
+.detailCon .teacherInfo p{
+	margin: 8px auto 0;
+	line-height: 20px;
+	height: 20px;
+}
+.detailCon .teacherInfo p.schoolName{
+	margin-top: 2px;
+}
+.hasLesson {
+	margin-top: 10px;
+}
+.hasLesson ul{
+	width: 130px;
+    height: 84px;
+    overflow-y: hidden;
+}
+.teacherInfo:hover .hasLesson ul{
+	overflow-y: auto;
+}
+.hasLesson .title{
+	width: 60px;
+	margin-right: 20px;
+}
+.hasLesson li{
+	height: 28px;
+	line-height: 28px;
+}

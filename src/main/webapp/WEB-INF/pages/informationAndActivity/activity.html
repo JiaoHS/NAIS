@@ -1,0 +1,177 @@
+<!--副导航开始-->
+<link rel="stylesheet" href="../../../static/css/informationAndActivity/activity.css">
+<div class="c-schoolsBox">
+    <div class="c-schools">
+        <span ng-repeat="j in schoolBoxList" class="{{j.id==schoolBoxList[0].id?'Selected':'unSelected'}}"
+              ng-click="SelectCampus(j.id,j.campusName)">{{j.campusName}}</span>
+    </div>
+</div>
+<!--近期活动开始-->
+<div class="recentActivityTitle">
+    <div class="rat-line"></div>
+    <div class="rat-word">近期活动</div>
+</div>
+<div class="rat-pic">
+    <img src="../../../static/images/informationAndActivity/ybanner.jpg" alt=""/>
+</div>
+<!--精彩图集开始-->
+<div class="activityPicTitle">
+    <div class="apt-line"></div>
+    <div class="apt-word">精彩图集</div>
+</div>
+<div class="apt-box">
+    <div class="apt-con">
+        <img src="../../../static/images/informationAndActivity/y1.jpg" alt=""/>
+        <div class="apt-shade">
+            <div class="apts-words">
+                <span class="apts-time">拍摄于2017.06.01</span>
+                <span class="apts-place">西安校区开学典礼</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="apt-con">
+        <img src="../../../static/images/informationAndActivity/y2.jpg" alt=""/>
+        <div class="apt-shade">
+            <div class="apts-words">
+                <span class="apts-time">拍摄于2017.06.01</span>
+                <span class="apts-place">西安校区开学典礼</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="apt-con">
+        <img src="../../../static/images/informationAndActivity/y2q.jpg" alt=""/>
+        <div class="apt-shade">
+            <div class="apts-words">
+                <span class="apts-time">拍摄于2017.06.01</span>
+                <span class="apts-place">西安校区开学典礼</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="apt-con">
+        <img src="../../../static/images/informationAndActivity/y3.jpg" alt=""/>
+        <div class="apt-shade">
+            <div class="apts-words">
+                <span class="apts-time">拍摄于2017.06.01</span>
+                <span class="apts-place">西安校区开学典礼</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="apt-con">
+        <img src="../../../static/images/informationAndActivity/y4.jpg" alt=""/>
+        <div class="apt-shade">
+            <div class="apts-words">
+                <span class="apts-time">拍摄于2017.06.01</span>
+                <span class="apts-place">西安校区开学典礼</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="apt-con">
+        <img src="../../../static/images/informationAndActivity/y5.jpg" alt=""/>
+        <div class="apt-shade">
+            <div class="apts-words">
+                <span class="apts-time">拍摄于2017.06.01</span>
+                <span class="apts-place">西安校区开学典礼</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="rat-more">
+    <div class="ratm-line"></div>
+    <div class="ratm-btn">
+        <a href="">更多+</a>
+    </div>
+</div>
+<div class="bannerShade">
+</div>
+<!--固定的侧边栏-->
+<div class="slidebar">
+    <div class="slidebar-top">
+        <div class="st-pic"></div>
+    </div>
+    <div class="slidebar-bottom">
+        <div class="sb-pic"></div>
+    </div>
+</div>
+<div class="big-ewm"></div>
+<!--点击图集详情-->
+<div class="pic-detail-shade">
+    <div id="playimages" class="play">
+        <ul class="big_pic">
+            <div class="p-close"></div>
+            <div class="prev"></div>
+            <div class="next"></div>
+
+            <a class="mark_left" href="javascript:;"></a>
+            <a class="mark_right" href="javascript:;"></a>
+            <li style="z-index:1;"><img src="../../../static/images/informationAndActivity/c1.jpg" style="background-position: center;background-size: cover" /></li>
+            <li><img src="../../../static/images/informationAndActivity/c2.jpg" /></li>
+            <li><img src="../../../static/images/informationAndActivity/c3.jpg" /></li>
+            <li><img src="../../../static/images/informationAndActivity/c4.jpg" /></li>
+            <li><img src="../../../static/images/informationAndActivity/c5.jpg" /></li>
+            <li><img src="../../../static/images/informationAndActivity/c6.jpg" /></li>
+            <!--<li><img src="../images/informationAndActivity/apt1.png" /></li>-->
+        </ul>
+        <div id="small_pic" class="small_pic">
+            <ul style="width:400px;">
+                <li style=" filter: alpha(opacity:100); opacity:1;"><img src="../../../static/images/informationAndActivity/c1.jpg" /></li>
+                <li><img src="../../../static/images/informationAndActivity/c2.jpg" /></li>
+                <li><img src="../../../static/images/informationAndActivity/c3.jpg" /></li>
+                <li><img src="../../../static/images/informationAndActivity/c4.jpg" /></li>
+                <li><img src="../../../static/images/informationAndActivity/c5.jpg" /></li>
+                <li><img src="../../../static/images/informationAndActivity/c6.jpg" /></li>
+                <!--<li><img src="../images/informationAndActivity/apt1.png" /></li>-->
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script>
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+        function () {
+            $(".big-ewm").css("right","65px")
+        }
+    );
+    $(".slidebar-top").mouseout(
+        function () {
+            $(".big-ewm").css("right","-165px")
+        }
+    )
+    //一键返回顶部
+    var toTop=document.querySelector(".slidebar-bottom");
+    toTop.onclick=function(){
+        obj=document.body.scrollTop==0?document.documentElement:document.body;
+        animate(obj,{scrollTop:0},100)
+    };
+
+    //精彩图集效果
+    $(".apt-con").each(
+        function () {
+            $(this).mouseover(
+                function() {
+                    $(this).children(".apt-shade").css("display","block")
+                })
+            $(this).mouseout(
+                function() {
+                    $(this).children(".apt-shade").css("display","none")
+                })
+        }
+    )
+    //图集点击出现轮播图
+    $(".apt-con").click(function () {
+//        var w = document.documentElement.clientWidth || document.body.clientWidth;
+//        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        $(".pic-detail-shade").css({"height":"100%"});
+    })
+    $(".p-close").click(function () {
+        $(".pic-detail-shade").css("height","0");
+    })
+</script>
+<script src="../../../static/js/lib/move.js"></script>
+
+

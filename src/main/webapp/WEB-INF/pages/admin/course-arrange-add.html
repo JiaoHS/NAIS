@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="../../../static/caohao/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script src="../../../static/caohao/js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+<div style="padding:10px 10px 10px 10px">
+    <form id="userForm" name="userForm2" enctype="multipart/form-data" method="post">
+        <table cellpadding="5">
+            <tr>
+                <td>上传大纲:</td>
+                <td>
+                    <input class="easyui-filebox" data-options="prompt:'浏览'" id="contractFile" name="uploadFile"
+                           style="width:155px">
+                </td>
+                <td>
+                    <input type="button" class="icon-save" onclick="loadFile();" value="上传文件">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <form id="contentAddForm_yr" class="itemForm" method="post">
+        <input type="hidden" name="categoryId"/>
+        <input id="fileUrl" type="hidden" name="courseAttach"/>
+        <table cellpadding="5">
+            <tr>
+                <td>课程名称:</td>
+                <td><input class="easyui-textbox" type="text" name="courseName" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+            <tr>
+                <td>课程CODE:</td>
+                <td><input class="easyui-textbox" type="text" name="courseCode" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+            <tr>
+                <td>选择校区:</td>
+                <td><input id="selectCampus" class="easyui-combobox" data-options="required:true"  name="schoolNameCn" style="width: 280px;"></input></td>
+            </tr>
+            <tr>
+                <td>上课时间:</td>
+                <td><input class="easyui-datetimebox" type="text"  data-options="required:true" name="startTime" style="width: 280px;"></input></td>
+            </tr>
+            <tr>
+                <td>下课时间:</td>
+                <td><input class="easyui-datetimebox" type="text" data-options="required:true" name="endTime" style="width: 280px;"></input></td>
+            </tr>
+            <tr>
+                <td>选择教授:</td>
+                <td><input id="selectProfessor" type="text" data-options="required:true" name="professorNameCn" style="width: 280px;"></input></td>
+            </tr>
+            <!--<tr>-->
+                <!--<td>上传大纲:</td>-->
+                <!--<td>-->
+                    <!--<input type="file" id="fuImportMultipleShipmentStatus" name="fuImportMultipleShipmentStatus" />-->
+                <!--</td>-->
+                <!--<td>-->
+                    <!--<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="ImportShipmentStatusList();"-->
+                       <!--style="margin-right: 8px;">Save</a>-->
+                <!--</td>-->
+                <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type="hidden" name="courseAttach" id="courseAttach"/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a href="javascript:void(0)" class="easyui-linkbutton oneDocUpload">大纲上传</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</td>&ndash;&gt;-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>图片2:</td>-->
+            <!--<td>-->
+            <!--<input type="hidden" name="pic2" />-->
+            <!--<a href="javascript:void(0)" class="easyui-linkbutton onePicUpload">图片上传</a>-->
+            <!--</td>-->
+            <!--</tr>-->
+        </table>
+    </form>
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentAddPage.submitForm()">提交</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentAddPage.clearForm()">重置</a>
+    </div>
+</div>
+<script>
+
+    function loadFile() {
+        $("#userForm").form('submit', {
+            type: "post",  //提交方式
+            url: "/upload/file", //请求url
+            success: function (data) { //提交成功的回调函数
+                var data = JSON.parse(data);
+                //var json = JSON.stringify(data);
+                if (data.code == 0) {
+                    $('#fileUrl').val(data.data);
+                    alert(data.info);
+                } else {
+                    alert(data.info);
+                }
+
+            }
+        });
+    }
+
+    $('#selectCampus').combobox({
+        url:'/campusCourse/show/listCampus',
+        valueField:'id',
+        textField:'name'
+    });
+
+    $('#selectProfessor').combobox({
+        url:'/campusCourse/show/listProfessor',
+        valueField:'id',
+        textField:'name'
+    });
+
+    var contentAddEditor ;
+    $(function(){
+//        contentAddEditor = TT.createEditor("#contentAddForm_hh [name=description]");
+        TT.initTwoPicUpload();
+        // $("#contentAddForm [name=categoryId]").val($("#contentCategoryTree").tree("getSelected").id);
+    });
+
+    var contentAddPage  = {
+        submitForm : function (){
+            if(!$('#contentAddForm_yr').form('validate')){
+                $.messager.alert('提示','表单还未填写完成!');
+                return ;
+            }
+            $.post("/campusCourse/add",$("#contentAddForm_yr").serialize(), function(data){
+                if(data.code == 0){
+                    $.messager.alert('提示','新增内容成功!');
+                    $("#contentList_yr").datagrid("reload");
+                    TT.closeCurrentWindow();
+                }
+            });
+        },
+        clearForm : function(){
+            $('#contentAddForm_yr').form('reset');
+//            contentAddEditor.html('');
+        }
+    };
+
+
+</script>
+
+</html>

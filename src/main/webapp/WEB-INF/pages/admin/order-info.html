@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="../../../static/caohao/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" charset="utf-8"
+        src="../../../static/caohao/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<div style="padding:10px 10px 10px 10px">
+    <table cellpadding="5">
+        <input type="hidden" name="orderId" id="orderId"/>
+        <input type="hidden" name="downUrl" id="downUrl"/>
+        <tr aria-rowspan="3">
+            <td>订单编号:</td>
+            <!--<input  type="text" id="paymentSeq" name="paymentSeq"  style="width: 280px;">-->
+            <td><input readonly class="easyui-textbox" type="text" id="Seq" style="width: 280px;"></input></td>
+            <!--<td><div id="paymentSeq" name="paymentSeq" style="width: 280px;"></div></input></td>-->
+            <td>支付渠道:</td>
+            <td><input readonly class="easyui-textbox" type="text" id="paymentChannel"
+                       data-options="formatter:formatChannel" style="width: 280px;"></input>
+            </td>
+            <td>应收金额:</td>
+            <td><input readonly id="totalAmount" class="easyui-textbox" type="text" id="totalAmount"
+                       style="width: 280px;"></input></td>
+        </tr>
+        <tr aria-rowspan="3">
+            <td>订单来源:</td>
+            <td><input readonly class="easyui-textbox" type="text" id="orderSource"
+                       data-options="required:true,formatter:formatOrderSource" style="width: 280px;"></input></td>
+            <td>所属校区:</td>
+            <td><input readonly class="easyui-textbox" id="camId" data-options="formatter:formatCampus"
+                       style="width: 280px;"></input>
+            </td>
+            <td>实收金额:</td>
+            <td><input readonly id="cashAmount" class="easyui-textbox" type="text" id="cashAmount"
+                       style="width: 280px;"></input></td>
+        </tr>
+        <tr aria-rowspan="3">
+            <td>创建人:</td>
+            <td><input readonly class="easyui-textbox" type="text" id="createdUser" style="width: 280px;"></input></td>
+            <td>订单状态:</td>
+            <td><input class="easyui-textbox" type="text" id="orderStatus" data-options="formatter:formatOrderStatus"
+                       style="width: 280px;"></input></td>
+            <td>优惠金额:</td>
+            <td><input readonly id="discountAmount" class="easyui-textbox" type="text" id="discountAmount"
+                       style="width: 280px;"></input></td>
+        </tr>
+        <tr aria-rowspan="3">
+            <td>创建时间:</td>
+            <td><input readonly id="createTime" class="easyui-textbox" type="text" id="createTime"
+                       style="width: 280px;"></input></td>
+
+            <td>付款时间:</td>
+            <td><input readonly id="paymentTime" class="easyui-textbox" type="text" id="paymentTime"
+                       style="width: 280px;"></input></td>
+
+            <td>付款成功时间:</td>
+            <td><input readonly id="paymentSuccessTime" class="easyui-textbox" type="text" id="paymentSuccessTime"
+                       style="width: 280px;"></input></td>
+        </tr>
+
+    </table>
+    <table>
+        <tr id="courseDetail" style="display:none">
+            <td>选课详情:
+            </td>
+            <td id="courseDetail2">
+                <table cellpadding="3" style="width: 420px;float: left" border="1" frame="void" class="border"
+                       id="courseList">
+                </table>
+            </td>
+
+        </tr>
+
+    </table>
+    <table>
+        <tr id="hotelDetail" style="display:none">
+            <td>入住时间:</td>
+            <td><input readonly class="easyui-textbox" id="timeStart"
+                       data-options="formatter:formatCampus"
+                       style="width: 280px;"></input>
+            </td>
+            <td>离开时间:</td>
+            <td><input readonly class="easyui-textbox" id="timeEnd"
+                       data-options="formatter:formatCampus"
+                       style="width: 280px;"></input>
+            </td>
+            <td>室友:</td>
+            <td><input readonly class="easyui-textbox" id="roomnumber"
+                       data-options="formatter:formatCampus"
+                       style="width: 280px;"></input>
+            </td>
+            <td>房间类型:</td>
+            <td><input readonly class="easyui-textbox" id="roomtype"
+                       data-options="formatter:formatCampus"
+                       style="width: 280px;"></input>
+            </td>
+        </tr>
+        <tr id="downPaymentDoc" style="display:none">
+            <td>汇款人姓名:</td>
+            <td><input readonly class="easyui-textbox" id="payName"
+                       data-options="formatter:formatCampus"
+                       style="width: 180px;">
+            </td>
+            <td>汇款人电话:</td>
+            <td><input readonly class="easyui-textbox" id="payPhone"
+                       data-options="formatter:formatCampus"
+                       style="width: 180px;">
+            </td>
+            <td>学生姓名:</td>
+            <td><input readonly class="easyui-textbox" id="studentName"
+                       data-options="formatter:formatCampus"
+                       style="width: 180px;">
+            </td>
+            <td>汇款银行:</td>
+            <td><input readonly class="easyui-textbox" id="payBank"
+                       data-options="formatter:formatCampus"
+                       style="width: 180px;">
+            </td>
+
+            <!--<td>支付凭证:-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<a href="javascript:void(0)" style="width: 100px" class="easyui-linkbutton"-->
+            <!--onclick="DownReceipt()">下载</a>-->
+            <!--</td>-->
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)" style="width: 100px" id="AcrossId" class="easyui-linkbutton"
+                   onclick="contentEditPage.submitForm(1)">审核通过</a></td>
+            <td><a href="javascript:void(0)" style="width: 100px" id="NotAcross" class="easyui-linkbutton"
+                   onclick="contentEditPage.submitForm(0)">审核不通过</a></td>
+            <td>
+                <a href="javascript:void(0)" style="width: 100px" class="easyui-linkbutton"
+                   onclick="contentEditPage.closeForm()">关闭</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+
+    var contentEditEditor;
+    $(function () {
+        contentEditEditor = TT.createEditor("#contentEditForm [name=content]");
+        TT.initOnePicUpload();
+    });
+
+    var contentEditPage = {
+        submitForm: function (AcrossId) {
+            var orderId = $("#orderId").val();
+            //alert(AcrossId)
+            $.post("/order/verify?orderId=" + orderId + "&AcrossId=" + AcrossId, function (data) {
+                if (data.code == 0) {
+                    $("#orderList").datagrid("reload");
+                    alert('审核成功！')
+                    TT.closeCurrentWindow();
+                }
+            });
+        },
+        closeForm: function () {
+            TT.closeCurrentWindow();
+        }
+    };
+
+    //1订单创建，2待审核，3支付成功，-1已作废
+    function formatOrderStatus(val, row) {
+        if (val === 1) {
+            return "订单创建";
+        } else if (val === 2) {
+            return "待审核";
+        } else if (val === 3) {
+            return "支付成功";
+        } else if (val === 4) {
+            return "待审核";
+        } else if (val === -1) {
+            return "已作废";
+        }
+    }
+
+    //订单来源，100 选课订单（选课订单需要使用规则计算价格） 200 住宿押金订单（住宿订单固定金额为5000)
+    function formatOrderSource(val, row) {
+        if (val === 100) {
+            return "选课订单";
+        } else if (val === 200) {
+            return "住宿押金";
+        }
+    }
+
+    //支付渠道 1 支付宝 2 微信 3 银行转账
+    function formatChannel(val, row) {
+        if (val === 1) {
+            return "支付宝";
+        } else if (val === 2) {
+            return "微信";
+        } else if (val === 3) {
+            return "银行转账";
+        } else {
+            return "未支付";
+        }
+    }
+
+    function formatCampus(val, row) {
+
+        switch (val) {
+            case 1:
+                return "南京校区";
+            case 2:
+                return "北京校区";
+            case -1:
+                return "未选择";
+        }
+
+    }
+
+    function DownReceipt() {
+        var url = $("#downUrl").val();
+        if (url == null || url == "") {
+            alert("暂无凭证,请联系管理员")
+        } else {
+            downloadFile(url);
+        }
+
+    }
+
+    window.downloadFile = function (sUrl) {
+
+        //iOS devices do not support downloading. We have to inform user about this.
+        if (/(iP)/g.test(navigator.userAgent)) {
+            alert('Your device does not support files downloading. Please try again in desktop browser.');
+            return false;
+        }
+
+        //If in Chrome or Safari - download via virtual link click
+        if (window.downloadFile.isChrome || window.downloadFile.isSafari) {
+            //Creating new link node.
+            var link = document.createElement('a');
+            link.href = sUrl;
+
+            if (link.download !== undefined) {
+                //Set HTML5 download attribute. This will prevent file from opening if supported.
+                var fileName = sUrl.substring(sUrl.lastIndexOf('/') + 1, sUrl.length);
+                link.download = fileName;
+            }
+
+            //Dispatching click event.
+            if (document.createEvent) {
+                var e = document.createEvent('MouseEvents');
+                e.initEvent('click', true, true);
+                link.dispatchEvent(e);
+                return true;
+            }
+        }
+
+        // Force file download (whether supported by server).
+        if (sUrl.indexOf('?') === -1) {
+            sUrl += '?download';
+        }
+
+        window.open(sUrl, '_self');
+        return true;
+    }
+
+    window.downloadFile.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+    window.downloadFile.isSafari = navigator.userAgent.toLowerCase().indexOf('safari') > -1;
+
+</script>
+</html>

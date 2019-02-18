@@ -1,0 +1,345 @@
+.applyHeader{
+	width: 220px;
+	height: 52px;
+	line-height: 52px;
+	background: url(../../images/userCenter/applyHeader.png) no-repeat top left/100%;
+	margin:-38px auto 40px;
+}
+.applyStep{
+	height: 57px;
+	margin:0 auto 40px;
+}
+.applyStep li{
+	width: 240px;
+	height: 57px;
+	line-height: 57px;
+	color:#656565;
+	background:url(../../images/userCenter/applyStepGray.png) no-repeat top left/100%; 
+	margin-left: -15px;
+}
+.applyStep li.done{
+	color:#fff;
+	background:url(../../images/userCenter/applyStep.png) no-repeat top left/100%;
+}
+.applyStep li.step1,.applyStep li.step1.done{
+	color:#fff;
+	margin-left: 15px;
+	background:url(../../images/userCenter/applyStep1.png) no-repeat top left/100%;
+}
+.applyItem1 .iptArea{
+	width: 680px;
+}
+.iptArea i{
+	color: #FF3939;
+	font-style: normal;
+	height: 48px;
+	line-height: 48px;
+	margin-left:5px;
+}
+.iptArea .title{
+	height: 48px;
+	line-height: 48px;
+	margin:0 8px 0 12px;
+}
+.baseIpt input{
+	width: 520px;
+	height: 48px;
+	line-height: 48px;
+	background: none;
+	border:1px solid #989898;
+	padding-left:10px;
+	margin-left:10px;
+}
+.enName {
+	margin-top: 42px;
+}
+.enName .enNameIpt{
+	width: 540px;
+	height: 48px;
+	margin-bottom: 42px;
+}
+.enName .enNameIpt input{
+	width: 387px;
+	height: 48px;
+	line-height: 48px;
+	background: none;
+	border:1px solid #989898;
+	padding-left:10px
+}
+.tips{
+	padding-left: 30px;
+	margin:-10px 0 20px;
+	width: 100%;
+	float:left;
+}
+.tip2{
+	margin:32px 0 0px;
+}
+.tip3{
+	margin:30px 0 30px 20px;
+}
+.sex{
+	line-height: 48px;
+	margin-bottom: 20px;
+}
+.sex .title{
+	margin-right: 20px;
+}
+.sex label{
+	margin:0 25px 0 5px; 
+	cursor: pointer;
+}
+.sex label span{
+	width: 35px;
+	height: 100%;
+	display: inline-block;
+	text-align: right;
+}
+.sex input{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+.idNum {
+	margin:42px 0 0;
+}
+select{
+	width: 150px;
+	height: 50px;
+	border:1px solid #989898;
+	color:#323232;
+	margin-left: 15px;
+	font-size: 20px;
+	text-align: center;
+	text-align-last: center;
+}
+select option{
+	font-size: 18px;
+}
+.idNum input{
+	width: 428px;
+}
+.saveBtn{
+	width: 122px;
+	height: 40px;
+	line-height: 40px;
+	margin:42px 0 2px 390px;
+	display: block;
+	border-radius: 6px;
+}
+.changeHead{
+	width: 200px;
+	height: 244px;
+	background: #FFFFFF;
+	box-shadow: 0 5px 60px -25px rgba(0,0,0,0.5);
+	border-radius: 6px;
+}
+.changeHead .headImg{
+	width: 124px;
+	height: 124px;
+	border-radius: 50%;
+	overflow: hidden;
+	top:34px;
+	left:38px;
+}
+.changeHead .headImg img{
+	top:0;
+	left:0;
+	margin:auto;
+}
+.changeHead .changeBtn{
+	left:39px;
+	bottom: 26px;
+	width: 122px;
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	border-radius: 6px;
+	cursor: pointer;
+}
+.entrySchool{
+	margin-bottom: 42px;
+}
+.entranceTime input{
+	width: 400px;
+	margin-right: 20px;
+}
+.entranceSeason {
+	margin:0 25px 0 5px; 
+	cursor: pointer;
+	line-height: 47px;
+}
+.entranceSeason input{
+	width: 15px;
+	height: 15px;
+}
+.entranceSeason span{
+	width: 55px;
+	height: 100%;
+	display: inline-block;
+	text-align: right;
+}
+.addressItem {
+	margin-right: 45px;
+}
+.applyItem3 .baseIpt{
+	width: 680px;
+	margin-top: 42px;
+}
+.baseIpt2 input{
+	width: 460px;
+}
+
+.agreement{
+	width: 868px;
+	height: 284px;
+	padding:15px;
+	border: 1px solid #D8D8D8;
+	border-radius: 8px;
+	margin:0 auto;
+	overflow-y:auto;
+}
+.agreement .title{
+	margin-bottom: 10px;
+}
+.agree{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	color:  #FF3939;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 20px;
+}
+.agree input{
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.choiceAddr label span{
+	width: 60px;
+}
+.lessonDetail{
+	width: 916px;
+	min-height: 48px;
+	background: #F4F4F4;
+	border-radius: 8px;
+	margin-bottom: 24px;
+}
+.lessonDetail .baseInfo,.lessonDetail .typeInfo{
+	width: 916px;
+	height: 48px;
+	line-height: 48px;
+	border-radius: 8px;
+	background: #E9E9E9;
+	text-align: center;
+}
+.lessonDetail .baseInfo li{
+	width: 25%;
+}
+.lessonDetail .baseInfo li.b{
+	width: 30%;
+}
+.lessonDetail .baseInfo li.c{
+	width: 15%;
+}
+.lessonDetail .baseInfo li.d{
+	width: 25%;
+}
+
+.lessonDetail .typeInfo li{
+	width: 25%;
+}
+.lessonDetail .typeInfo li.c{
+	width: 20%;
+}
+.lessonDetail .arr{
+	width: 48px;
+	height: 48px;
+	top:0;
+	content: "";
+	background: url(../../images/userCenter/arrBB.png) no-repeat center/13px;
+	cursor: pointer;
+	transition:all 0.3s;
+	-webkit-transition:all 0.3s;
+	transform:rotate(0deg);
+	-webkit-transform:rotate(0deg);
+}
+.lessonDetail.open .arr{
+	transform:rotate(-90deg);
+	-webkit-transform:rotate(-90deg);
+}
+.lessonDetail.open .baseInfo{
+	display: none;
+}
+.lessonDetail.open .typeInfo{
+	display: block;
+}
+.lessonDetail.select .baseInfo,.lessonDetail.select .typeInfo{
+	color:#fff;
+	background:#4EC0E1;
+}
+
+.lessonListInfo{
+	padding:0 10px;
+	display: none;
+}
+.lessonListInfo ul{
+	height: 65px;
+	border-bottom: 2px solid #fff;
+}
+.lessonListInfo ul:nth-last-child(1){
+	border-bottom: none;
+}
+.lessonListInfo ul li{
+	text-align: center;
+	width: 22%;
+	line-height: 65px;
+}
+.lessonListInfo ul li.b{
+	width: 28%;
+	line-height: 20px;
+	margin-top: 10px;
+}
+.lessonListInfo ul li.e{
+	text-align: right;
+	width: 5%;
+}
+.lessonListInfo ul li a{
+	font-size: 16px;
+	color: #656565;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #979797;
+}
+.lessonListInfo ul li input{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+.syllabus{
+	margin-right: 20px;
+	padding:5px 0px;
+	border-bottom: 1px solid #979797;
+}
+
+.iptErrMsg{
+	height: 40px;
+	line-height: 40px;
+	color: red;
+	left:146px;
+	bottom:-40px;
+}
+.iptErrMsg.type1,.iptErrMsg.type3,.iptErrMsg.type4{
+	bottom: 5px;
+	left:285px;
+}
+.iptErrMsg.type2{
+	left:208px;
+}
+.iptErrMsg.type3{
+	left:378px;
+}
+.iptErrMsg.type4{
+	left:168px;
+}

@@ -1,0 +1,419 @@
+.title {
+    height: 30px;
+    padding: 12px 0 0;
+    color: #656565;
+    margin-bottom: 18px;
+}
+
+.title::after {
+    width: 23px;
+    height: 6px;
+    background: #4EC0E1;
+    top: 0;
+    left: -12px;
+    position: absolute;
+    content: "";
+}
+
+.paymentList li {
+    width: 269px;
+    height: 133px;
+    background: #FFA47A;
+    box-shadow: 0 17px 36px -27px rgba(0, 0, 0, 0.8);
+    border-radius: 11px;
+    margin-bottom: 30px;
+}
+
+.paymentList li.center {
+    margin: 0px 62px 30px;
+    overflow: hidden;
+}
+
+.paymentList li.done {
+    background: #FFC6AB;
+}
+
+.paymentList li .top {
+    padding: 10px 11px 0;
+}
+
+.paymentList li .top .name {
+    padding: 0 0 10px 8px;
+    border-bottom: 2px dashed #fff;
+}
+
+.paymentList li .top .time {
+    margin-top: 8px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.paymentList li .bottom {
+    height: 47px;
+    background: rgba(255, 255, 255, 0.4);
+    margin-top: 8px;
+}
+
+.paymentList li .bottom .num {
+    height: 30px;
+    line-height: 30px;
+    margin: 8px 0 0 18px;
+    color: #FF2B2B;
+}
+
+.paymentList li .bottom .payBtn {
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+    margin: 8px 8px 0 0;
+    background: #FFFFFF;
+    box-shadow: 0 0 16px -9px rgba(0, 0, 0, 0.8);
+    border-radius: 6px;
+    cursor: pointer;
+    color: #4EC0E1;
+    font-weight: bold;
+}
+
+.paymentList li.done .bottom {
+    background: none;
+}
+
+.paymentList li.done .bottom .num {
+    color: #989898;
+}
+
+.paymentList li.done .bottom .payBtn {
+    background: none;
+    box-shadow: none;
+    color: #fff;
+}
+
+.paymentHandleWrap {
+    background: #fff;
+    width: 1200px;
+    padding: 28px 40px;
+    border-radius: 6px;
+}
+
+.paymentWrap .totalNum {
+    padding-right: 10px;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.paymentWrap .totalNum i {
+    font-style: normal;
+    margin-right: 20px;
+}
+
+.payTotal {
+    width: 122px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.coupon {
+    width: 604px;
+    height: 101px;
+    background: #FFA47A;
+    border-radius: 11px;
+    margin: 30px auto 42px;
+}
+
+.coupon .text {
+    width: 210px;
+    height: 62px;
+    line-height: 62px;
+    margin: 20px 35px 0 0;
+    border-right: 2px dashed #fff;
+}
+
+.coupon input {
+    width: 303px;
+    height: 62px;
+    margin-top: 20px;
+    padding-left: 12px;
+}
+
+.agreement {
+    width: 1165px;
+    height: 284px;
+    padding: 15px;
+    border: 1px solid #D8D8D8;
+    border-radius: 8px;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+
+.agreement .title {
+    margin-bottom: 10px;
+}
+
+.agree {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    color: #FF3939;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.agree input {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.choicePayMethod {
+    width: 1198px;
+    padding: 28px 40px 10px;
+}
+
+.payMethodList {
+    width: 1278px;
+    border: 1px solid #656565;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.methodTitle {
+    height: 56px;
+    line-height: 56px;
+    padding: 0 150px;
+}
+
+.methodTitle li {
+    width: 198px;
+    margin: 0 30px;
+    cursor: pointer;
+}
+
+.methodTitle li::after {
+    width: 0px;
+    height: 5px;
+    background: #4EC0E1;
+    position: absolute;
+    bottom: -5px;
+    left: 14px;
+    content: "";
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+
+.methodTitle li.cur::after, .methodTitle li:hover::after {
+    width: 160px;
+}
+
+.methodTitle li.c {
+    width: 100px;
+}
+
+.methodTitle li.c::after {
+    left: 16px;
+}
+
+.methodTitle li.c.cur::after, .methodTitle li.c:hover::after {
+    width: 70px;
+}
+
+.methodTitle li.d {
+    width: 240px;
+}
+
+.methodTitle li.d::before {
+    content: "推荐";
+    width: 39px;
+    height: 21px;
+    background: #FFA47A;
+    border-radius: 4px;
+    position: absolute;
+    top: 20px;
+    right: -10px;
+    font-size: 12px;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+}
+
+.methodTitle li.d::after {
+    left: 44px;
+}
+
+.methodTitle li.d.cur::after, .methodTitle li.d:hover::after {
+    width: 150px;
+}
+
+.methodTitle li.cur {
+    background: #fff;
+}
+
+.payDetailWrap {
+    background: #fff;
+    padding: 40px 40px 40px 60px;
+}
+
+.payDetail .info {
+    width: 740px;
+    height: 250px;
+    font-size: 26px;
+    border-right: 2px dashed #979797;
+}
+
+.payDetail.two .info {
+    height: 90px;
+}
+
+.payDetail.four .info {
+    height: 457px;
+}
+
+.payDetail.two .infoLine {
+    margin-top: 20px;
+}
+
+.infoLine {
+    height: 62px;
+    line-height: 62px;
+}
+
+.infoLine .infoTitle {
+    width: 150px;
+    margin-right: 30px;
+}
+
+.infoLine .infoMsg {
+    font-weight: bold;
+}
+
+.payTip {
+    width: 400px;
+    padding-top: 10px;
+}
+
+.tipHead {
+    height: 30px;
+    line-height: 30px;
+}
+
+.paymentInfo {
+    margin: 30px 0 0;
+}
+
+.paymentInfo .top {
+    padding-left: 170px;
+}
+
+.paymentInfo .tip {
+    color: #FF3939;
+    margin-bottom: 30px;
+}
+
+.submitBtn, .payNowBtn {
+    color: #fff;
+    width: 122px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 auto;
+    background: #4EC0E1;
+    text-align: center;
+    font-size: 14px;
+}
+
+.paymentInfo .infoBox {
+    width: 405px;
+    padding: 30px 40px;
+    height: 220px;
+    background: #fff;
+    margin: 0 auto 30px;
+}
+
+.iptLine {
+    height: 36px;
+    margin-bottom: 24px;
+}
+
+.iptTitle {
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.iptMsg {
+    width: 250px;
+    height: 34px;
+    padding-left: 12px;
+    margin-left: 40px;
+    border: 1px solid #CFCFCF;
+    border-radius: 4px;
+}
+
+.aliPay {
+    width: 155px;
+    height: 51px;
+    top: -15px;
+    left: -20px;
+}
+
+.aliPay2 {
+    display: block;
+    margin: 20px auto 25px;
+}
+
+.alipayInfo {
+    width: 351px;
+    height: 195px;
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    padding-top: 15px;
+    margin: 20px auto 0;
+}
+
+.payTip .red {
+    color: #FF3939;
+}
+
+.four .alipayInfo {
+    height: 400px;
+    margin: 50px 0 0 10px;
+}
+
+.qrCode {
+    display: block;
+    margin: 25px auto 35px;
+}
+
+.alipayInfo .payTips {
+    padding-left: 25px;
+}
+
+.alipayMsg {
+    margin: 90px 0 0 60px;
+    height: 360px;
+    width: 248px;
+}
+
+.alipayMsg .alipayMsgTitle {
+    height: 28px;
+    line-height: 28px;
+    margin-bottom: 10px;
+}
+
+.alipayMsg input {
+    width: 234px;
+    padding-left: 12px;
+    height: 32px;
+    border: 1px solid #CFCFCF;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.alipayMsg .payNowBtn {
+    margin-top: 30px;
+}

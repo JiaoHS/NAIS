@@ -1,0 +1,80 @@
+
+<!--导航图-->
+<link rel="stylesheet" href="../../../static/css/applicationInformation/transcriptCertification.css">
+<!--<div class="ai-bgBox">-->
+    <!--<div class="ai-bgWord">-->
+        <!--<span>成绩单认证</span><br/>-->
+        <!--<span style="font-size: 48px">Transcript certification</span>-->
+    <!--</div>-->
+<!--</div>-->
+<!--右侧主体内容部分-->
+<div class="ai-right">
+    <div class="ai-rightIn">
+        <div class="tqDeriction">申请信息>成绩单认证</div>
+        <div class="tqPart1">
+            <div class="tqP1-left">信息概要</div>
+            <div class="tqP1-right">
+                NAIS留学生服务平台各校区成绩单由主办大学教务部门统一发放，成绩单及成绩单信封的密封处盖有主办大学成绩单发放部门公章。每个大学校区结课的两周后，该大学的教务部门统一发放官方成绩单（如学生因9月上旬所在大学尚未开学需晚寄成绩单，可于暑校结课前与客服联系说明情况）。成绩单全部由快递寄出，并于寄出后4-5个工作日内到达。学生可在NAIS留学生服务平台官网的个人账户中查询自己成绩单快递单号。
+            </div>
+        </div>
+
+        <div class="tqPart1">
+            <div class="tqP1-left">邮寄地址</div>
+            <div class="tqP1-right">
+                NAIS留学生服务平台成绩单由主办大学统一邮寄至学生所在大学相关审核部门，请同学们在个人信息中填写成绩单邮寄地址、邮政编码、收件人姓名及电话，并确认此为正确有效信息。以上信息非常重要，缺一不可。
+
+            </div>
+        </div>
+
+        <div class="tqPart1">
+            <div class="tqP1-left">申请追加</div>
+            <div class="tqP1-left1">成绩单</div>
+            <div class="tqP1-right">
+                暑校开学期间，每周定期召开教学质量评估委员会例会，由委员会所有成员出席，助教列席。会上，秘书长向委员会全体成员提交学生的反馈意见，由主任与副主任带领进行当周情况总结，针对不足之处提出宝贵意见并拟定相应改进措施。会后，主任会与评价较低的任课教授做出及时沟通，秘书长汇总当周课程满意度调查数据及会议记录。
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!--固定的侧边栏-->
+<div class="slidebar">
+    <div class="slidebar-top">
+        <div class="st-pic"></div>
+    </div>
+    <div class="slidebar-bottom">
+        <div class="sb-pic"></div>
+    </div>
+</div>
+<div class="big-ewm"></div>
+<!---------------------------------------------------------------------------------------------------------------------->
+
+<script>
+
+    window.onscroll=function(){
+        if ($(document).scrollTop() >410)//这个410是距离顶部高度
+        {
+            $(".ai-left").addClass('ai-leftFixed');//
+        }else{
+            $(".ai-left").removeClass('ai-leftFixed');
+        }
+    }
+
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+            function () {
+                $(".big-ewm").css("right","65px")
+            }
+    );
+    $(".slidebar-top").mouseout(
+            function () {
+                $(".big-ewm").css("right","-165px")
+            }
+    )
+    //一键返回顶部
+    var toTop=document.querySelector(".slidebar-bottom");
+    toTop.onclick=function(){
+        obj=document.body.scrollTop==0?document.documentElement:document.body;
+        animate(obj,{scrollTop:0},100)
+    };
+</script>

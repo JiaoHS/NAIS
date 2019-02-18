@@ -1,0 +1,269 @@
+.banner{
+	width: 100%;
+	height: 290px;
+	border-radius: 8px;
+	overflow: hidden;
+	margin-bottom: 22px;
+}
+.title{
+	height: 30px;
+	padding:12px 0 0;
+	color: #656565;
+	margin-bottom: 18px;
+}
+.title::after{
+	width: 23px;
+	height: 6px;
+	background: #4EC0E1;
+	top:0;
+	left:-12px;
+	position: absolute;
+	content: "";
+}
+.schoolAddr{
+	margin: 32px 0 64px;
+	height: 44px;
+}
+.schoolAddr li{
+	width: 268px;
+	height: 44px;
+	line-height: 44px;
+	border-radius: 22px;
+	border:1px solid #e0e0e0;
+	color: #C2C2C2;
+	cursor: pointer;
+	margin-right: 80px;
+}
+.schoolAddr li::after{
+	content: "";
+	position: absolute;
+	top:16px;
+	left:22px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #C2C2C2;
+}
+.schoolAddr li.select::after{
+	background:#fff;
+}
+.schoolAddr li.select{
+	border-color: #4EC0E1;
+	background: #4EC0E1;
+	box-shadow: 0 0 13px -4px rgba(0,0,0,0.8);
+	color: #fff;
+}
+
+.leftCon{
+	height: 548px;
+	width: 228px;
+}
+.selectBtn,.selectInfo{
+	width: 228px;
+	height: 37px;
+	line-height: 37px;
+	border-radius: 17px;
+	box-shadow: 0 0 13px -4px rgba(0,0,0,0.8);
+	top:0;
+	z-index: 2;
+	cursor: pointer;
+}
+.selectBtn::after{
+	width: 10px;
+	height: 7px;
+	background: url(../../images/userCenter/arrBW.png) no-repeat center/100%;
+	position: absolute;
+	left:30px;
+	top:15px;
+	content: "";
+	transition:all 0.3s;
+	-webkit-transition:all 0.3s;
+}
+.selectBtn.open::after{
+	transform:rotate(180deg);
+}
+.hotleList{
+	width: 100%;
+	height: 178px;
+	border-radius: 18px;
+	z-index: 1;
+	top:0;
+	box-shadow: 0 0 13px -4px rgba(0,0,0,0.8);
+	padding-top: 38px;
+	background: #fff;
+	overflow-y:auto;
+}
+.hotleList>li{
+	height: 57px;
+	line-height: 57px;
+	color: #c2c2c2;
+	border-top: 1px solid #f4f4f4;
+	cursor: pointer;
+}
+.hotleList>li.selected,.hotleList>li:hover{
+	background: #f4f4f4;
+}
+.selectHotle{
+	width: 228px;
+	height: 38px;
+}
+.hotelIntro{
+	margin-top: 20px;
+}
+.hotelIntro .introTitle{
+	height: 40px;
+	line-height: 40px;
+}
+.hotelInfo{
+	height: 458px;
+	width: 204px;
+	padding: 0px 10px 0 14px;
+	border-top:15px solid #fff;
+	border-bottom:15px solid #fff;
+}
+.hotelInfo p{
+	text-indent: 2em;
+}
+.stars li{
+	width: 16px;
+	height: 16px;
+	margin:5px 0 0 3px;
+	background: url(../../images/userCenter/starGray.png) no-repeat center/100%;
+}
+.stars li.cur{
+	background: url(../../images/userCenter/star.png) no-repeat center/100%;
+}
+.safe{
+	margin-bottom: 10px;
+	padding-right: 5px;
+}
+.rightCon{
+	width: 640px;
+	padding:15px;
+	height: 518px;
+	box-shadow: 0 0 13px -4px rgba(0,0,0,0.8);;
+	border-radius: 18px;
+}
+.imgShow{
+	margin-bottom: 25px;
+}
+.imgShow img{
+	width: 310px;
+	height: 194px;
+	border-radius: 18px;
+}
+.hotelSimpleInfo{
+	height: 34px;
+	line-height: 34px;
+}
+.hotelSimpleInfo .hotelAddr {
+	width: 360px;
+	padding-left: 60px;
+}
+.hotelSimpleInfo .hotelAddr::after{
+	content: "";
+	position: absolute;
+	top:0;
+	left:15px;
+	width: 27px;
+	height: 33px;
+	background: url(../../images/userCenter/location.png) no-repeat center/27px 33px;
+}
+.hotelSimpleInfo .stars{
+	margin-top: 3px;
+}
+.hotelSimpleInfo .distance{
+	width: 100px;
+	color:#c2c2c2;
+}
+
+.iptInfo{
+	margin-top: 28px;
+}
+.iptInfoLeft{
+	width: 360px;
+	height: 200px;
+	padding-left: 40px;
+}
+.iptInfoLeft .iptArea{
+	height: 46px;
+	line-height: 46px;
+	margin-bottom: 24px;
+}
+.iptInfoLeft .iptArea input{
+	height: 44px;
+	border:1px solid #989898;
+	padding-left: 12px;
+	width: 190px;
+	margin-left: 20px;
+}
+.iptInfoRight .selectHotle{
+	height: 40px;
+	top:0;
+}
+.iptInfoRight .confirm,.iptInfoRight .money{
+	margin-top: 76px;
+	margin-right: 20px;
+	height: 36px;
+	line-height: 36px;
+}
+.iptInfoRight .confirm{
+	width: 88px;
+	border-radius: 10px;
+	cursor: pointer;
+	margin-right: 10px
+}
+.iptInfoLeft .iptArea label,.iptInfoLeft .iptArea .iptRadio{
+	cursor: pointer;
+}
+.iptInfoLeft .iptArea input.iptRadio{
+	width: 18px;
+	height: 18px;
+	margin: 14px 14px 0 0;
+}
+.setFriend{
+	margin-top: 50px;
+}
+.setFriend .outRadio{
+	bottom: 12px;
+	right:-105px;
+}
+.setFriend .outTitle{
+	right:-180px;
+	bottom: -1px;
+}
+.agreement{
+	width: 868px;
+	height: 284px;
+	padding:15px;
+	border: 1px solid #D8D8D8;
+	border-radius: 8px;
+	margin:40px auto;
+	overflow-y:auto;
+}
+.agreement .title{
+	margin-bottom: 10px;
+}
+.agree{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	color:  #FF3939;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 20px;
+}
+.agree input{
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+}
+.btnSubmit{
+	display: block;
+	width: 160px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 6px;
+	margin:20px 0 0 370px;
+}

@@ -1,0 +1,67 @@
+body{
+	background: #f4f4f4;
+}
+.topBanner {
+	width: 100%;
+	height: 400px;
+}
+.topBanner li{
+	width: 100%;
+	height: 400px;
+	background: url(../images/applyInfo/1.png) no-repeat center;
+	display: none;
+}
+.topBanner li.guide{
+	background: url(../images/applyInfo/2.png) no-repeat center;
+}
+.topBanner li.discount{
+	background: url(../images/applyInfo/3.png) no-repeat center;
+}
+.topBanner li.show{
+	display: block;
+}
+.content .tab {
+	width: 865px;
+	margin: 30px auto;
+}
+.content .tab li{
+	cursor: pointer;
+	margin:0 60px;
+}
+.content .tab li::after{
+	content: "";
+	position: absolute;
+	bottom:-10px;
+	left:50%;
+	width: 0;
+	height: 5px;
+	background: #4EC0E1;
+	transition:all 0.3s;-webkit-transition:all 0.3s;
+}
+.content .tab li.select::after,.content .tab li:hover::after{
+	width: 140px;
+	margin-left:-70px;
+}
+.content .tab .center.select::after,.content .tab .center:hover::after{
+	width: 210px;
+	margin-left:-105px;
+}
+.infoItem{
+	background: #fff;
+	display: none;
+}
+.infoItem.cur{
+	display: block;
+}
+.infoItem{
+	width: 1180px;
+	padding:100px 50px;
+	margin-bottom: 50px;
+}
+.flowGuide{
+	display: block;
+	margin: 0 auto;
+	width: 877px;
+	height: 114px;
+	background: url(../images/applyInfo/申请信息.png) no-repeat;
+}

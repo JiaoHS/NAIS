@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="easyui-panel" title="Nested Panel" data-options="width:'100%',minHeight:1000,noheader:true,border:false" style="padding:10px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <!--<div data-options="region:'west',split:false" style="width:250px;padding:5px">-->
+        <!--<ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/content/category/list',animate: true,method : 'GET'">-->
+        <!--</ul>-->
+        <!--</div>-->
+        <div data-options="region:'center'" style="padding:5px">
+            <div>
+                <label for="proName"> 教授姓名：</label><input id="proName" type="text"  style="line-height:26px;border:1px solid #ccc"/>
+                <label for="comeShchool"> 来自学校： </label><input id="comeShchool" type="text" style="line-height:26px;border:1px solid #ccc"/>
+            </div>
+            <table class="easyui-datagrid" id="contentList_hh" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/professor/find',queryParams:{page:1,rows:20}">
+                <thead>
+                <tr>
+                    <th data-options="field:'id',width:30">ID</th>
+                    <th data-options="field:'professorName',width:120">教授名称</th>
+                    <th data-options="field:'fromSchool',width:120">来自学校</th>
+                    <th data-options="field:'description',width:120">个人描述</th>
+                    <th data-options="field:'photo',width:210">教授照片</th>
+                    <th data-options="field:'createTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">创建日期</th>
+                    <th data-options="field:'updateTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">更新日期</th>
+                    <!--<th data-options="field:'CreateNum',width:150,align:'center',formatter:rowformater,onClickRow:CreateNum">-->
+                        <!--操作-->
+                    <!--</th>-->
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    $(function(){
+        var tree = $("#contentCategoryTree");
+        var datagrid = $("#contentList_hh");
+        tree.tree({
+            onClick : function(node){
+                if(tree.tree("isLeaf",node.target)){
+                    datagrid.datagrid('reload', {
+                        categoryId :node.id
+                    });
+                }
+            }
+        });
+    });
+
+    var contentListToolbar = [{
+        text:'新增',
+        iconCls:'icon-add',
+        handler:function(){
+            // var node = $("#contentCategoryTree").tree("getSelected");
+            // if(!node || !$("#contentCategoryTree").tree("isLeaf",node.target)){
+            //     $.messager.alert('提示','新增内容必须选择一个内容分类!');
+            //     return ;
+            // }
+            TT.createWindow({
+                url : "/admin/professor-add.html"
+            });
+        }
+    },{
+        text:'编辑',
+        iconCls:'icon-edit',
+        handler:function(){
+            var ids = TT.getSelectionsIds("#contentList_hh");
+            if(ids.length == 0){
+                $.messager.alert('提示','必须选择一个内容才能编辑!');
+                return ;
+            }
+            if(ids.indexOf(',') > 0){
+                $.messager.alert('提示','只能选择一个内容!');
+                return ;
+            }
+
+
+            TT.createWindow({
+                url : "/admin/professor-edit.html",
+                onLoad : function(){
+                    var data = $("#contentList_hh").datagrid("getSelections")[0];
+                    $("#contentEditForm_hh").form("load",data);
+
+                    // 实现图片
+                    if(data.photo){
+                        $("#contentEditForm_hh [name=photo]").after("<a href='"+data.photo+"' target='_blank'><img src='"+data.photo+"' width='80' height='50'/></a>");
+                    }
+                    if(data.fromSchool){
+                        $("#contentEditForm_hh [name=fromSchool]").html(data.fromSchool);
+                    }
+                    contentEditEditor.html(data.description);
+
+                    var params = {"id":ids};
+                    $.ajaxSettings.async = false;
+                    $.post("/professor/findUserByPrefessorId",params, function(data1) {
+                        if (data1.code == 0 && data1.data!=null) {
+                            var jsonObj=data1.data;
+                            //获取对象的值
+                            var o_email=jsonObj.email;
+                            var o_password= jsonObj.password;
+                            data.email=o_email;
+                            data.password=o_password;
+
+                            if(data.email){
+                                $("#contentEditForm_hh [name=email]").html(data.email);
+                            }
+                            if(data.password){
+                                console.log(data.password);
+                                $("#contentEditForm_hh [name=password]").html(data.password);
+                            }
+                        }else {
+//                            console.log("data为空的时候");
+//                            $("#contentEditForm_hh [name=email]").html("请生成账号");;
+//                            $("#contentEditForm_hh [name=password]").html("请生成密码");
+                            $("#contentEditForm_hh [name=userName]").css("display","none");
+                            $("#contentEditForm_hh [name=userPassword]").css("display","none");
+                        }
+                    });
+                    $.ajaxSettings.async = true;
+//                            // 实现图片
+//                            if(data.photo){
+//                                $("#contentEditForm_hh [name=photo]").after("<a href='"+data.photo+"' target='_blank'><img src='"+data.photo+"' width='80' height='50'/></a>");
+//                            }
+//                            if(data.fromSchool){
+//                                $("#contentEditForm_hh [name=fromSchool]").html(data.fromSchool);
+//                            }
+//                            console.log(data);
+//                            if(data.email){
+//                                console.log("测试有");
+//                                $("#contentEditForm_hh [name=email]").html(data.email);
+//                            }else {
+//                                console.log("测试无");
+//                                $("#contentEditForm_hh [name=email]").hide();
+//                            }
+//                            if(data.password){
+//                                console.log(data.password);
+//                                $("#contentEditForm_hh [name=password]").html(data.password);
+//                            }else {
+//                                $("#contentEditForm_hh [name=password]").hide();
+//                            }
+
+//                            contentEditEditor.html(data.description);
+
+
+
+                }
+            });
+        }
+    },{
+        text:'删除',
+        iconCls:'icon-cancel',
+        handler:function(){
+            var ids = TT.getSelectionsIds("#contentList_hh");
+            if(ids.length == 0){
+                $.messager.alert('提示','未选中商品!');
+                return ;
+            }
+            $.messager.confirm('确认','确定删除ID为 '+ids+' 的内容吗？',function(r){
+                if (r){
+                    var params = {"ids":ids};
+                    $.post("/professor/batchDelete",params, function(data){
+                        if(data.code == 0){
+                            $.messager.alert('提示','删除内容成功!',undefined,function(){
+                                $("#contentList_hh").datagrid("reload");
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    },{
+        text:'查询',
+        iconCls:'icon-search',
+        handler:function () {
+            $('#contentList_hh').datagrid('reload',{
+                professorName:$("#proName").val(),
+                fromSchool:$("#comeShchool").val()
+            });
+        }
+    }
+    ];
+
+    function rowformater(value, row, index) {
+        // console.log(row.paymentSeq);
+        return '<a href="#" onclick="CreateNum(' + index + ')">生成账号</a>';
+    }
+
+    function CreateNum(index) {
+        $('#contentList_hh').datagrid('selectRow', index);
+        var row = $('#contentList_hh').datagrid('getSelected');
+        var params = {"id": row.id};
+        $.post("/professor/createProfessNum", params, function (data) {
+            if (data.code == 0){
+                $.messager.alert('提示','生成教授登录信息成功了!');
+            }else if(data.code ==2) {
+                $.messager.alert('提示','已经生成过了教授的登录信息！');
+            }else {
+                $.messager.alert('提示','生成教授登录信息失败了');
+            }
+        })
+    }
+
+
+</script>
+</html>

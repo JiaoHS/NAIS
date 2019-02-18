@@ -1,0 +1,85 @@
+<!--右侧内容 ng-app="myApp"-->
+<div class="m-right">
+    <div class="mr-inside">
+        <!--活动优惠券开始-->
+        <div class="activitiesCoupon">
+            <div class="ac-title">活动优惠券</div>
+            <div class="ac-coupons">
+                <div class="ac-cupons" ng-repeat="coupon in GetActiveList">
+                    <div class="ac-cSymbol">￥</div>
+                    <div class="ac-cPrice">{{coupon.discountAmount/1000}}</div>
+                    <div class="ac-cTime" style="width: 78%;">
+                        （{{FormatTime(coupon.couponStartTime)}}-{{FormatTimeEnd(coupon.couponEndTime)}}）
+                    </div>
+                    <!--ng-click="GetCoupon(coupon.id)"-->
+                    <div class="ac-cGet" ng-click="GetCoupon(coupon.id,coupon.discountAmount/1000)">点击领取</div>
+                </div>
+            </div>
+        </div>
+
+        <!--生成优惠码开始-->
+        <div class="buildCodeBox">
+            <div class="pcb-title">领取优惠码</div>
+            <div class="pcb-cuponsBox">
+                <div class="pcb-inputBox">
+                    <input type="text" name="promoCode" id="promoCode" placeholder="请在此输入优惠码"
+                           ng-model="couponCodeModel"/>
+                </div>
+                <div class="pcb-build" ng-click="GetGeneralizeCoupon()">领取</div>
+                <span style="padding-left: 15px;font-size: 16px;color: #c0c3c6">注：优惠券只能使用一次</span>
+            </div>
+        </div>
+        <div class="mr-line"></div>
+        <!--我的优惠码开始-->
+        <div class="myCodeBox">
+            <div class="mcb-title">我的优惠码</div>
+            <div class="mcb-cuponsBox">
+                <div class="mcb-cupons" id="mycoupon">
+                    <div class="mcb-couponsDetail" ng-repeat="mycoupon in MyCouponList">
+                        <span class="mcb-cSymbol">￥{{mycoupon.discountAmount/1000}}</span>
+                        <div class="mcb-cGet">优惠券</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--用券说明开始-->
+        <div class="useCodeBox">
+            <div class="ucb-title">用券说明</div>
+            <div class="ucb-content">
+                1、优惠券是仅限在限定范时间内使用，按面值总额减免支付的优惠码。<br/>
+                2、优惠券分两种：活动优惠券、推广转赠券。<br/>
+                3、优惠券获取方式：通过进入NAIS国际暑校查看活动优惠和通过其他推广人推广码进行领取。<br/>
+                4、使用满减券、免邮券提交的订单，在订单未支付时取消订单，则订单取消后，系统自动返还相应的优惠券（一般1小时内返还）；若订单被支付后，取消某一子单或取消全部子单，优惠券均不返还。
+            </div>
+        </div>
+    </div>
+</div>
+<!--遮罩及内容-->
+<div class="cuponShade">
+    <div class="cs-box">
+        <div class="csb-close">×</div>
+        <div class="csb-promopt">
+            <div class="csbp-pic"></div>
+            <div class="csbp-word" id="csbpWord">
+                <span>恭喜你</span><span>优惠券领取成功</span>
+            </div>
+        </div>
+        <div class="csb-couponsDetail" id="couponsDetail">
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="../../static/css/personalCenter/couponCenter.css"/>
+<script>
+    //遮罩及内容 ng-show="{{cuponShadeShow}}"
+    // $(".ac-cGet").click(function () {
+    //     var w = document.documentElement.clientWidth || document.body.clientWidth;
+    //     var h = document.documentElement.clientHeight || document.body.clientHeight;
+    //     $(".cuponShade").css({"width": w, "height": h, "display": "block"});
+    // })
+    $(".csb-close").click(function () {
+        $(".cuponShade").css("display", "none");
+    })
+</script>

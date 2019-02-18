@@ -1,0 +1,313 @@
+<!--中间主体信息部分开始-->
+<link rel="stylesheet" href="../../../static/css/personalCenter/educationalCenter/teacherSystem-main.css">
+<style>
+    .cl-courseNumSel {
+        background: #e1e1e1;
+        display: block;
+        width: 140px;
+        height: auto;
+        margin-top: 13px;
+        border: 1px dashed #e1e1e1;
+        border-radius: 4px;
+        text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
+        line-height: 33px;
+        font-size: 20px;
+        color: #4e4e4e;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .cl-courseNumUnSel {
+        display: block;
+        width: 140px;
+        height: auto;
+        margin-top: 13px;
+        border: 1px dashed #e1e1e1;
+        border-radius: 4px;
+        text-align: left;
+        padding-left: 5px;
+        padding-right: 5px;
+        line-height: 33px;
+        font-size: 20px;
+        color: #4e4e4e;
+        cursor: pointer;
+        position: relative;
+    }
+
+    /*.cl-courseNumUnSel:nth-child(1) {*/
+        /*background: #e1e1e1;*/
+    /*}*/
+
+    .tsh-courseSel {
+        background: #7b7b7b;
+        width: 102px;
+        height: 30px;
+        float: left;
+        margin-left: 26px;
+        border-radius: 4px;
+        border: 1px dashed #7b7b7b;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+        color: #4e4e4e;
+        cursor: pointer;
+    }
+
+    .tsh-courseUnSel {
+        width: 102px;
+        height: 30px;
+        float: left;
+        margin-left: 26px;
+        border-radius: 4px;
+        border: 1px dashed #7b7b7b;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+        color: #4e4e4e;
+        cursor: pointer;
+    }
+
+    /*.tsh-courseUnSel:nth-child(1) {*/
+        /*background: #7b7b7b;*/
+    /*}*/
+</style>
+<div class="userHeader1">{{campusInfoList.campusNameEn}}</div>
+<div class="ts-header2">
+    <div class="tsh-courseUnSel" id="abc{{course.id}}" ng-repeat="course in CourseList"
+         ng-click="GetCourseByIds(course.id,course.courseId,course.courseCode)">{{course.courseCode}}
+    </div>
+
+    <span class="tsh-time">{{ymd}} {{week}} {{hms}}</span>
+</div>
+
+<div class="container">
+    <!--左侧课程侧边栏-->
+    <div class="c-header">
+        <div class="ch-assignment">Assignment：</div>
+        <div class="ch-con">
+            <span class="ch-assignmentCourse" ng-click="GetAssignment(1)">Homework</span>
+            <span class="ch-assignmentCourse" ng-click="GetAssignment(2)">Speech</span>
+            <span class="ch-assignmentCourse" ng-click="GetAssignment(3)">The midterm exam</span>
+            <span class="ch-assignmentCourse" ng-click="GetAssignment(4)">Final exam</span>
+
+        </div>
+
+    </div>
+    <div class="c-left">
+        <span class="cl-title">Student List:</span>
+        <div class="cl-courses" id="studengListHtml">
+
+        </div>
+    </div>
+    <!--中间主体内容-->
+    <div class="c-middle" ng-show="{{StuWorkListIsShow}}">
+        <div class="cm-header">
+            <div class="cm-time">
+                <div class="cmt-left" ng-click='GetTimeList("pre")'></div>
+                <div class="cmt-middle" ng-click='GetTimeList("now")'>Today</div>
+                <div class="cmt-right" ng-click='GetTimeList("next")'></div>
+            </div>
+        </div>
+
+        <div class="cm-timeBox">
+            <div class="cmt-word">Date</div>
+            <div class="cmt-time1">{{TimeList[0]}}</div>
+            <div class="cmt-time2">{{TimeList[1]}}</div>
+            <div class="cmt-time3">{{TimeList[2]}}</div>
+            <div class="cmt-time4">{{TimeList[3]}}</div>
+            <div class="cmt-time5">{{TimeList[4]}}</div>
+        </div>
+        <!--课后作业-->
+        <div class="cm-homeworkBox">
+            <div class="cm-row1" id="homeworkRow1">
+            </div>
+
+            <div class="cm-row2" id="homeworkRow2">
+            </div>
+        </div>
+
+        <!--演讲成绩-->
+        <div class="cm-speaking">
+            <div class="cms-con" id="speachList">
+            </div>
+        </div>
+        <!--期中考试-->
+        <div class="cm-midTerm">
+            <div class="cmm-row1" id="homeworkRow3">
+
+            </div>
+
+            <div class="cmm-row2" id="homeworkRow4">
+
+            </div>
+
+        </div>
+        <!--期末考试-->
+        <div class="cm-finalTerm">
+            <div class="cmf-row1" id="homeworkRow5">
+
+            </div>
+
+            <div class="cmf-row2" id="homeworkRow6">
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--右侧通知栏-->
+    <div class="c-right">
+        <div class="cr-title">Inform:</div>
+        <div class="cr-content" id="informList">
+            <!--<div class="crc-conBox" ng-repeat="inform in InformList">-->
+            <!--<div class="crc-time">{{inform.createTime}}</div>-->
+            <!--<paragraph>{{inform.taskDesc}}</paragraph>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+
+</div>
+<!--遮罩及内容 onchange="change();"-->
+<div class="teacherSystemShade1">
+    <div class="tss-con">
+        <div class="tss-title">
+            <span>Homework</span>
+        </div>
+        <div class="tss-line"></div>
+        <div class="tss-time">
+            <div class="tsst-title">Release date:</div>
+            <div class="tsst-date">{{ymd}}</div>
+        </div>
+        <div class="tss-upload">
+            <form id="upfile" method="post" enctype="multipart/form-data">
+                <input type="file" class="homeworkFile" id="upload_file" style="display: none;" onchange="change();"/>
+                <input type="text" id="upload_file_tmp" readonly="readonly" onclick="upload_file.click();"
+                       placeholder="Please choose the file to upload"/>
+                <button type="button" class="tss-browse" id="select_file" onclick="upload_file.click();">browse</button>
+                <input type="hidden" id="fileUrl">
+            </form>
+
+
+        </div>
+        <div class="tss-timeSection">
+            <div class="tssts-title">Term of validity：</div>
+            <input class="tssts-dateMonth1" ng-model="dateMonth1"/>
+            <span>/</span>
+            <input class="tssts-dateDay1" ng-model="dateDay1"/>
+            <span>/</span>
+            <input class="tssts-dateYear1" ng-model="dateYear1"/>
+            <span>—</span>
+            <input class="tssts-dateMonth2" ng-model="dateMonth2"/>
+            <span>/</span>
+            <input class="tssts-dateDay2" ng-model="dateDay2"/>
+            <span>/</span>
+            <input class="tssts-dateYear2" ng-model="dateYear2"/>
+        </div>
+        <div class="tss-timeSection">
+            <div class="tssts-title">Full mark：</div>
+            <input style="width: 65px" class="tssts-dateMonth1" ng-model="fullMark"/>
+        </div>
+        <div class="tss-timeSection">
+            <div class="tssts-title">Description：</div>
+            <input style="width: 410px" class="tssts-dateMonth1" ng-model="description"/>
+        </div>
+        <div class="tss-do" style="margin-top:15px">
+            <div class="tssd-cancel">Cancel</div>
+            <div class="tssd-upload" ng-click="UpLoadWork()">Upload</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="teacherSystemShade2">
+    <div class="tss-con">
+        <div class="tss-title">
+            <span>Reminder</span>
+        </div>
+        <div class="tss-line"></div>
+        <span style="display: block;float: left;margin-left: 95px;font-size: 18px;color:#4e4e4;margin-top: 60px">Are you sure that
+            <span style="color: red">{{studentName}}</span> student score is
+            <span style="color: red">{{ScoreNew}}</span>?</span>
+        <br/>
+        <span style="display: block;float: left;margin-left: 95px;font-size: 18px;color: #4e4e4;margin-top: 20px;margin-bottom: 80px">The results can not be modified.</span>
+        <div class="tss-do">
+            <div class="tssd-cancel">Cancel</div>
+            <div class="tssd-determine" ng-click="SubScore(ScoreNew)">Determine</div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+    //左侧侧边栏效果
+    $(".cl-courseNumUnSel").click(
+        function () {
+            alert(2)
+            $(this).css("background-color", "#e1e1e1");
+            $(this).siblings().css("background-color", "white")
+        }
+    );
+
+    //获取用户输入数据放在页面中
+    function jqajax() {
+        var url = "";//后台数据库接口
+        $.ajax({
+            type: "post",
+            url: url,
+            dataType: "JSONP",
+            success: function (t) {
+                if (t.status == 'success') {
+
+
+                } else {
+
+
+                }
+            }
+        });
+    }
+
+    //      遮罩及内容
+    $(".ch-assignmentCourse").click(function () {
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        $(".teacherSystemShade1").css({"width": w, "height": h, "display": "block"});
+    })
+    $(".tssd-cancel").click(function () {
+        $(".teacherSystemShade1").css("display", "none");
+    })
+
+    $(".cmh-scoreUpload").click(function () {
+        var w = document.documentElement.clientWidth || document.body.clientWidth;
+        var h = document.documentElement.clientHeight || document.body.clientHeight;
+        $(".teacherSystemShade2").css({"width": w, "height": h, "display": "block"});
+    })
+    $(".tssd-cancel").click(function () {
+        $(".teacherSystemShade2").css("display", "none");
+    })
+
+    //上传文件
+    // function change() {
+    //     document.getElementById("upload_file_tmp").value = document.getElementById("upload_file").value;
+    //     var formData = new FormData($("#upfile")[0]);
+    //     formData.append("file", document.getElementById("upload_file").value);
+    //     $.ajax({
+    //         url: $scope.baseurl + "/pay/bankPay/receipt/upload",
+    //         type: "POST",
+    //         data: formData,
+    //         dataType: "text",
+    //         processData: false,         // 告诉jQuery不要去处理发送的数据
+    //         contentType: false,        // 告诉jQuery不要去设置Content-Type请求头
+    //
+    //         success: function (data) {
+    //             //赋值 URL  隐藏域
+    //             $("#fileUrl").val("hh");
+    //         },
+    //     });
+    // }
+
+</script>
+

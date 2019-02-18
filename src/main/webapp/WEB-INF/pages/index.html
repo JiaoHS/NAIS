@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>首页</title>
+    <link rel="shortcut icon" href="../../inc/icon.png" type="image/x-icon"/>
+    <!--<link rel="stylesheet" href="../../static/css/jquery.idcode.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="../../static/css/global.css">-->
+    <script type="text/javascript" src="../../static/js/lib/jquery.min.js"></script>
+    <script src="../../static/js/lib/animate.js"></script>
+    <!--<script src="../../static/js/lib/jquery.min.js"></script>-->
+    <script src="../../static/js/lib/angular.min.js"></script>
+    <script src="../../static/js/lib/angular-ui-router.js"></script>
+    <script src="../../static/js/lib/angular-animate.min.js"></script>
+    <script src="../../static/js/lib/uibootstraptpls.js"></script>
+    <script src="../../static/js/lib/app.js"></script>
+    <script src="../../static/js/lib/config.js"></script>
+    <script src="../../static/js/controller/indexhomeController.js"></script>
+    <script src="../../static/js/controller/campus/campusController.js"></script>
+    <script src="../../static/js/controller/teacher/teacherController.js"></script>
+    <!--<script src="../../static/js/lib/jquery.idcode.js"></script>-->
+    <script src="../../static/js/controller/loginController.js"></script>
+    <!--<script src="../../static/js/lib/md5.js"></script>-->
+    <!--<script src="../../static/js/controller/registerController.js"></script>-->
+    <!--<script src="../../static/js/controller/passwordResetController.js"></script>-->
+    <!--<script src="../../static/js/controller/information/infoListController.js"></script>-->
+    <script src="../../static/js/controller/aboutUsController.js"></script>
+    <!--<script src="../../static/js/controller/information/infoDetailController.js"></script>-->
+    <script src="../../static/js/controller/application/applicationController.js"></script>
+    <script src="../../static/js/controller/application/normalQuestionController.js"></script>
+    <!--<script src="../../static/js/controller/application/applicationGuideController.js"></script>-->
+    <!--<script src="../../static/js/controller/information/activityController.js"></script>-->
+
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-size: 12px;
+            font-family: '微软雅黑';
+        }
+
+        .ui-dialog {
+            width: 300px;
+            height: auto;
+            position: absolute;
+            z-index: 999;
+            top: 100px;
+            left: 100px;
+            border: 1px solid #d5d5d5;
+            background: #fff;
+            display: none; /*隐藏登录浮层*/
+        }
+
+        .ui-dialog-title {
+            height: 48px;
+            line-height: 48px;
+            padding-left: 20px;
+            color: #535353;
+            font-size: 16px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #efefef;
+            cursor: move;
+        }
+
+        .ui-dialog-title-closebutton {
+            width: 48px;
+            height: 48px;
+            display: block;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            /*background: url();*/
+            background: red;
+        }
+
+        .ui-dialog-title-closebutton:hover {
+            /*background: url();*/
+            background: #fff;
+        }
+
+        .ui-dialog-content {
+            margin-top: 30px;
+        }
+
+        .ui-dialog-content .title {
+            display: inline-block;
+            width: 40px;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .ui-dialog-content .require, #btn_login {
+            width: 170px;
+            height: 25px;
+            margin: 0px;
+            padding: 0px;
+            color: #535353;
+        }
+
+        .ui-dialog-content > form > div {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .ui-mask {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.4;
+            filter: Alpha(opacity=40);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 888;
+            display: none; /*隐藏遮盖层*/
+        }
+
+        .link {
+            text-align: right;
+            line-height: 20px;
+            padding-right: 40px;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="indexhomeController">
+<!--头部信息开始-->
+<div id="header" class="header">
+    <div class="w1280 headerCon">
+        <a class="logo fl" ng-click="SkipToIndex()">
+            <img src="../../static/images/logo.png" alt="">
+        </a>
+        <div id="nav" class="fr nav">
+            <ul class="navCon fl clearfix">
+                <li class="fl rel cur"><a ui-sref="indexhome">首页</a></li>
+                <li class="fl rel">
+                    <a ui-sref="campus">校区介绍</a>
+                    <div class="tabSons abs tran tc">
+                        <div class="tabSon"><a ng-click="TabSkip(beijingInfo.id,1)">北京</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(shanghaiInfo.id,1)">南京</a></div>
+                    </div>
+                </li>
+                <li class="fl rel">
+                    <a ui-sref="teacher">师资团队</a>
+                    <div class="tabSons teachers abs tran tc">
+                        <div class="tabSon"><a ng-click="TabSkip(0,2)">全部</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(beijingInfo.id,2)">北京</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(shanghaiInfo.id,2)">南京</a></div>
+
+                    </div>
+                </li>
+                <li class="fl rel">
+                    <a ui-sref="application">申请信息</a>
+                    <div class="tabSons teachers abs tran tc">
+                        <div class="tabSon"><a ng-click="TabSkip(7,3)">报名流程</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(8,3)">课程审核指导</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(9,3)">优惠政策</a></div>
+                    </div>
+                </li>
+                <li class="fl rel">
+                    <a ui-sref="normalQuestion">常见问题</a>
+                    <div class="tabSons questions abs tran tc">
+                        <div class="tabSon"><a ng-click="TabSkip(10,4)">暑校学分</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(11,4)">老师授课</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(12,4)">校区选课</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(13,4)">付款方式</a></div>
+                        <div class="tabSon"><a ng-click="TabSkip(14,4)">住宿饮食</a></div>
+                    </div>
+                </li>
+                <li class="fl rel"><a ui-sref="aboutUs">关于我们</a></li>
+            </ul>
+
+            <div class="login fr">
+                <!-- 未登录 -->
+                <a href="javascript:;" class="toLogin tc fr" ng-show="{{visible}}" ng-click="SkipLogin()">登录</a>
+                <!-- 已经登录 展示头像-->
+                <a style="width: 68px;height: 68px;"  href="javascript:;" ng-click="PersonalCenter()" ng-show="{{visiblePerson}}" class="loged">
+                    <!--<img style="width: 70px;height: 70px;" ng-src="{{photo}}" alt="">-->
+                    <img style="width: 48px;height: 48px;margin-top: 10px;margin-left: 10px;border-radius:50%; overflow:hidden;" ng-src="{{photo}}" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="loading">
+    <div id="mask-loading" class="mask-loading" style="background-color: rgba(0, 0, 0, 0.17);">
+        <div class="loading-icon"></div>
+    </div>
+</div>
+<!--&lt;!&ndash; 登录浮层 &ndash;&gt;-->
+<!--<div class='ui-dialog' id='dialog'>-->
+<!--<div class='ui-dialog-title' id='dialogTitle'>-->
+<!--登录通行证-->
+<!--<a href='javascript:hideDialog();' class='ui-dialog-title-closebutton'></a>-->
+<!--</div>-->
+<!--<div class='ui-dialog-content'>-->
+<!--<form action='' method='post'>-->
+<!--<div><label class='title'>帐号:</label><input ng-model="useracount" type='text' class='require' /></div>-->
+<!--<div><label class='title'>密码:</label><input ng-model="userpwd" type='password' class='require' /></div>-->
+<!--<div><label class='title'></label><input type='button' value='登 录' ng-click="loginSubmit(1)" id='btn_login' /></div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash; 遮盖层 &ndash;&gt;-->
+<!--<div class='ui-mask' id='mask' onselectstart='return false'></div>-->
+<!--<div class='link'><a href='javascript:showDialog();'>登录</a></div>-->
+
+<div ui-view></div>
+<!--底部导航栏-->
+<div id="footer" class="footer f20 colorE6">
+    <div class="w1280 footerCon rel">
+        <ul class="navCon clearfix" id="footH">
+            <li class="fl rel cur"><a ui-sref="indexhome">首页</a></li>
+            <li class="fl rel"><a ui-sref="campus">校区介绍</a></li>
+            <li class="fl rel"><a ui-sref="teacher">师资团队</a></li>
+            <li class="fl rel"><a ui-sref="application">申请信息</a></li>
+            <li class="fl rel"><a ui-sref="normalQuestion">常见问题</a></li>
+            <li class="fl rel"><a ui-sref="aboutUs">关于我们</a></li>
+        </ul>
+
+        <div class="baseInfo">
+            <div class="fl tr">
+                <p>ISSN</p>
+                <p>International </p>
+                <p>Summer </p>
+            </div>
+            <div class="fr tl">
+                <p class="tel">‭130-3102-2803</p>
+                <p></p>
+                <p class="email">andy.zhouqing@gmail.com</p>
+            </div>
+        </div>
+
+        <p class="tc f18">版权所有2015北京涣洋教育科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISSN国际暑期学校平台&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;京ICP备19002011号</p>
+
+        <div class="QRcode abs">
+            <p class="abs f20">联系我们</p>
+        </div>
+    </div>
+</div>
+
+<div class="maskBg fixed" style="display: none"></div>
+<div id="loginBox" class="loginBox fixed hide">
+    <div class="lrTitle tc f24">学员登录</div>
+    <div class="loginForm">
+        <div class="inputWrap">
+            <div class="fl iptTitle f20">邮箱</div>
+            <input id="email" ng-model="useracount" ng-change="check1()" class="fr" type="text" placeholder="请输入邮箱名">
+            <div class="errMsgTip fl">
+                <p id="emailMsg" class="hide">*邮箱格式不正确，请重新输入！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20">密码</div>
+            <input id="password" ng-model="userpwd" ng-change="check4()" class="fr" type="password" placeholder="请输入密码">
+            <div class="errMsgTip fl">
+                <p id="emailMsgPwd" class="hide">*由6-10位数字和字母组成！</p>
+            </div>
+        </div>
+        <div class="btnGroup clearfix">
+            <span class="toLogin btn2 fl" ng-click="RegisterForm()">注册</span>
+            <span class="btnLogin btn tc fl" ng-click="loginSubmit(1)">登录</span>
+            <span class="findCode btn2 fr" ng-click="RetrievePwd()">找回密码</span>
+        </div>
+    </div>
+    <span ng-click="CloseForm()" class="close abs"></span>
+</div>
+
+<div id="RetrievePwd" style="width: 480px;height: 440px" class="loginBox fixed hide">
+    <div class="lrTitle tc f24">找回密码</div>
+    <div class="loginForm">
+        <div class="inputWrap">
+            <div class="fl iptTitle f20">邮箱</div>
+            <input id="emailRetrieve" ng-model="useracount" ng-change="check1()" class="fr" type="text"
+                   placeholder="请输入邮箱名">
+            <div class="errMsgTip fl">
+                <p style="padding-left:40px" id="emailMsgRetrieve" class="hide">*邮箱格式不正确，请重新输入！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div style="width: 100px" class="fl iptTitle f20">邮箱验证码</div>
+            <input style="float: left; margin-left: 35px;width: 200px;" id="emailRetrieveCode" ng-model="userTxtidcode"
+                   ng-change="check1()" class="fr" type="text"
+                   placeholder="请输入邮箱验证码">
+            <input style="float: left; margin-left: 10px;width: 120px; position: absolute;background-color:white;text-align: left;cursor: pointer"
+                   id="emailRetrieveBtn"
+                   class="fr" type="button" value="免费邮箱验证" ng-click="EmailCheck()">
+            <div class="errMsgTip fl">
+                <p style="padding-left:40px" id="emailMsgRetrieveCode" class="hide">*邮箱验证码不正确，请重新输入！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20">密码</div>
+            <input id="passwordRetrieve" ng-model="userpwd" ng-change="check4()" class="fr" type="password"
+                   placeholder="请输入密码">
+            <div class="errMsgTip fl">
+                <p style="padding-left:40px" id="emailMsgPwdRetrieve" class="hide">*由6-10位数字和字母组成！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div style="width: 80px" class="fl iptTitle f20">确认密码</div>
+            <input id="password2Retrieve" ng-model="userpwdReg2" ng-change="checkPwdSame()" class="fr" type="password"
+                   placeholder="请确认密码">
+            <div class="errMsgTip fl">
+                <p style="padding-left:40px" id="emailMsg2PwdRetrieve" class="hide">*两次输入的密码不一致，请重新输入！</p>
+            </div>
+        </div>
+        <div class="btnGroup clearfix">
+            <span style="margin-left:190px" class="btnLogin btn tc fl" ng-click="ModifyPwd()">修改密码</span>
+        </div>
+    </div>
+    <span ng-click="CloseForm()" class="close abs"></span>
+</div>
+
+<div id="registerBox" class="loginBox registerBox fixed hide">
+    <div class="lrTitle tc f24">学员注册</div>
+    <div class="loginForm">
+        <div class="inputWrap">
+            <div class="fl iptTitle f20"><i>*</i>邮箱</div>
+            <input id="emailRegster" ng-model="useracount" ng-change="check1()" class="fr" type="text"
+                   placeholder="请输入用户名">
+            <div class="errMsgTip fl">
+                <p id="emailMsgRegster" class="hide">*邮箱格式不正确，请重新输入！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20"><i>*</i>电话</div>
+            <input id="phoneRegster" ng-model="userphone" ng-change="checkPhone()" class="fr" type="text"
+                   placeholder="请输入电话">
+            <div class="errMsgTip fl">
+                <p id="phoneMsgRegster" class="hide">*电话格式不正确，请重新输入！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20"><i>*</i>姓名</div>
+            <input id="nameRegster" ng-model="username" ng-change="checkName()" class="fr" type="text"
+                   placeholder="请输入姓名">
+            <div class="errMsgTip fl">
+                <p id="nameMsgRegster" class="hide">*姓名不能为空，请重新输入！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20"><i>*</i>身份证</div>
+            <input id="CardRegster" ng-model="userCard" ng-change="checkIdcode()" class="fr" type="text"
+                   placeholder="请输入身份证">
+            <div class="errMsgTip fl">
+                <p id="ncardMsgRegster" class="hide">*身份证格式不正确，请重新输入！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20"><i>*</i>性别</div>
+            <div class="fl selectSexWrap">
+                <label for="sexMale" class="clearfix fl"><input id="sexMale" name="sexSelect" class="fl"
+                                                                checked="checked"
+                                                                type="radio"><span class="fl">男</span></label>
+                <label for="sexFamale" class="clearfix fl"><input id="sexFamale" name="sexSelect"
+                                                                  class="fl"
+                                                                  type="radio"><span class="fl">女</span></label>
+            </div>
+            <div class="errMsgTip fl">
+                <p class="hide"></p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20"><i>*</i>密码</div>
+            <input id="passwordRegater" ng-model="userpwd" ng-change="check4()" class="fr" type="password"
+                   placeholder="请输入密码">
+            <div class="errMsgTip fl">
+                <p id="MsgPwdReg" class="hide">*由6-10位数字和字母组成！</p>
+            </div>
+        </div>
+        <div class="inputWrap">
+            <div class="fl iptTitle f20"><i>*</i>确认密码
+            </div>
+            <input id="passwordRegater2" ng-model="userpwdReg2" ng-change="checkPwdSame()" class="fr" type="password"
+                   placeholder="请确认密码">
+            <div class="errMsgTip fl">
+                <p id="MsgPwdReg2" class="hide">*两次输入的密码不一致，请重新输入！</p>
+            </div>
+        </div>
+        <div class="btnGroup clearfix">
+            <span class="btnRegister btn tc fl" ng-click="RegisterSubmit()">立即注册</span>
+            <span class="btnCancel btn tc fl" ng-click="ReSetInput()">重置</span>
+        </div>
+    </div>
+    <span ng-click="CloseForm()" class="close abs"></span>
+</div>
+
+<script type="text/javascript">
+
+
+    // //  获取元素对象
+    // function g(id){ return document.getElementById(id); }
+    //
+    // //  自动居中 - 登录浮层
+    // function autoCenter(el){
+    //     var bodyW = document.documentElement.clientWidth;
+    //     var bodyH = document.documentElement.clientHeight;//网页可视区域 宽高
+    //
+    //     var elW = el.offsetWidth;
+    //     var elH = el.offsetHeight;//浮层 宽高
+    //
+    //     el.style.left = (bodyW - elW) / 2 + 'px';
+    //     el.style.top = (bodyH - elH) / 2 + 'px';
+    // }
+    //
+    // //  自动全屏 - 遮罩
+    // function fillToBody(el){
+    //     el.style.width = document.documentElement.clientWidth + 'px';
+    //     el.style.height = document.documentElement.clientHeight + 'px';
+    // }
+    //
+    // var mouseOffsetX = 0;//偏移( 鼠标在登录层标题栏按下时的 横坐标与登录层左上角的横坐标 的差 )
+    // var mouseOffsetY = 0;//    (                            纵坐标与              纵坐标 的差 )
+    // var isDraging = false;//是否可拖拽
+    //
+    // //  鼠标按下   计算偏移(固定)
+    // g('dialogTitle').addEventListener('mousedown', function(e){
+    //     var e = e || window.event;
+    //     mouseOffsetX = e.pageX - g('dialog').offsetLeft;
+    //     mouseOffsetY = e.pageY - g('dialog').offsetTop;
+    //     isDraging = true;
+    // })
+    //
+    // //  鼠标移动
+    // document.onmousemove = function(e){
+    //     var e = e || window.event;
+    //     var mouseX = e.pageX;//鼠标当前位置
+    //     var mouseY = e.pageY;
+    //
+    //     var moveX = 0;//浮层元素新位置
+    //     var moveY = 0;
+    //
+    //     if(isDraging === true){
+    //         moveX = mouseX - mouseOffsetX;
+    //         moveY = mouseY - mouseOffsetY;
+    //
+    //         var pageWidth = document.documentElement.clientWidth;//网页可视区域 宽高
+    //         var pageHeight = document.documentElement.clientHeight;
+    //
+    //         var dialogWidth = g('dialog').offsetWidth;//浮层 宽高
+    //         var dialogHeight = g('dialog').offsetHeight;
+    //
+    //         var maxX = pageWidth - dialogWidth;//浮层最大偏移量
+    //         var maxY = pageHeight- dialogHeight;
+    //
+    //         moveX = Math.min(Math.max(0, moveX), maxX);
+    //         moveY = Math.min(Math.max(0, moveY), maxY);//范围限定
+    //
+    //         g('dialog').style.left = moveX + 'px';
+    //         g('dialog').style.top = moveY + 'px';
+    //     }
+    // }
+    //
+    // //  鼠标松开
+    // document.onmouseup = function(){
+    //     isDraging = false;
+    // }
+    //
+    // //  显示登录浮层
+    // function showDialog(){
+    //     g('dialog').style.display = 'block';
+    //     g('mask').style.display = 'block';
+    //     autoCenter(g('dialog'));
+    //     fillToBody(g('mask'));
+    // }
+    //
+    // //  隐藏登录浮层
+    // function hideDialog(){
+    //     g('dialog').style.display = 'none';
+    //     g('mask').style.display ='none'
+    // }
+    //
+    // // 窗口改变时触发
+    // window.onresize = function(){
+    //     autoCenter(g('dialog'));
+    //     fillToBody(g('mask'));
+    // }
+
+    // window.onscroll = function () {
+    //     if ($(document).scrollTop() > 750)//这个750是距离顶部高度
+    //     {
+    //         $(".cm-left").addClass('cm-leftFixed');//
+    //     } else {
+    //         $(".cm-left").removeClass('cm-leftFixed');
+    //     }
+    // }
+    //
+    // $(".cml-1").eq(0).css("font-weight", "bold");
+    // $(".cml-1").click(
+    //     function () {
+    //         $(this).css("font-weight", "bold");
+    //         $(this).siblings().css("font-weight", "normal")
+    //     })
+
+    //侧边栏的效果
+    // $(".slidebar-top").mouseover(
+    //     function () {
+    //         $(".big-ewm").css("right", "65px")
+    //     }
+    // );
+    // $(".slidebar-top").mouseout(
+    //     function () {
+    //         $(".big-ewm").css("right", "-165px")
+    //     }
+    // )
+
+
+    // $(function () {
+    //     $('#toright').hover(function () {
+    //         $("#toleft").hide()
+    //     }, function () {
+    //         $("#toleft").show()
+    //     })
+    //     $('#toleft').hover(function () {
+    //         $("#toright").hide()
+    //     }, function () {
+    //         $("#toright").show()
+    //     })
+    // })
+    // //大图切换
+    // var t;
+    // var index = 0;
+    // /////自动播放
+    // t = setInterval(play, 3000)
+    //
+    // function play() {
+    //     index++;
+    //     if (index > 4) {
+    //         index = 0
+    //     }
+    //     // console.log(index)
+    //     $(".dot>li").eq(index).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //
+    //     $(".lunbo a ").eq(index).fadeIn(1000).siblings().fadeOut(1000);
+    // };
+    //
+    // ///点击鼠标 图片切换
+    // $(".dot>li").click(function () {
+    //
+    //     //添加 移除样式
+    //     //$(this).addClass("lito").siblings().removeClass("lito"); //给当前鼠标移动到的li增加样式 且其余兄弟元素移除样式   可以在样式中 用hover 来对li 实现
+    //     $(this).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //     var index = $(this).index(); //获取索引 图片索引与按钮的索引是一一对应的
+    //
+    //     $(".lunbo a ").eq(index).fadeIn(1000).siblings().fadeOut(1000); // siblings  找到 兄弟节点(不包括自己）
+    // });
+    //
+    // ///////////上一张、下一张切换
+    // $("#toleft").click(function () {
+    //     index--;
+    //     if (index <= 0) //判断index<0的情况为：开始点击#toright  index=0时  再点击 #toleft 为负数了 会出错
+    //     {
+    //         index = 4
+    //     }
+    //     console.log(index);
+    //     $(".dot>li").eq(index).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //
+    //     $(".lunbo a ").eq(index).fadeIn(1000).siblings().fadeOut(1000); // siblings  找到 兄弟节点(不包括自己）必须要写
+    // }); // $("#imgbox a ")获取到的是一个数组集合 。所以可以用index来控制切换
+    //
+    // $("#toright").click(function () {
+    //     index++;
+    //     if (index > 4) {
+    //         index = 0
+    //     }
+    //     console.log(index);
+    //     $(this).css({
+    //         "opacity": "0.5"
+    //     })
+    //     $(".dot>li").eq(index).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //     $(".lunbo a ").eq(index).fadeIn(1000).siblings().fadeOut(1000); // siblings  找到 兄弟节点(不包括自己）
+    // });
+    // $("#toleft,#toright").hover(function () {
+    //         $(this).css({
+    //             "color": "black"
+    //         })
+    //     },
+    //     function () {
+    //         $(this).css({
+    //             "opacity": "0.3",
+    //             "color": ""
+    //         })
+    //     })
+    // ///
+    //
+    // ///////鼠标移进  移出
+    // $(".dot>li,.lunbo a img,#toright,#toleft ").hover(
+    //     ////////鼠标移进
+    //     function () {
+    //         $('#toright,#toleft').show()
+    //         clearInterval(t);
+    //
+    //     },
+    //     ///////鼠标移开
+    //     function () {
+    //         //$('#toright,#toleft').hide()
+    //         //alert('aaa')
+    //         t = setInterval(play, 3000)
+    //
+    //         function play() {
+    //             index++;
+    //             if (index > 2) {
+    //                 index = 0
+    //             }
+    //             $(".dot>li").eq(index).css({
+    //                 "border": "1px solid white",
+    //                 "background": "none"
+    //             }).siblings().css({
+    //                 "background": "white",
+    //                 "border": "none"
+    //             })
+    //             $(".lunbo a ").eq(index).fadeIn(1000).siblings().fadeOut(1000);
+    //         }
+    //     })
+    //
+    //
+    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // $(function () {
+    //     $('#toright1').hover(function () {
+    //         $("#toleft1").hide()
+    //     }, function () {
+    //         $("#toleft1").show()
+    //     })
+    //     $('#toleft1').hover(function () {
+    //         $("#toright1").hide()
+    //     }, function () {
+    //         $("#toright1").show()
+    //     })
+    // })
+    // //小图资讯切换
+    // var t1;
+    // var index1 = 0;
+    // /////自动播放
+    // t1 = setInterval(play1, 3000)
+    //
+    // function play1() {
+    //     index1++;
+    //     if (index1 > 2) {
+    //         index1 = 0
+    //     }
+    //     // console.log(index)
+    //     $(".dot1>li").eq(index1).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //
+    //     $(".lunbo1 a ").eq(index1).fadeIn(1000).siblings().fadeOut(1000);
+    // };
+    //
+    // ///点击鼠标 图片切换
+    // $(".dot1>li").click(function () {
+    //
+    //     //添加 移除样式
+    //     //$(this).addClass("lito").siblings().removeClass("lito"); //给当前鼠标移动到的li增加样式 且其余兄弟元素移除样式   可以在样式中 用hover 来对li 实现
+    //     $(this).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //     var index1 = $(this).index(); //获取索引 图片索引与按钮的索引是一一对应的
+    //
+    //     $(".lunbo1 a ").eq(index1).fadeIn(1000).siblings().fadeOut(1000); // siblings  找到 兄弟节点(不包括自己）
+    // });
+    //
+    // /////////////上一张、下一张切换
+    // $("#toleft1").click(function () {
+    //     index1--;
+    //     if (index1 <= 0) //判断index<0的情况为：开始点击#toright  index=0时  再点击 #toleft 为负数了 会出错
+    //     {
+    //         index1 = 2
+    //     }
+    //     console.log(index1);
+    //     $(".dot1>li").eq(index1).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //
+    //     $(".lunbo1 a ").eq(index1).fadeIn(1000).siblings().fadeOut(1000); // siblings  找到 兄弟节点(不包括自己）必须要写
+    // }); // $("#imgbox a ")获取到的是一个数组集合 。所以可以用index来控制切换
+    //
+    // $("#toright1").click(function () {
+    //     index1++;
+    //     if (index1 > 2) {
+    //         index1 = 0
+    //     }
+    //     console.log(index1);
+    //     $(this).css({
+    //         "opacity": "0.5"
+    //     })
+    //     $(".dot1>li").eq(index1).css({
+    //         "border": "1px solid white",
+    //         "background": "none  "
+    //     }).siblings().css({
+    //         "background": "white",
+    //         "border": "none"
+    //     })
+    //     $(".lunbo1 a ").eq(index1).fadeIn(1000).siblings().fadeOut(1000); // siblings  找到 兄弟节点(不包括自己）
+    // });
+    // $("#toleft1,#toright1").hover(function () {
+    //         $(this).css({
+    //             "color": "black"
+    //         })
+    //     },
+    //     function () {
+    //         $(this).css({
+    //             "opacity": "0.3",
+    //             "color": ""
+    //         })
+    //     })
+    // ///
+    //
+    // ///////鼠标移进  移出
+    // $(".dot1>li,.lunbo1 a img,#toright1,#toleft1 ").hover(
+    //     ////////鼠标移进
+    //     function () {
+    //         $('#toright1,#toleft1').show()
+    //         clearInterval(t);
+    //
+    //     },
+    //     ///////鼠标移开
+    //     function () {
+    //         //$('#toright,#toleft').hide()
+    //         //alert('aaa')
+    //         t = setInterval(play1, 3000)
+    //
+    //         function play1() {
+    //             index1++;
+    //             if (index1 > 2) {
+    //                 index1 = 0
+    //             }
+    //             $(".dot1>li").eq(index1).css({
+    //                 "border": "1px solid white",
+    //                 "background": "none"
+    //             }).siblings().css({
+    //                 "background": "white",
+    //                 "border": "none"
+    //             })
+    //             $(".lunbo1 a ").eq(index1).fadeIn(1000).siblings().fadeOut(1000);
+    //         }
+    //     })
+    //
+    //
+    // //    校区鼠标移入效果
+    // $(".school").each(
+    //     function () {
+    //         $(this).mouseover(
+    //             function () {
+    //                 $(this).children(".s-hover").css("background", "rgba(163,90,185,0.6)")
+    //             })
+    //         $(this).mouseout(
+    //             function () {
+    //                 $(this).children(".s-hover").css("background", "none")
+    //             })
+    //     }
+    // )
+    // //各校区展示图片效果
+    // $(".spc-campusList").click(
+    //     function () {
+    //         $(this).children(".spc-campus").css({"font-weight": "bolder", "color": "#2e3d90"});
+    //         $(this).siblings().children(".spc-campus").css({"font-weight": "normal", "color": "#96adec"})
+    //     }
+    // )
+    //侧边栏的效果
+    // $(".slidebar-top").mouseover(
+    //     function () {
+    //         $(".big-ewm").css("right", "65px")
+    //     }
+    // );
+    // $(".slidebar-top").mouseout(
+    //     function () {
+    //         $(".big-ewm").css("right", "-165px")
+    //     }
+    // )
+    //一键返回顶部
+    // var toTop = document.querySelector(".slidebar-bottom");
+    // toTop.onclick = function () {
+    //     obj = document.body.scrollTop == 0 ? document.documentElement : document.body;
+    //     animate(obj, {scrollTop: 0}, 100)
+    // };
+</script>
+</body>
+</html>

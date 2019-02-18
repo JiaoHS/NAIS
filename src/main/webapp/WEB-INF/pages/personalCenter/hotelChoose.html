@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="../../static/css/global.css">
+<link rel="stylesheet" href="../../static/css/userCenter/ucPublic.css">
+<link rel="stylesheet" href="../../static/css/userCenter/accommodation.css">
+
+
+<div class="ucRight fr">
+    <div class="banner">
+        <img ng-src="../../static/images/userCenter/Group.png" alt="">
+    </div>
+    <div class="schooleChoice">
+        <div class="title rel f22">所在校区</div>
+        <ol class="schoolAddr clearfix">
+            <!-- 添加select被选中 -->
+            <li class="fl rel tc f20 select" id="bjAddr">北京校区</li>
+            <li class="fl rel tc f20" id="shAddr">南京校区</li>
+        </ol>
+    </div>
+    <div class="hotleChoice clearfix">
+        <div class="title rel f22">选取酒店</div>
+        <div class="leftCon fl">
+            <div class="selectHotle rel">
+                <div class="selectInfo f20 fff abs tc baseBg open">{{campusInfoList.hotelname}}</div>
+            </div>
+
+            <div class="hotelIntro rel c65">
+                <div class="hotleList hotelInfo">
+                    <div class="safe f20 clearfix">
+                        <div class="f20 introTitle tc open">酒店介绍</div>
+                        <span class="fl">安全性</span>
+                        <ol id="star1" class="stars fr clearfix">
+                            <!--<li class="fl cur"></li>-->
+                            <!--<li class="fl cur"></li>-->
+                            <!--<li class="fl cur"></li>-->
+                            <!--<li class="fl cur"></li>-->
+                            <!--<li class="fl"></li>-->
+                        </ol>
+                    </div>
+                    <p ng-bind-html="campusInfoList.hotelDesc | parseHTML"></p>
+                </div>
+            </div>
+        </div>
+        <div class="rightCon fr">
+            <div class="imgShow clearfix">
+                <img class="fl" src="{{campusInfoList.hotelimage1}}" alt="">
+                <img class="fr" src="{{campusInfoList.hotelimage2}}" alt="">
+            </div>
+            <div class="hotelSimpleInfo f20 clearfix">
+                <div class="fl hotelAddr rel toe c65">{{campusInfoList.hoteladdress}}</div>
+                <div class="fr distance tr">{{campusInfoList.hoteldistance}} 米内</div>
+                <ol id="star2" class="stars fr clearfix">
+                    <!--<li class="fl cur"></li>-->
+                    <!--<li class="fl cur"></li>-->
+                    <!--<li class="fl cur"></li>-->
+                    <!--<li class="fl cur"></li>-->
+                    <!--<li class="fl"></li>-->
+                </ol>
+            </div>
+            <div class="iptInfo clearfix">
+                <div class="fl iptInfoLeft f18 c65">
+                    <div class="iptArea clearfix">
+                        <span class="fl">入住时间</span><input type="text" ng-model="StartYear" class="fl">
+                    </div>
+                    <div class="iptArea clearfix">
+                        <span class="fl">离开时间</span><input type="text" ng-model="EndYear" class="fl">
+                    </div>
+                    <div class="iptArea setFriend clearfix rel">
+                        <input class="iptRadio fl" id="setTrue" name="setFriend" type="radio">
+                        <label for="setTrue" class="fl">制定室友</label>
+                        <input class="iptRadio abs outRadio" id="setFalse" name="setFriend" checked type="radio">
+                        <label for="setFalse" class="abs outTitle">自行分配</label>
+                        <input type="text" class="fl" ng-model="roomnumber">
+                    </div>
+                </div>
+                <div class="fr iptInfoRight rel">
+                    <div class="selectHotle abs">
+                        <div class="selectBtn f20 fff abs tc baseBg" ng-click="SelectRoomType()" id="roomType">
+                            选择房型
+                        </div>
+                        <ul id="roomtypelist" class="hotleList abs hide">
+                            <li class="tc toe">房型A</li>
+                            <li class="tc toe">房型B</li>
+                            <li class="tc toe">房型C</li>
+                        </ul>
+                    </div>
+                    <!--<div class="confirm fr baseBg fff f18 tc">预定</div>-->
+                    <div class="money fr baseColor tr f24" id="hotelmoney"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="agreementWrap fl">
+            <div style="height: 124px" class="agreement c65 f16">
+                <div class="title f22">ISSN暑期特别提示</div>
+                <p>入住酒店时请报预订时填写的客人姓名或报酒店确认号入住。为了维护酒店正常秩序，保障旅客的人身、财产安全，根据公安机关《旅馆业治安管理办法》之规定所有入住酒店的客人都需要提供身份证、回乡证 、护照、（10岁以上的未成年人提供户口簿），等有效证件登记入住。</p>
+            </div>
+            <label class="agree f22" for="agree"><input id="agree" type="checkbox" style="cursor: pointer;">同意</label>
+        </div>
+    </div>
+    <span style="cursor: pointer" class="btnSubmit tc fff baseBg fl f16" ng-click="SubmitHotelApply()">提交申请表</span>
+</div>

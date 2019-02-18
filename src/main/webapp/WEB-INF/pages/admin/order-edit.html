@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="../../../static/caohao/js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../../static/caohao/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<div style="padding:10px 10px 10px 10px">
+    <form id="orderForm" class="itemForm" method="post">
+        <!--<input type="hidden" name="categoryId"/>-->
+        <input id="id" type="hidden" name="id"/>
+        <table cellpadding="5">
+            <tr>
+                <td>订单编号:</td>
+                <td><input class="easyui-textbox" type="text" name="paymentSeq" data-options="required:true" style="width: 280px;"></input></td>
+            </tr>
+
+
+            <tr>
+                <td>订单来源:</td>
+                <td><input class="easyui-textbox" type="text" name="orderSource" data-options="required:true,formatter:formatOrderSource" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>支付渠道:</td>
+                <td><input class="easyui-textbox" type="text" name="paymentChannel" data-options="formatter:formatChannel" style="width: 280px;"></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td>创建人:</td>
+                <td><input class="easyui-textbox" type="text" name="createdUser" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>订单状态:</td>
+                <td><input class="easyui-textbox" type="text" name="orderStatus" data-options="formatter:formatOrderStatus" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>所属校区:</td>
+                <td><input class="easyui-textbox" name="campusId" data-options="required:true,formatter:formatCampus" style="width: 280px;"></input>
+                </td>
+            </tr>
+
+            <tr>
+                <td>应收金额:</td>
+                <td><input id="totalAmount" class="easyui-textbox" type="text" name="totalAmount" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>实收金额:</td>
+                <td><input id="cashAmount" class="easyui-textbox" type="text" name="cashAmount" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>优惠金额:</td>
+                <td><input id="discountAmount" class="easyui-textbox" type="text" name="discountAmount" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>创建时间:</td>
+                <td><input id="createTime" class="easyui-textbox" type="text" name="createTime" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>付款时间:</td>
+                <td><input id="paymentTime" class="easyui-textbox" type="text" name="paymentTime" style="width: 280px;"></input></td>
+            </tr>
+
+            <tr>
+                <td>付款成功时间:</td>
+                <td><input id="paymentSuccessTime" class="easyui-textbox" type="text" name="paymentSuccessTime" style="width: 280px;"></input></td>
+            </tr>
+
+        </table>
+    </form>
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentEditPage.submitForm()">提交</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="contentEditPage.clearForm()">重置</a>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var contentEditEditor ;
+    $(function(){
+        contentEditEditor = TT.createEditor("#contentEditForm [name=content]");
+        TT.initOnePicUpload();
+    });
+
+    var contentEditPage = {
+        submitForm : function(){
+            if(!$('#contentEditForm').form('validate')){
+                $.messager.alert('提示','表单还未填写完成!');
+                return ;
+            }
+            contentEditEditor.sync();
+
+            $.post("/info/update",$("#contentEditForm").serialize(), function(data){
+                if(data.code == 0){
+                    $.messager.alert('提示','新增内容成功!');
+                    $("#orderList").datagrid("reload");
+                    TT.closeCurrentWindow();
+                }
+            });
+        },
+        clearForm : function(){
+
+        }
+    };
+
+    //1订单创建，2待审核，3支付成功，-1已作废
+    function formatOrderStatus(val, row) {
+        if (val === 1){
+            return "订单创建";
+        }else if (val === 2){
+            return "待审核";
+        }else if (val === 3){
+            return "支付成功";
+        }else if(val === -1){
+            return "已作废";
+        }
+    }
+    //订单来源，100 选课订单（选课订单需要使用规则计算价格） 200 住宿押金订单（住宿订单固定金额为5000)
+    function formatOrderSource(val, row) {
+        if (val === 100){
+            return "选课订单";
+        }else if (val === 200){
+            return "住宿押金";
+        }
+    }
+    //支付渠道 1 支付宝 2 微信 3 银行转账
+    function formatChannel(val, row) {
+        if (val === 1){
+            return "支付宝";
+        }else if (val === 2){
+            return "微信";
+        }else if (val === 3){
+            return "银行转账";
+        }else {
+            return "未支付";
+        }
+    }
+
+    function formatCampus(val,row) {
+
+        switch(val){
+            case 1:
+                return "长安大学";
+            case 2:
+                return "大连校区";
+            case 3:
+                return "上海校区（网络课程）";
+            case 4:
+                return "成都校区";
+            case 5:
+                return "上海校区";
+            case 6:
+                return "东京校区";
+            case 7:
+                return "北京a校区";
+            case 8:
+                return "麻省校区";
+        }
+
+    }
+
+</script>
+</html>

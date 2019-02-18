@@ -1,0 +1,26 @@
+<!--右侧内容-->
+<div class="m-right">
+    <div class="mr-ChooseTitle">
+        <div class="mrct-line1"></div>
+        <div class="mrct-campus" ui-sref="courseHome">校区选择</div>
+        <div class="mrct-line1"></div>
+        <div class="mrct-courses" ui-sref="chooseCourses">选择课程</div>
+        <div class="mrct-line1"></div>
+        <div class="mrct-confirm" ui-sref="coursesOrderPreview">课程确认</div>
+        <div class="mrct-line1"></div>
+    </div>
+    <div class="mr-ChooseBox">
+        <div class="mrcb-campusBox" style="cursor: pointer;" ng-repeat="school in schoolBoxList"
+             ng-click="SubSchool(school.id)">
+            <img src="../../static/images/personal/bj.png" alt=""/>
+            <!--ng-click="SkipToCourse(school.id)"-->
+            <div class="mrcb-inside">
+                <span class="mrcb-campus">{{school.campusName}}</span>
+                <span class="mrcb-school">{{school.campusName}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mr-skip" ng-click="SubSchool(-1)"><a style="cursor: pointer">跳过>></a></div>
+</div>
+<link rel="stylesheet" href="../../static/css/personalCenter/coursesCenter.css"/>

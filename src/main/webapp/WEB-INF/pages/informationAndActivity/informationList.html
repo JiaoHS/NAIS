@@ -1,0 +1,44 @@
+<!--咨询列表内容开始-->
+<link rel="stylesheet" href="../../../static/css/informationAndActivity/informationList.css">
+<div class="il-con">
+    <div class="il-titleBox">
+        <div class="il-titleLine"></div>
+        <div class="il-titleWord">资讯列表</div>
+    </div>
+    <div class="il-listBox" ng-repeat="info in infoList">
+        <div class="il-listLeft"
+             style="background: url({{baseurl+info.titleImg}}) no-repeat;background-position: center;background-size: cover">
+        </div>
+        <div class="il-listRight">
+            <span class="il-contantTitle">{{info.title}}</span>
+            <span class="il-contantTime">{{info.updateTime.substr(0,10)}}</span>
+            <span class="il-contantSummary">
+             {{info.descInfo | textLengthSet:true:63:' ...'}}
+            </span>
+            <div class="il-detail">
+                <a href="javascript:void(0)" ng-click="GetDetail(info.id)">查看详情>></a>
+            </div>
+        </div>
+        <div class="il-bottomLine"></div>
+    </div>
+</div>
+</div>
+<script>
+    //侧边栏的效果
+    $(".slidebar-top").mouseover(
+        function () {
+            $(".big-ewm").css("right", "65px")
+        }
+    );
+    $(".slidebar-top").mouseout(
+        function () {
+            $(".big-ewm").css("right", "-165px")
+        }
+    )
+    //一键返回顶部
+    var toTop = document.querySelector(".slidebar-bottom");
+    toTop.onclick = function () {
+        obj = document.body.scrollTop == 0 ? document.documentElement : document.body;
+        animate(obj, {scrollTop: 0}, 100)
+    };
+</script>
